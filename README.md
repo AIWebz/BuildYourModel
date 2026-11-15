@@ -1,4 +1,4 @@
-# BuildYourModel: Basis
+# BuildYourModel: Solen 1.0
 
 A small AI built from scratch in Python and NumPy. It has two models wired together:
 
@@ -10,7 +10,15 @@ A small AI built from scratch in Python and NumPy. It has two models wired toget
 
 The knowledge it is trained on lives in `data/knowledge.json` (479 facts). Its specialty is **building AI models**: 129 facts on the build process, data, training, architectures, LLM techniques, evaluation, tools, deployment and responsible AI, plus step-by-step guides and code examples. It also covers science, space, math, geography, history, computing, health, language and general knowledge. The defined conversation responses live in `data/intents.json`.
 
-## Run
+## Website
+
+```bash
+python server.py        # then open http://localhost:8000
+```
+
+The Solen 1.0 website lets anyone build an AI model in the browser: describe the model in the chat (or click an example), attach a CSV, TXT or ZIP of image folders, and Solen picks the model type, trains it and tests it. Every model appears in **Your models**, where you can run it and download it. Each browser gets its own private session (own chat memory, uploads and models). For safety the website only reads files the visitor uploaded plus the example data, and `/teach` is turned off there. It uses only the Python standard library plus NumPy (Pillow for image models).
+
+## Run in the terminal
 
 ```bash
 pip install numpy

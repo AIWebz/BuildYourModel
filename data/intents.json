@@ -1,40 +1,220 @@
 {
-  "intents": [
-    {"intent": "greeting",
-     "patterns": ["hi", "hello", "hey", "hey there", "good morning", "good evening", "good afternoon", "hiya", "howdy", "yo", "greetings", "hello there"],
-     "responses": ["Hello{name_suffix}! How can I help you today?", "Hi{name_suffix}! What would you like to know?", "Hey{name_suffix}! Ask me anything."]},
-    {"intent": "goodbye",
-     "patterns": ["bye", "goodbye", "see you later", "see ya", "i have to go", "talk to you later", "good night", "farewell", "later", "i am leaving"],
-     "responses": ["Goodbye{name_suffix}! Come back any time.", "See you later{name_suffix}!", "Bye{name_suffix}, it was good talking with you."]},
-    {"intent": "thanks",
-     "patterns": ["thanks", "thank you", "thanks a lot", "thank you so much", "much appreciated", "cheers", "that helped", "thx", "ty", "great thanks"],
-     "responses": ["You are welcome{name_suffix}!", "Happy to help{name_suffix}.", "Any time{name_suffix}!"]},
-    {"intent": "how_are_you",
-     "patterns": ["how are you", "how are you doing", "how is it going", "what is up", "whats up", "how do you feel", "are you okay", "how have you been"],
-     "responses": ["I am running well and ready to help. How are you?", "All systems are working fine. What can I do for you?", "I am doing great, thanks for asking. What is on your mind?"]},
-    {"intent": "identity",
-     "patterns": ["who are you", "what are you", "what is your name", "tell me about yourself", "are you a robot", "are you human", "are you an ai", "introduce yourself", "what should i call you"],
-     "responses": ["I am Basis, a small AI built from two connected models: a neural brain that understands your question and a language model that writes the answer.", "My name is Basis. I am an AI with my own neural network and my own language model, trained on basic knowledge."]},
-    {"intent": "capabilities",
-     "patterns": ["what can you do", "help", "how do you work", "what do you know", "what are your skills", "how can you help me", "what topics do you know", "show me what you can do", "commands"],
-     "responses": ["I know about 480 facts, with a specialty in building AI models: data, training, neural network architectures, language models, evaluation, tools and deployment. I also cover science, math, geography, history, computing, health and language. I can also build small AI models for you. Just describe what you want, for example: make me an AI that predicts house prices from data/examples/houses.csv. I can build text and table classifiers, number predictors, clustering models, anomaly detectors, forecasters, recommenders, text generators, image classifiers and maze-solving reinforcement learning agents. Run them with /ask name input and list them with /models. I can also do arithmetic, remember your name, learn new facts with /teach question | answer, and write text with /generate <words>."]},
-    {"intent": "creator",
-     "patterns": ["who made you", "who created you", "who built you", "who programmed you", "where do you come from", "who is your creator"],
-     "responses": ["I was built in the BuildYourModel project: a neural network brain plus a custom language model, written from scratch in Python and NumPy."]},
-    {"intent": "set_name",
-     "patterns": ["my name is sam", "call me alex", "i am called jordan", "my name is taylor", "you can call me chris", "i am named morgan"],
-     "responses": ["Nice to meet you, {name}!", "Great to meet you, {name}. I will remember that.", "Hello {name}, I will remember your name."]},
-    {"intent": "get_name",
-     "patterns": ["what is my name", "do you know my name", "who am i", "remember my name", "say my name"],
-     "responses": ["Your name is {name}.", "You told me your name is {name}."]},
-    {"intent": "joke",
-     "patterns": ["tell me a joke", "say something funny", "make me laugh", "do you know any jokes", "joke please", "another joke"],
-     "responses": ["Why do programmers prefer dark mode? Because light attracts bugs.", "I told my computer I needed a break, and it said no problem, it will go to sleep.", "Why was the math book sad? It had too many problems.", "What do you call a fake noodle? An impasta."]},
-    {"intent": "affirm",
-     "patterns": ["yes", "yeah", "yep", "sure", "okay", "ok", "of course", "correct", "right", "exactly"],
-     "responses": ["Great! What would you like to know next?", "Okay. Ask me anything else."]},
-    {"intent": "deny",
-     "patterns": ["no", "nope", "not really", "nah", "wrong", "that is wrong", "incorrect"],
-     "responses": ["Okay. You can teach me the right answer with /teach question | answer.", "Alright. Tell me what you meant and I will try again."]}
-  ]
+ "intents": [
+  {
+   "intent": "greeting",
+   "patterns": [
+    "hi",
+    "hello",
+    "hey",
+    "hey there",
+    "good morning",
+    "good evening",
+    "good afternoon",
+    "hiya",
+    "howdy",
+    "yo",
+    "greetings",
+    "hello there"
+   ],
+   "responses": [
+    "Hello{name_suffix}! How can I help you today?",
+    "Hi{name_suffix}! What would you like to know?",
+    "Hey{name_suffix}! Ask me anything."
+   ]
+  },
+  {
+   "intent": "goodbye",
+   "patterns": [
+    "bye",
+    "goodbye",
+    "see you later",
+    "see ya",
+    "i have to go",
+    "talk to you later",
+    "good night",
+    "farewell",
+    "later",
+    "i am leaving"
+   ],
+   "responses": [
+    "Goodbye{name_suffix}! Come back any time.",
+    "See you later{name_suffix}!",
+    "Bye{name_suffix}, it was good talking with you."
+   ]
+  },
+  {
+   "intent": "thanks",
+   "patterns": [
+    "thanks",
+    "thank you",
+    "thanks a lot",
+    "thank you so much",
+    "much appreciated",
+    "cheers",
+    "that helped",
+    "thx",
+    "ty",
+    "great thanks"
+   ],
+   "responses": [
+    "You are welcome{name_suffix}!",
+    "Happy to help{name_suffix}.",
+    "Any time{name_suffix}!"
+   ]
+  },
+  {
+   "intent": "how_are_you",
+   "patterns": [
+    "how are you",
+    "how are you doing",
+    "how is it going",
+    "what is up",
+    "whats up",
+    "how do you feel",
+    "are you okay",
+    "how have you been"
+   ],
+   "responses": [
+    "I am running well and ready to help. How are you?",
+    "All systems are working fine. What can I do for you?",
+    "I am doing great, thanks for asking. What is on your mind?"
+   ]
+  },
+  {
+   "intent": "identity",
+   "patterns": [
+    "who are you",
+    "what are you",
+    "what is your name",
+    "tell me about yourself",
+    "are you a robot",
+    "are you human",
+    "are you an ai",
+    "introduce yourself",
+    "what should i call you",
+    "what is solen",
+    "who is solen",
+    "are you solen",
+    "what version are you",
+    "what is solen 1.0"
+   ],
+   "responses": [
+    "I am Solen 1.0, a small AI built from two connected models: a neural brain that understands your question and a language model that writes the answer.",
+    "My name is Solen 1.0. I am an AI with my own neural network and my own language model, trained on basic knowledge."
+   ]
+  },
+  {
+   "intent": "capabilities",
+   "patterns": [
+    "what can you do",
+    "help",
+    "how do you work",
+    "what do you know",
+    "what are your skills",
+    "how can you help me",
+    "what topics do you know",
+    "show me what you can do",
+    "commands"
+   ],
+   "responses": [
+    "I know about 480 facts, with a specialty in building AI models: data, training, neural network architectures, language models, evaluation, tools and deployment. I also cover science, math, geography, history, computing, health and language. I can also build small AI models for you. Just describe what you want, for example: make me an AI that predicts house prices from data/examples/houses.csv. I can build text and table classifiers, number predictors, clustering models, anomaly detectors, forecasters, recommenders, text generators, image classifiers and maze-solving reinforcement learning agents. Run them with /ask name input and list them with /models. I can also do arithmetic, remember your name, learn new facts with /teach question | answer, and write text with /generate <words>."
+   ]
+  },
+  {
+   "intent": "creator",
+   "patterns": [
+    "who made you",
+    "who created you",
+    "who built you",
+    "who programmed you",
+    "where do you come from",
+    "who is your creator"
+   ],
+   "responses": [
+    "I was built in the BuildYourModel project: a neural network brain plus a custom language model, written from scratch in Python and NumPy."
+   ]
+  },
+  {
+   "intent": "set_name",
+   "patterns": [
+    "my name is sam",
+    "call me alex",
+    "i am called jordan",
+    "my name is taylor",
+    "you can call me chris",
+    "i am named morgan"
+   ],
+   "responses": [
+    "Nice to meet you, {name}!",
+    "Great to meet you, {name}. I will remember that.",
+    "Hello {name}, I will remember your name."
+   ]
+  },
+  {
+   "intent": "get_name",
+   "patterns": [
+    "what is my name",
+    "do you know my name",
+    "who am i",
+    "remember my name",
+    "say my name"
+   ],
+   "responses": [
+    "Your name is {name}.",
+    "You told me your name is {name}."
+   ]
+  },
+  {
+   "intent": "joke",
+   "patterns": [
+    "tell me a joke",
+    "say something funny",
+    "make me laugh",
+    "do you know any jokes",
+    "joke please",
+    "another joke"
+   ],
+   "responses": [
+    "Why do programmers prefer dark mode? Because light attracts bugs.",
+    "I told my computer I needed a break, and it said no problem, it will go to sleep.",
+    "Why was the math book sad? It had too many problems.",
+    "What do you call a fake noodle? An impasta."
+   ]
+  },
+  {
+   "intent": "affirm",
+   "patterns": [
+    "yes",
+    "yeah",
+    "yep",
+    "sure",
+    "okay",
+    "ok",
+    "of course",
+    "correct",
+    "right",
+    "exactly"
+   ],
+   "responses": [
+    "Great! What would you like to know next?",
+    "Okay. Ask me anything else."
+   ]
+  },
+  {
+   "intent": "deny",
+   "patterns": [
+    "no",
+    "nope",
+    "not really",
+    "nah",
+    "wrong",
+    "that is wrong",
+    "incorrect"
+   ],
+   "responses": [
+    "Okay. You can teach me the right answer with /teach question | answer.",
+    "Alright. Tell me what you meant and I will try again."
+   ]
+  }
+ ]
 }

@@ -1,4 +1,4 @@
-"""Model builder: Basis builds and trains small, separate AI models from your files.
+"""Model builder: Solen 1.0 builds and trains small, separate AI models from your files.
 
     .csv with 2 columns (text,label)        -> text classifier  (small neural net)
     .csv with 2+ columns, last column = target
@@ -470,6 +470,19 @@ class ModelBuilder:
             return f"{'UNUSUAL' if bad else 'normal'} (distance {d:.2f}, threshold {m.threshold:.2f})"
         j, desc = m.predict(vals)
         return f"group {j + 1}: {desc}"
+
+    def models(self):
+        """Structured list of built models (for the website)."""
+        os.makedirs(self.dir, exist_ok=True)
+        out = []
+        for f in sorted(os.listdir(self.dir)):
+            if f.endswith(".meta.json"):
+                n = f[:-10]
+                m = self._meta(n)
+                out.append({"name": n, "kind": m["kind"], "type": KINDS[m["kind"]], "params": m["params"],
+                            "size": _size(m["bytes"]), "usage": m["usage"],
+                            "built": os.path.getmtime(os.path.join(self.dir, f))})
+        return out
 
     def list(self):
         os.makedirs(self.dir, exist_ok=True)

@@ -1,4 +1,4 @@
-"""Basis: a neural 'brain' model connected to a custom language model."""
+"""Solen 1.0: a neural 'brain' model connected to a custom language model."""
 from .assistant import Assistant
 
 __all__ = ["Assistant"]

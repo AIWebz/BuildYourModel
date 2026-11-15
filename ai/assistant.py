@@ -84,6 +84,8 @@ class Assistant:
         self.learned_path = os.path.join(self.data_dir, "learned.json")
         self.memory = {}
         self.builder = ModelBuilder(self.model_dir)
+        self.allowed_roots = None  # set by the web server: only these folders may be read
+        self.allow_teach = True
         self.brain = Brain()
         self.lm = LanguageModel()
         self._load_data()
@@ -159,6 +161,8 @@ class Assistant:
 
     # -------------------------------------------------------------- teach
     def teach(self, question, answer):
+        if not self.allow_teach:
+            return "Teaching new facts is turned off here."
         self.learned.append({"question": question.strip(), "answer": answer.strip()})
         with open(self.learned_path, "w") as f:
             json.dump(self.learned, f, indent=2)
@@ -170,11 +174,19 @@ class Assistant:
         return "Got it. I learned that."
 
     # ------------------------------------------------- build other models
+    def path_ok(self, path):
+        if self.allowed_roots is None:
+            return True
+        real = os.path.realpath(path)
+        return any(real == r or real.startswith(r + os.sep) for r in map(os.path.realpath, self.allowed_roots))
+
     def build_model(self, name, path, kind=None, target=None, k=None):
         for cand in (path, os.path.join(ROOT, path)):
             if os.path.exists(cand):
                 path = cand
                 break
+        if not self.path_ok(path):
+            return "I can only use files you uploaded or the example data."
         return self.builder.build(name, path, kind=kind, target=target, k=k)
 
     def handle_build_request(self, req):
@@ -203,10 +215,14 @@ class Assistant:
         name = rp.default_name({**req, "path": path})
         builder_kind = None if kind == "classify" else kind
         result = self.build_model(name, path, kind=builder_kind, target=req.get("target"), k=req.get("k"))
+        if result.startswith("I can only use files"):
+            return result
         rel = os.path.relpath(path, ROOT) if os.path.isabs(path) and path.startswith(ROOT) else path
         return f"Understood: building {what} from {rel}.\n{result}"
 
     def ask_model(self, name, text):
+        if os.path.exists(text.strip()) and not self.path_ok(text.strip()):
+            return "I can only use files you uploaded or the example data."
         return self.builder.ask(name, text)
 
     def list_models(self):

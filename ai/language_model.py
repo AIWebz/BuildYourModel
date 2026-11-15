@@ -1,4 +1,4 @@
-"""Basis LM: a custom word-level language model with defined responses.
+"""Solen 1.0 LM: a custom word-level language model with defined responses.
 
 * Trigram model with interpolated Kneser-Ney smoothing, written from scratch.
 * Trained on the knowledge base and the defined-response bank.

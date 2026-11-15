@@ -10,7 +10,7 @@ from ai.language_model import LanguageModel
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-class BasisTest(unittest.TestCase):
+class SolenTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.tmp = tempfile.mkdtemp()
@@ -32,7 +32,7 @@ class BasisTest(unittest.TestCase):
 
     def test_defined_responses(self):
         self.assertIn(self.bot.reply("hello"), [t.format(name_suffix="") for t in self.bot.lm.responses["greeting"]])
-        self.assertIn("Basis", self.bot.reply("who are you"))
+        self.assertIn("Solen 1.0", self.bot.reply("who are you"))
 
     def test_name_memory(self):
         self.assertIn("Riley", self.bot.reply("my name is riley"))
@@ -114,6 +114,18 @@ class BasisTest(unittest.TestCase):
             self.skipTest("Pillow not installed")
         self.assertIn("image classifier", self.bot.reply("train an ai to recognize shapes in data/examples/shapes"))
         self.assertIn("triangle", self.bot.reply("/ask shapes data/examples/shapes/triangle/triangle_05.png"))
+
+    def test_web_mode_restrictions(self):
+        self.bot.allowed_roots = [os.path.join(ROOT, "data", "examples")]
+        self.bot.allow_teach = False
+        try:
+            self.assertIn("only use files", self.bot.reply(f"/build leak {os.path.join(ROOT, 'README.md')}"))
+            self.assertIn("only use files", self.bot.reply(
+                f"make an ai that writes text like {os.path.join(ROOT, 'train.py')}.txt"))
+            self.assertIn("turned off", self.bot.reply("/teach a | b"))
+            self.assertIn("forecaster", self.bot.reply("build a model that forecasts sales from data/examples/sales.csv"))
+        finally:
+            self.bot.allowed_roots, self.bot.allow_teach = None, True
 
     def test_save_load(self):
         fresh = Assistant(data_dir=self.bot.data_dir, model_dir=self.bot.model_dir).load()

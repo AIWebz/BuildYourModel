@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solen 1.0</title>
+  <meta name="description" content="Describe an AI model in plain English and Solen 1.0 builds it.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="13"/><g class="rays"><path d="M32 5v8M32 51v8M5 32h8M51 32h8M12.9 12.9l5.7 5.7M45.4 45.4l5.7 5.7M12.9 51.1l5.7-5.7M45.4 18.6l5.7-5.7"/></g></svg>
+      <div>
+        <h1>Solen <span>1.0</span></h1>
+        <p class="tag">Describe an AI model. Solen builds it.</p>
+      </div>
+    </div>
+    <button id="themeBtn" class="ghost" type="button" aria-label="Toggle dark mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button>
+  </header>
+
+  <main class="layout">
+    <section class="chat" aria-label="Chat with Solen">
+      <div id="messages" class="messages" aria-live="polite">
+        <div class="welcome" id="welcome">
+          <h2>What AI model do you want to build?</h2>
+          <p>Tell Solen what the model should do and give it data. It picks the model type, trains it, tests it on data it never saw, and hands it to you.</p>
+          <div class="chips" id="chips"></div>
+          <p class="hint">Or attach your own <b>CSV</b>, <b>TXT</b> or <b>ZIP of image folders</b> with the paperclip.</p>
+        </div>
+      </div>
+
+      <form id="composer" class="composer">
+        <div id="attachment" class="attachment" hidden>
+          <span id="attachName"></span>
+          <button type="button" id="attachRemove" aria-label="Remove file">×</button>
+        </div>
+        <div class="row">
+          <label class="icon-btn" title="Attach a file" aria-label="Attach a file">
+            <input type="file" id="fileInput" accept=".csv,.txt,.json,.zip" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5l-8.6 8.6a5.5 5.5 0 01-7.8-7.8l8.6-8.6a3.7 3.7 0 015.2 5.2l-8.6 8.6a1.8 1.8 0 01-2.6-2.6l8-8"/></svg>
+          </label>
+          <textarea id="input" rows="1" placeholder="Describe the AI model you want…" aria-label="Message"></textarea>
+          <button id="send" class="send" type="submit" aria-label="Send">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l16-8-6 16-2.5-6.5L4 12z"/></svg>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <aside class="side" aria-label="Your models">
+      <div class="side-head">
+        <h2>Your models</h2>
+        <span id="count" class="count">0</span>
+      </div>
+      <div id="models" class="models">
+        <p class="empty">Models you build appear here. You can test them and download them.</p>
+      </div>
+      <details class="about">
+        <summary>What can Solen build?</summary>
+        <ul>
+          <li><b>Text classifiers</b>: sentiment, spam, topics</li>
+          <li><b>Number predictors</b>: prices, scores</li>
+          <li><b>Table classifiers</b>: which category a row is</li>
+          <li><b>Clustering</b>: find groups in your data</li>
+          <li><b>Anomaly detectors</b>: spot unusual rows</li>
+          <li><b>Forecasters</b>: predict the next values</li>
+          <li><b>Recommenders</b>: people who liked X also liked Y</li>
+          <li><b>Text generators</b>: n-gram and neural character models</li>
+          <li><b>Image classifiers</b>: small pictures</li>
+          <li><b>Game agents</b>: reinforcement learning in a maze</li>
+        </ul>
+        <p>Every model is small, trained from scratch on this server, and scored on held-out data.</p>
+      </details>
+    </aside>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

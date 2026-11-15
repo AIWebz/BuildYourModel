@@ -1,4 +1,4 @@
-"""More small model types Basis can build, all from scratch in NumPy.
+"""More small model types Solen 1.0 can build, all from scratch in NumPy.
 
     ClusterModel    k-means with automatic k (silhouette)        -> groups rows
     AnomalyModel    distance-to-centroid with learned threshold  -> flags unusual rows

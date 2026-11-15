@@ -3051,6 +3051,1182 @@
     "best way to learn"
    ],
    "answer": "Study in short focused sessions, test yourself instead of rereading, space out your reviews over days and teach the idea to someone else."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how do i build an ai model",
+    "steps to build an ai model",
+    "how to make an ai",
+    "how do you create an ai model",
+    "what is the process of building a machine learning model",
+    "guide to making an ai"
+   ],
+   "answer": "To build an AI model: 1, define the problem and what a good result looks like. 2, collect data. 3, clean and label it. 4, split it into training, validation and test sets. 5, start with a simple baseline model. 6, train a better model. 7, evaluate it on the test set. 8, tune hyperparameters. 9, deploy it. 10, monitor it and retrain as data changes."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "where do i start learning ai",
+    "how do i learn to build ai",
+    "how to get started with machine learning",
+    "beginner roadmap for ai"
+   ],
+   "answer": "Start with Python, then learn NumPy and pandas, basic linear algebra, calculus and probability. Next learn scikit-learn for classic models, then PyTorch for neural networks. Build small projects early, like a spam filter or digit classifier, and grow from there."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what math do i need for machine learning",
+    "math for ai",
+    "do i need math to build ai"
+   ],
+   "answer": "The key math for machine learning is linear algebra for vectors and matrices, calculus for gradients, probability and statistics for uncertainty and evaluation. You can start building with basic algebra and learn the rest as you go."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "best programming language for ai",
+    "what language should i use for ai",
+    "which language is used for machine learning"
+   ],
+   "answer": "Python is the main language for AI because of libraries like PyTorch, TensorFlow, scikit-learn, NumPy and Hugging Face. C++ and CUDA are used for high performance parts, and JavaScript for running models in browsers."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how long does it take to build an ai model",
+    "how long does training take",
+    "how long to train a model"
+   ],
+   "answer": "It depends on size. A small classifier can train in seconds on a laptop, like my brain does. A medium deep learning model can take hours on a GPU. Large language models take weeks or months on thousands of GPUs."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how much does it cost to train an ai model",
+    "cost of training ai",
+    "how expensive is it to train a large language model"
+   ],
+   "answer": "Small models cost almost nothing to train on your own computer or free tools like Google Colab. Fine-tuning a model can cost a few dollars to a few hundred. Training the largest language models from scratch can cost tens to hundreds of millions of dollars."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "can i build an ai without coding",
+    "no code ai tools",
+    "build a model without programming"
+   ],
+   "answer": "Yes. No-code tools like Google Teachable Machine, cloud AutoML services and some Hugging Face tools let you train models by uploading data. Coding gives you much more control, though."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how were you trained",
+    "how were you built",
+    "what is your architecture",
+    "how do you work inside"
+   ],
+   "answer": "I have two connected models. My brain is a neural network: hashed word and letter features go through an embedding layer, a hidden layer and a softmax, trained with Adam, dropout and data augmentation, backed by a TF-IDF retriever. My language model is a trigram model with Kneser-Ney smoothing that picks and fills my defined responses."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what types of ai models are there",
+    "kinds of machine learning models",
+    "list types of ai models"
+   ],
+   "answer": "Common model types are linear models, decision trees and forests, nearest neighbors, support vector machines, neural networks such as CNNs, RNNs and transformers, and generative models such as GANs, diffusion models and language models."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is training data",
+    "what data does ai learn from",
+    "explain training data",
+    "what is a dataset"
+   ],
+   "answer": "Training data is the set of examples a model learns from. For supervised learning, each example has an input, like a sentence, and a label, like its category."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how much data do i need to train a model",
+    "how much training data is enough",
+    "how many examples do i need"
+   ],
+   "answer": "It depends on the task. Simple classifiers can work with a few hundred examples per class. Deep image models often need thousands per class. Using a pretrained model and fine-tuning greatly reduces how much data you need."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "where can i find datasets",
+    "where to get data for machine learning",
+    "free datasets for ai",
+    "where can i download training data",
+    "best websites for data"
+   ],
+   "answer": "Good dataset sources are Kaggle, Hugging Face Datasets, the UCI Machine Learning Repository, Google Dataset Search, OpenML and government open data portals."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how do i clean data",
+    "what is data cleaning",
+    "how to prepare data for machine learning"
+   ],
+   "answer": "Data cleaning means removing duplicates, fixing or removing missing values, correcting wrong labels, standardizing formats and removing outliers or junk. Clean data often matters more than a fancier model."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is data labeling",
+    "what is data annotation",
+    "how do i label data"
+   ],
+   "answer": "Data labeling means attaching the correct answer to each example, like tagging images as cat or dog. It can be done by hand, with tools like Label Studio, or partly automated with an existing model."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a train test split",
+    "training validation and test sets",
+    "how should i split my data"
+   ],
+   "answer": "Split your data into a training set to learn from, a validation set to tune settings, and a test set used only once at the end. A common split is 80 percent, 10 percent and 10 percent."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is data augmentation in machine learning",
+    "how to augment data",
+    "examples of data augmentation"
+   ],
+   "answer": "Data augmentation creates new training examples by changing existing ones, such as flipping or cropping images, or adding typos and filler words to text. I was trained this way to handle messy questions."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is feature engineering",
+    "what are features in machine learning",
+    "how to choose features"
+   ],
+   "answer": "Features are the input values a model uses. Feature engineering means creating useful inputs from raw data, like turning a date into day of week, or text into word counts."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is feature scaling",
+    "should i normalize my data",
+    "what is standardization in machine learning"
+   ],
+   "answer": "Feature scaling puts inputs on similar ranges, for example by standardizing to mean 0 and standard deviation 1. It helps many models, especially neural networks and distance based models, train better."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is imbalanced data",
+    "how to handle class imbalance",
+    "what if one class has more examples"
+   ],
+   "answer": "Imbalanced data means some classes have far more examples than others. Fixes include collecting more minority data, oversampling, undersampling, class weights in the loss, and judging with precision, recall and F1 instead of accuracy."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is data leakage",
+    "explain data leakage",
+    "why is my test score too good"
+   ],
+   "answer": "Data leakage is when information from the test set or the future sneaks into training, making results look better than they really are. Keep the test set separate and only compute preprocessing on training data."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is synthetic data",
+    "can ai train on generated data",
+    "how to create synthetic data"
+   ],
+   "answer": "Synthetic data is artificially generated training data, made by simulations, rules or other AI models. It helps when real data is scarce or private, but should be checked for quality and realism."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a loss function",
+    "explain loss functions",
+    "what does loss mean in training"
+   ],
+   "answer": "A loss function measures how wrong a model's predictions are. Training tries to make the loss smaller. Cross entropy is common for classification and mean squared error for regression."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is gradient descent",
+    "explain gradient descent",
+    "how does a model learn",
+    "how does training work",
+    "how do neural networks learn"
+   ],
+   "answer": "Gradient descent is how most models learn. It computes how the loss changes with each weight, called the gradient, and nudges the weights a small step in the direction that lowers the loss, over and over."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is backpropagation",
+    "explain backpropagation",
+    "how are gradients calculated in a neural network"
+   ],
+   "answer": "Backpropagation computes the gradient of the loss for every weight in a neural network by applying the chain rule backward from the output layer to the input layer."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a learning rate",
+    "how to choose a learning rate",
+    "learning rate too high"
+   ],
+   "answer": "The learning rate sets how big each training step is. Too high and training becomes unstable, too low and it is slow. Values around 0.001 are a common start for Adam, often with a schedule that lowers it over time."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is an epoch",
+    "what is batch size",
+    "epoch vs batch vs iteration"
+   ],
+   "answer": "An epoch is one full pass through the training data. The batch size is how many examples are used in one update step, and each step is called an iteration."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is an optimizer",
+    "what is the adam optimizer",
+    "sgd vs adam"
+   ],
+   "answer": "An optimizer updates model weights using gradients. SGD takes plain gradient steps, often with momentum. Adam adapts the step size for each weight and is a popular default. AdamW adds proper weight decay."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is overfitting",
+    "explain overfitting",
+    "why does my model do well on training but bad on test",
+    "my model works on training data but fails on new data",
+    "why does my model fail on new data",
+    "what does it mean when a model overfits"
+   ],
+   "answer": "Overfitting is when a model memorizes the training data, including noise, so it scores well in training but poorly on new data."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is underfitting",
+    "explain underfitting",
+    "my model is not learning"
+   ],
+   "answer": "Underfitting is when a model is too simple or trained too little to capture the patterns, so it does poorly on both training and test data. Try a bigger model, better features or longer training."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to prevent overfitting",
+    "how to fix overfitting",
+    "ways to reduce overfitting"
+   ],
+   "answer": "To reduce overfitting: get more data, use data augmentation, add regularization such as weight decay or dropout, use early stopping, simplify the model and use cross validation."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is regularization",
+    "l1 and l2 regularization",
+    "what is weight decay"
+   ],
+   "answer": "Regularization discourages overly complex models. L2 regularization, or weight decay, penalizes large weights, and L1 pushes many weights to exactly zero."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is dropout",
+    "how does dropout work",
+    "dropout in neural networks"
+   ],
+   "answer": "Dropout randomly turns off a fraction of neurons during each training step, often 10 to 50 percent, so the network cannot rely on any single neuron. It is turned off at prediction time."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is early stopping",
+    "when should i stop training",
+    "how many epochs should i train"
+   ],
+   "answer": "Early stopping means watching the validation loss and stopping training when it stops improving, then keeping the best checkpoint. It prevents overfitting and saves time."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what are hyperparameters",
+    "what is hyperparameter tuning",
+    "how to tune hyperparameters",
+    "how do i choose the best settings for training"
+   ],
+   "answer": "Hyperparameters are settings you choose before training, like learning rate, batch size and number of layers. Tune them with grid search, random search or Bayesian optimization, judged on the validation set."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what are weights and biases",
+    "what are model parameters",
+    "what does a model learn"
+   ],
+   "answer": "Parameters, the weights and biases, are the numbers a model learns during training. Weights scale inputs and biases shift outputs. Large language models have billions of them."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is an activation function",
+    "what is relu",
+    "sigmoid vs relu vs softmax"
+   ],
+   "answer": "Activation functions add non-linearity so networks can learn complex patterns. ReLU outputs max of 0 and x and is the common default. Sigmoid squashes values between 0 and 1, and softmax turns scores into probabilities."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is batch normalization",
+    "what is layer normalization",
+    "why use normalization layers"
+   ],
+   "answer": "Normalization layers rescale activations inside a network to keep training stable and fast. Batch normalization is common in CNNs, and layer normalization is used in transformers."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is weight initialization",
+    "how to initialize neural network weights",
+    "xavier and he initialization"
+   ],
+   "answer": "Weight initialization sets starting values for weights. Good schemes like Xavier or He initialization scale random values by layer size so signals do not vanish or explode."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is the vanishing gradient problem",
+    "what are exploding gradients",
+    "why do deep networks fail to train"
+   ],
+   "answer": "Vanishing gradients shrink as they flow back through many layers, so early layers stop learning. Exploding gradients grow too large. ReLU, good initialization, normalization, residual connections and gradient clipping help."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is cross validation",
+    "k fold cross validation",
+    "explain cross validation"
+   ],
+   "answer": "Cross validation splits data into k parts, trains on k minus 1 parts and tests on the remaining one, rotating k times. Averaging the scores gives a more reliable estimate, especially with small data."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is the bias variance tradeoff",
+    "explain bias and variance in machine learning"
+   ],
+   "answer": "High bias means a model is too simple and underfits. High variance means it is too sensitive to training data and overfits. Good models balance the two."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a baseline model",
+    "why start with a simple model",
+    "what baseline should i use"
+   ],
+   "answer": "A baseline is a simple model, like predicting the most common class or a logistic regression, that sets a minimum score. Any complex model should clearly beat it."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is supervised learning",
+    "explain supervised learning",
+    "examples of supervised learning"
+   ],
+   "answer": "Supervised learning trains on labeled examples, input and correct output, such as emails labeled spam or not spam. Classification and regression are supervised tasks."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is unsupervised learning",
+    "explain unsupervised learning",
+    "examples of unsupervised learning"
+   ],
+   "answer": "Unsupervised learning finds patterns in unlabeled data, such as grouping customers by behavior with clustering or compressing data with dimensionality reduction."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is reinforcement learning",
+    "explain reinforcement learning",
+    "how does reinforcement learning work"
+   ],
+   "answer": "In reinforcement learning, an agent takes actions in an environment and learns from rewards and penalties to maximize total reward. It is used for games, robotics and tuning language models."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is self supervised learning",
+    "explain self supervised learning",
+    "how do models learn without labels"
+   ],
+   "answer": "Self supervised learning creates labels from the data itself, like hiding a word and predicting it. Language models learn this way by predicting the next token in huge amounts of text."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "classification vs regression",
+    "what is classification",
+    "what is regression in machine learning"
+   ],
+   "answer": "Classification predicts a category, like spam or not spam. Regression predicts a number, like a house price."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is clustering",
+    "what is k means",
+    "how does k means clustering work"
+   ],
+   "answer": "Clustering groups similar data points without labels. K-means picks k centers, assigns each point to its nearest center, moves centers to the average of their points, and repeats."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a decision tree",
+    "what is a random forest",
+    "what is gradient boosting"
+   ],
+   "answer": "A decision tree splits data with yes or no questions. A random forest averages many trees trained on random samples. Gradient boosting, like XGBoost or LightGBM, adds trees one by one to fix earlier errors and is very strong on tabular data."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is linear regression",
+    "explain linear regression",
+    "how does linear regression work"
+   ],
+   "answer": "Linear regression fits a straight line, or plane, that predicts a number from inputs by minimizing squared error. It is the simplest regression model."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is logistic regression",
+    "explain logistic regression"
+   ],
+   "answer": "Logistic regression is a classification model that applies a sigmoid to a weighted sum of inputs to output a probability. It is a strong simple baseline."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is k nearest neighbors",
+    "how does knn work",
+    "explain knn"
+   ],
+   "answer": "K nearest neighbors predicts by finding the k most similar training examples and taking a vote or average of their labels. It needs no training but can be slow on big data."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a support vector machine",
+    "what is an svm",
+    "explain svm"
+   ],
+   "answer": "A support vector machine finds the boundary that separates classes with the widest margin. Kernels let it learn curved boundaries."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a perceptron",
+    "explain the perceptron",
+    "first neural network"
+   ],
+   "answer": "A perceptron is the simplest artificial neuron: it multiplies inputs by weights, adds a bias and outputs 1 or 0. Frank Rosenblatt introduced it in 1958."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a multilayer perceptron",
+    "what is a feedforward neural network",
+    "what is a dense layer"
+   ],
+   "answer": "A multilayer perceptron is a feedforward network of fully connected, or dense, layers with activation functions between them. My brain uses this kind of network."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a convolutional neural network",
+    "what is a cnn",
+    "how do cnns work"
+   ],
+   "answer": "A convolutional neural network slides small learned filters across an image to detect edges, textures and shapes, building up to whole objects. CNNs are standard for image tasks."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a recurrent neural network",
+    "what is an rnn",
+    "what is an lstm"
+   ],
+   "answer": "A recurrent neural network processes sequences one step at a time while keeping a memory of earlier steps. LSTMs and GRUs are RNN types that remember longer. Transformers have mostly replaced them."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a transformer",
+    "explain transformers in ai",
+    "how do transformers work"
+   ],
+   "answer": "A transformer is a neural network built on self-attention, introduced in the 2017 paper Attention Is All You Need. It processes all tokens in parallel and powers modern language models like GPT and Claude."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is attention in ai",
+    "what is self attention",
+    "explain the attention mechanism"
+   ],
+   "answer": "Attention lets each token look at every other token and decide which ones matter most, using query, key and value vectors. Self-attention is the core of transformers."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is an embedding",
+    "what are word embeddings",
+    "explain embeddings",
+    "how do models represent words as numbers",
+    "what is a vector representation"
+   ],
+   "answer": "An embedding is a list of numbers, a vector, that represents something like a word or image so similar things have similar vectors. Models learn embeddings during training."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is tokenization",
+    "what is a tokenizer",
+    "what is a token in ai"
+   ],
+   "answer": "Tokenization splits text into pieces called tokens, which can be words, parts of words or characters. Most language models use subword methods like byte pair encoding."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is an autoencoder",
+    "explain autoencoders"
+   ],
+   "answer": "An autoencoder compresses input into a small representation with an encoder, then rebuilds it with a decoder. It is used for compression, denoising and anomaly detection."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a gan",
+    "what is a generative adversarial network",
+    "how do gans work"
+   ],
+   "answer": "A generative adversarial network has two networks: a generator that makes fake data and a discriminator that tries to spot fakes. Competing makes the generator produce realistic results."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a diffusion model",
+    "how do image generators work",
+    "how does stable diffusion work"
+   ],
+   "answer": "A diffusion model learns to remove noise step by step. To generate an image, it starts from pure noise and gradually denoises it, often guided by a text prompt."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a mixture of experts",
+    "what is moe in ai"
+   ],
+   "answer": "A mixture of experts model has many expert sub-networks and a router that sends each token to only a few of them, so the model can be very large while staying fast."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a context window",
+    "what is context length",
+    "how much text can a language model read"
+   ],
+   "answer": "The context window is how many tokens a language model can consider at once, including your prompt and its answer. Modern models range from thousands to over a million tokens."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is an n gram model",
+    "what is kneser ney smoothing",
+    "how does your language model work"
+   ],
+   "answer": "An n-gram model predicts the next word from the previous n minus 1 words using counts. Kneser-Ney smoothing shares probability with unseen word combinations. My language model is a trigram model with Kneser-Ney smoothing."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is word2vec",
+    "how are word vectors trained"
+   ],
+   "answer": "Word2vec learns word embeddings by training a small network to predict words from their neighbors, so words used in similar contexts get similar vectors."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a residual connection",
+    "what is a skip connection",
+    "what is resnet"
+   ],
+   "answer": "A residual, or skip, connection adds a layer's input to its output, which lets gradients flow easily and makes very deep networks trainable. ResNet introduced this idea for images."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build an image classifier",
+    "how do i train an image recognition model",
+    "build a model to recognize pictures"
+   ],
+   "answer": "To build an image classifier: gather labeled images in folders per class, resize and augment them, start from a pretrained CNN or vision transformer like ResNet, replace the final layer with your classes, fine-tune it in PyTorch, and check accuracy on a test set."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build a chatbot",
+    "how do i make my own chatbot",
+    "steps to create a chatbot"
+   ],
+   "answer": "For a simple chatbot like me: define intents and responses, train a text classifier to recognize intents, and map each intent to a reply. For an advanced chatbot, call or fine-tune a large language model and add retrieval so it can use your documents."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build a large language model",
+    "how do i train my own llm",
+    "steps to create a language model like gpt",
+    "how are language models like chatgpt trained",
+    "build a gpt from scratch"
+   ],
+   "answer": "To build a large language model: collect and filter a huge text dataset, train a tokenizer, build a transformer, pretrain it to predict the next token on many GPUs, then fine-tune it on instructions and align it with human feedback, and evaluate it on benchmarks."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build a sentiment analysis model",
+    "how do i detect positive or negative text",
+    "sentiment classifier"
+   ],
+   "answer": "For sentiment analysis: collect text labeled positive, negative or neutral, turn it into features with TF-IDF or a pretrained transformer, train a classifier like logistic regression or a fine-tuned BERT model, and measure F1. You can try a small one here with /build."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build a recommendation system",
+    "how do recommendation engines work",
+    "build a recommender"
+   ],
+   "answer": "Recommendation systems use collaborative filtering, which suggests items liked by similar users, content based filtering, which suggests items similar to ones you liked, or hybrids with neural networks and embeddings."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build a spam filter",
+    "how do spam filters work",
+    "make a spam detector"
+   ],
+   "answer": "To build a spam filter: collect emails labeled spam or not, convert text to word features, train Naive Bayes or logistic regression, then tune the threshold so few real emails get flagged."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build a speech recognition model",
+    "how does speech to text work"
+   ],
+   "answer": "Speech recognition turns audio into spectrograms and trains a neural network, often a transformer like Whisper, to output text. Fine-tuning a pretrained model is the practical route."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build an ai agent",
+    "what is an ai agent",
+    "how do ai agents work"
+   ],
+   "answer": "An AI agent is a language model that can plan and use tools, like search, code or APIs, in a loop: think, act, observe the result, repeat. You build one by giving the model tool definitions and running that loop."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build a text classifier",
+    "how do i classify text with ai",
+    "train a model to sort text into categories"
+   ],
+   "answer": "To build a text classifier: gather texts with category labels, turn them into features such as word counts, TF-IDF or embeddings, train a model such as logistic regression or a neural network, and test it. My brain is a text classifier, and /build makes a new one from your data."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build a model to predict prices",
+    "how to predict numbers with machine learning",
+    "house price prediction model"
+   ],
+   "answer": "To predict prices: collect past examples with features like size and location and the price, clean and scale them, train a regression model such as gradient boosting, and measure mean absolute error on a test set."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build a game playing ai",
+    "how to train ai to play games",
+    "how did alphago work"
+   ],
+   "answer": "Game playing AIs usually use reinforcement learning, where the agent plays many games and learns from wins and losses, often combined with search. AlphaGo combined neural networks with Monte Carlo tree search."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to train a model on my own data",
+    "use my own data to train ai",
+    "custom model with my data"
+   ],
+   "answer": "To train on your own data: put it in a table of inputs and labels, split it, and train with scikit-learn or fine-tune a pretrained model. Here you can save a CSV with text,label columns and run /build name path.csv."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build an object detection model",
+    "what is yolo",
+    "detect objects in images"
+   ],
+   "answer": "Object detection finds and boxes objects in images. Models like YOLO or DETR are trained on images labeled with bounding boxes, usually by fine-tuning a pretrained detector."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to build an anomaly detection model",
+    "how to detect fraud with ai",
+    "what is anomaly detection"
+   ],
+   "answer": "Anomaly detection flags unusual data, like fraud. Common methods are isolation forests, autoencoders that fail to rebuild odd inputs, and classifiers trained on labeled fraud examples."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is pretraining",
+    "explain pretraining",
+    "what does pretrained model mean"
+   ],
+   "answer": "Pretraining is the first big training stage, where a model learns general patterns from huge amounts of data, like predicting the next word in internet text. A pretrained model can then be adapted to specific tasks."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is fine tuning",
+    "how to fine tune a model",
+    "explain fine tuning",
+    "how do i adapt a pretrained model",
+    "customize a pretrained model"
+   ],
+   "answer": "Fine-tuning continues training a pretrained model on a smaller, task specific dataset with a low learning rate, so it adapts to your task while keeping what it already learned."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is transfer learning",
+    "explain transfer learning"
+   ],
+   "answer": "Transfer learning reuses knowledge from a model trained on one task for another task, such as fine-tuning an ImageNet model to recognize plant diseases. It saves data and compute."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is lora",
+    "what is parameter efficient fine tuning",
+    "what is qlora"
+   ],
+   "answer": "LoRA, low rank adaptation, fine-tunes a model by training small added matrices while freezing the original weights. It needs far less memory. QLoRA does this on a quantized model."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is rlhf",
+    "reinforcement learning from human feedback",
+    "how are chatbots aligned"
+   ],
+   "answer": "RLHF trains a reward model from human preferences between answers, then uses reinforcement learning to make the language model produce answers people prefer. Methods like DPO learn from preferences more directly."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is instruction tuning",
+    "what is supervised fine tuning",
+    "how do models learn to follow instructions"
+   ],
+   "answer": "Instruction tuning, or supervised fine-tuning, trains a pretrained model on examples of instructions paired with good responses, so it learns to follow requests."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is prompt engineering",
+    "how to write good prompts",
+    "prompting tips"
+   ],
+   "answer": "Prompt engineering is writing inputs that get better results from a model: be clear and specific, give context and examples, describe the format you want, and break big tasks into steps."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is rag",
+    "what is retrieval augmented generation",
+    "how do i give an ai my documents",
+    "how can a chatbot answer from my files",
+    "connect an ai to my documents"
+   ],
+   "answer": "Retrieval augmented generation finds relevant documents for a question, usually with embeddings and a vector database, and adds them to the prompt so the model answers from that information. My TF-IDF retriever is a simple form of retrieval."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a vector database",
+    "examples of vector databases",
+    "how to store embeddings"
+   ],
+   "answer": "A vector database stores embeddings and quickly finds the most similar ones. Examples include FAISS, Pinecone, Chroma, Weaviate, Qdrant and pgvector."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is quantization",
+    "how to make a model smaller",
+    "what is 4 bit quantization",
+    "how to compress a neural network",
+    "how to make a model use less memory",
+    "how to run a large model on a small computer"
+   ],
+   "answer": "Quantization stores model weights with fewer bits, like 8 or 4 bits instead of 16 or 32, making models smaller and faster with a small loss in quality."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is knowledge distillation",
+    "what is model distillation",
+    "how to make a small model from a big one",
+    "can a small model learn from a large one",
+    "teacher and student models"
+   ],
+   "answer": "Distillation trains a small student model to copy the outputs of a large teacher model, giving much of the quality at a fraction of the size."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is pruning in neural networks",
+    "what is model pruning"
+   ],
+   "answer": "Pruning removes weights or neurons that contribute little, making a model smaller and faster, usually followed by a short retraining."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what are scaling laws",
+    "do bigger models work better",
+    "explain scaling laws in ai"
+   ],
+   "answer": "Scaling laws show that language model loss falls predictably as you increase model size, data and compute. Compute optimal training balances parameters and tokens."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is temperature in ai",
+    "what is top k sampling",
+    "how do language models choose words"
+   ],
+   "answer": "Language models pick each next token from a probability distribution. Temperature controls randomness: low is focused, high is creative. Top-k and top-p sampling limit choices to the most likely tokens. My /generate uses temperature and top-k."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is ai hallucination",
+    "why do ai models make things up",
+    "how to reduce hallucinations"
+   ],
+   "answer": "Hallucination is when a model states false information confidently. Reduce it with retrieval from trusted sources, asking for citations, better training data and letting the model say I do not know, like I do."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is perplexity in ai",
+    "how to measure a language model",
+    "explain perplexity"
+   ],
+   "answer": "Perplexity measures how surprised a language model is by text. Lower is better. My language model gives real sentences a perplexity of about 4 and scrambled word salad over 800."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is precision and recall",
+    "what is f1 score",
+    "precision vs recall"
+   ],
+   "answer": "Precision is the share of predicted positives that are correct. Recall is the share of real positives the model found. F1 is their harmonic mean, useful for imbalanced data."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is accuracy in machine learning",
+    "is accuracy a good metric"
+   ],
+   "answer": "Accuracy is the share of predictions that are correct. It can mislead on imbalanced data: if 99 percent of emails are not spam, always guessing not spam gets 99 percent accuracy."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a confusion matrix",
+    "explain confusion matrix"
+   ],
+   "answer": "A confusion matrix is a table of predicted versus actual classes, showing true positives, false positives, true negatives and false negatives, so you can see exactly which mistakes a model makes."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is roc auc",
+    "what is an roc curve",
+    "explain auc"
+   ],
+   "answer": "An ROC curve plots true positive rate against false positive rate across thresholds. AUC, the area under it, summarizes performance: 1.0 is perfect and 0.5 is random guessing."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is mean squared error",
+    "what is mae",
+    "regression metrics"
+   ],
+   "answer": "For regression, mean squared error averages squared differences between predictions and true values, and mean absolute error averages absolute differences, which is easier to interpret."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how do i evaluate a model",
+    "how to test an ai model",
+    "how do i know if my model is good",
+    "how do i measure if my ai works",
+    "how to check model performance"
+   ],
+   "answer": "Evaluate on a held-out test set the model never trained on, using metrics that match your goal, compare against a baseline, look at a confusion matrix and real mistakes, and test on messy real world inputs."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a benchmark in ai",
+    "what are ai benchmarks",
+    "how are language models compared"
+   ],
+   "answer": "A benchmark is a standard test set for comparing models, such as ImageNet for images, or MMLU, GPQA and SWE-bench for language models."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is pytorch",
+    "pytorch vs tensorflow",
+    "what is pytorch used for",
+    "what framework should i use for deep learning",
+    "best library for neural networks"
+   ],
+   "answer": "PyTorch is a popular open source deep learning framework from Meta. It builds networks in plain Python with automatic gradients and runs on GPUs. It is the most common choice in research."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is tensorflow",
+    "what is keras"
+   ],
+   "answer": "TensorFlow is Google's deep learning framework, used widely in production. Keras is its easy high level API for building networks layer by layer."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is jax",
+    "what is jax used for"
+   ],
+   "answer": "JAX is a Google library for fast numerical computing with automatic gradients and compilation for GPUs and TPUs. It is popular for large scale research."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is scikit learn",
+    "what is sklearn",
+    "what is scikit-learn used for"
+   ],
+   "answer": "Scikit-learn is a Python library for classic machine learning: regression, classification, clustering, preprocessing and evaluation. It is the best place to start for tabular data."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is numpy",
+    "what is pandas",
+    "numpy vs pandas"
+   ],
+   "answer": "NumPy provides fast arrays and math in Python, and I am built on it. Pandas provides data tables, called DataFrames, for loading and cleaning data."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is hugging face",
+    "what is the transformers library",
+    "where can i download ai models"
+   ],
+   "answer": "Hugging Face is a platform and set of libraries for sharing and using AI models and datasets. Its Transformers library lets you load thousands of pretrained models in a few lines of Python."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a jupyter notebook",
+    "what is google colab",
+    "where can i train models for free"
+   ],
+   "answer": "A Jupyter notebook mixes code, results and notes in one document. Google Colab runs notebooks in the cloud with free GPU access, which is great for learning."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "do i need a gpu to train ai",
+    "can i train ai on a laptop",
+    "gpu vs cpu for deep learning"
+   ],
+   "answer": "Small models, like me, train fine on a laptop CPU. Deep learning on images or text is much faster on a GPU, because GPUs do thousands of calculations in parallel. Free cloud GPUs are a good start."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is cuda",
+    "what is a tpu",
+    "what hardware is used to train ai"
+   ],
+   "answer": "CUDA is NVIDIA's platform for running computations on its GPUs, which most AI training uses. TPUs are Google's chips designed specifically for machine learning."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to deploy an ai model",
+    "how do i put my model in an app",
+    "serving a machine learning model",
+    "how do i use my model in a website",
+    "turn my model into an api"
+   ],
+   "answer": "To deploy a model: save it, wrap it in an API with FastAPI or Flask, package it in a Docker container and run it on a server or cloud service. Libraries like ONNX Runtime or vLLM make serving faster."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is mlops",
+    "what is model drift",
+    "how to monitor a model in production"
+   ],
+   "answer": "MLOps is the practice of reliably deploying, monitoring and updating models. Model drift is when real data changes over time so accuracy drops, which is why you monitor and retrain."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to save a model",
+    "how do i save and load a trained model",
+    "model checkpoint"
+   ],
+   "answer": "Save a model's learned weights to a file, called a checkpoint, and load them later. In PyTorch use torch.save and load_state_dict. I save my brain as brain.npz and my language model as lm.pkl."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is inference in ai",
+    "training vs inference"
+   ],
+   "answer": "Training is when a model learns its weights. Inference is when the trained model makes predictions on new inputs."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is experiment tracking",
+    "what is mlflow",
+    "what is weights and biases tool"
+   ],
+   "answer": "Experiment tracking records settings, metrics and results of each training run so you can compare them. Popular tools are MLflow and Weights and Biases."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is onnx",
+    "how to convert a model between frameworks"
+   ],
+   "answer": "ONNX is an open format for AI models. You can export a model from PyTorch or TensorFlow to ONNX and run it fast with ONNX Runtime on many devices."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "show me code for a neural network in pytorch",
+    "pytorch example code",
+    "write a simple neural network in python"
+   ],
+   "answer": "Here is a small PyTorch network:\nimport torch, torch.nn as nn\nmodel = nn.Sequential(nn.Linear(10, 64), nn.ReLU(), nn.Linear(64, 2))\nopt = torch.optim.Adam(model.parameters(), lr=1e-3)\nloss_fn = nn.CrossEntropyLoss()\nfor x, y in loader:\n    opt.zero_grad()\n    loss = loss_fn(model(x), y)\n    loss.backward()\n    opt.step()"
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "show me scikit learn code",
+    "example machine learning code in python",
+    "simple classifier code"
+   ],
+   "answer": "Here is a simple scikit-learn classifier:\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)\nmodel = LogisticRegression(max_iter=1000).fit(X_train, y_train)\nprint(model.score(X_test, y_test))"
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "show me code for a text classifier",
+    "text classification code example"
+   ],
+   "answer": "Here is a text classifier in scikit-learn:\nfrom sklearn.pipeline import make_pipeline\nfrom sklearn.feature_extraction.text import TfidfVectorizer\nfrom sklearn.linear_model import LogisticRegression\nclf = make_pipeline(TfidfVectorizer(), LogisticRegression())\nclf.fit(texts, labels)\nprint(clf.predict(['great product']))"
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is ai bias",
+    "what is fairness in ai",
+    "how to reduce bias in ai models"
+   ],
+   "answer": "AI bias is when a model treats groups unfairly, often because of skewed training data. Reduce it with diverse data, testing results per group, fairness metrics and human review."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is ai safety",
+    "what is ai alignment",
+    "how to make ai safe"
+   ],
+   "answer": "AI safety and alignment aim to make AI systems helpful, honest and harmless, doing what people intend. Methods include careful data, human feedback training, red teaming and safety evaluations before release."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is red teaming",
+    "how to test ai for problems"
+   ],
+   "answer": "Red teaming means deliberately trying to make a model fail or misbehave, so problems can be found and fixed before release."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "what is a model card",
+    "how to document an ai model"
+   ],
+   "answer": "A model card documents a model: what it is for, the data it was trained on, its performance, its limits and known risks."
+  },
+  {
+   "topic": "ai_building",
+   "patterns": [
+    "how to protect privacy in ai",
+    "data privacy in machine learning"
+   ],
+   "answer": "Protect privacy by collecting only needed data, removing personal details, getting consent, securing storage, and using methods like differential privacy or federated learning."
   }
  ]
 }

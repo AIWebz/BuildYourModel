@@ -150,16 +150,17 @@ class Brain:
         self.classes, self.net, self.retriever = [], None, Retriever()
 
     # ------------------------------------------------------------------ train
-    def train(self, examples, epochs=12, batch=64, aug=12, seed=0, verbose=True):
+    def train(self, examples, epochs=12, batch=64, aug=12, seed=0, verbose=True, unknown=True):
         """examples: list of (text, label). Returns final training accuracy."""
         rng = random.Random(seed)
         nrng = np.random.default_rng(seed)
-        self.classes = sorted({lab for _, lab in examples} | {UNKNOWN})
+        self.classes = sorted({lab for _, lab in examples} | ({UNKNOWN} if unknown else set()))
         cid = {c: i for i, c in enumerate(self.classes)}
         data = []
         for text, lab in examples:
             data += [(t, lab) for t in augment(text, aug, rng)]
-        data += [(t, UNKNOWN) for t in negative_examples(len(examples) // 2, rng)]
+        if unknown:
+            data += [(t, UNKNOWN) for t in negative_examples(len(examples) // 2, rng)]
         idx, wts = _pack([features(t) for t, _ in data])
         y = np.array([cid[lab] for _, lab in data])
         C = len(self.classes)

@@ -51,6 +51,20 @@ class BasisTest(unittest.TestCase):
         self.bot.reply("/teach what is the zorblax | The zorblax is a made-up test creature.")
         self.assertIn("zorblax", self.bot.reply("what is the zorblax"))
 
+    def test_ai_building_knowledge(self):
+        self.assertIn("baseline", self.bot.reply("how do i build an ai model"))
+        self.assertIn("self-attention", self.bot.reply("explain how transformers work"))
+        self.assertIn("tokenizer", self.bot.reply("how do i make my own llm"))
+        self.assertIn("Kaggle", self.bot.reply("where do i get training data"))
+
+    def test_build_and_ask_custom_model(self):
+        out = self.bot.reply(f"/build mood {os.path.join(ROOT, 'data', 'examples', 'sentiment.csv')}")
+        self.assertIn("Built model 'mood'", out)
+        self.assertIn("positive", self.bot.reply("/ask mood i love it, it is amazing"))
+        self.assertIn("mood", self.bot.reply("/models"))
+        self.assertIn("no model named", self.bot.reply("/ask nothere hello"))
+        self.assertIn("could not find", self.bot.reply("/build x missing.csv"))
+
     def test_save_load(self):
         fresh = Assistant(data_dir=self.bot.data_dir, model_dir=self.bot.model_dir).load()
         self.assertIn("Tokyo", fresh.reply("capital of japan"))

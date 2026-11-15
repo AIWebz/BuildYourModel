@@ -17,6 +17,11 @@ HELD_OUT = [  # phrasings never seen in training -> text the reply must contain
     ("what is the hottest planet in our solar system", "Venus"), ("how big is jupiter compared to other planets", "Jupiter"),
     ("who started microsoft", "Gates"), ("whats the biggest ocean on earth", "Pacific"),
     ("what is the meaning of life", "/teach"), ("how are rainbows made", "sunlight"),
+    ("what steps do i follow to make an ai model", "baseline"), ("my model memorizes the training set", "Overfitting|overfitting"),
+    ("explain how transformers work", "self-attention"), ("how do i make my own llm", "tokenizer"),
+    ("which python libraries should i use for deep learning", "PyTorch"), ("how do i pick a learnin rate", "0.001"),
+    ("whats the difference between precision and recall", "Precision"), ("how do i give a chatbot my company documents", "retriev"),
+    ("how can i shrink a model so it runs faster", "bits|student|Pruning"), ("where do i get training data", "Kaggle"),
 ]
 
 if __name__ == "__main__":

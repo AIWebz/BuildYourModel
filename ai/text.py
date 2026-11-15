@@ -12,6 +12,27 @@ STOPWORDS = {"the", "a", "an", "is", "are", "of", "to", "in", "do", "does", "me"
              "can", "tell", "about", "what", "i", "and", "my", "your", "it", "on", "for", "be"}
 
 
+# canonical forms so different wordings of the same idea share features
+SYNONYMS = {
+    "make": "build", "makes": "build", "making": "build", "create": "build", "creating": "build",
+    "develop": "build", "construct": "build", "code": "build", "program": "build",
+    "llm": "large language model", "llms": "large language model", "gpt": "large language model",
+    "ml": "machine learning", "nn": "neural network", "ai": "artificial intelligence",
+    "dataset": "data", "datasets": "data", "get": "find", "obtain": "find", "source": "find",
+    "shrink": "smaller", "compress": "smaller", "tiny": "small", "faster": "fast", "quicker": "fast",
+    "biggest": "largest", "huge": "large", "big": "large",
+    "pick": "choose", "select": "choose", "set": "choose",
+    "models": "model", "networks": "network", "nets": "network", "net": "network",
+}
+
+
+def canonical(tokens):
+    out = []
+    for t in tokens:
+        out.extend(SYNONYMS.get(t, t).split())
+    return out
+
+
 def tokenize(text):
     text = text.lower()
     for k, v in CONTRACTIONS.items():
@@ -25,7 +46,7 @@ def _h(s):
 
 def features(text):
     """Return {feature_index: weight} using word 1-grams, 2-grams and char 3-grams."""
-    toks = tokenize(text)
+    toks = canonical(tokenize(text))
     feats = {}
 
     def add(key, w):

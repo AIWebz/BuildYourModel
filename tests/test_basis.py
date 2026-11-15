@@ -85,6 +85,36 @@ class BasisTest(unittest.TestCase):
         fresh = Assistant(data_dir=self.bot.data_dir, model_dir=self.bot.model_dir).load()
         self.assertIn("apple", fresh.reply("/ask fruits 200, green, smooth"))  # reload from disk
 
+    def test_understands_model_requests(self):
+        out = self.bot.reply("make me an ai that predicts house prices from data/examples/houses.csv")
+        self.assertIn("number predictor", out)
+        self.assertIn("Predicts price", out)
+        self.assertIn("forecaster", self.bot.reply("build a model that forecasts sales from data/examples/sales.csv"))
+        self.assertIn("next 3", self.bot.reply("/ask sales 3"))
+        out = self.bot.reply("I want an AI that groups customers into 3 groups using data/examples/customers.csv")
+        self.assertIn("Found 3 groups", out)
+        out = self.bot.reply("make an ai agent that learns to escape the maze in data/examples/maze.txt")
+        self.assertIn("route takes 11 steps (shortest possible: 11)", out)
+        self.assertIn("recommender", self.bot.reply("create a model from data/examples/ratings.csv"))
+        # multi-turn: ask for missing info, then use the example data
+        self.assertIn("anomaly detector", self.bot.reply("I need an AI that spots unusual transactions"))
+        self.assertIn("Built anomaly detector", self.bot.reply("use the example data"))
+        self.assertIn("UNUSUAL", self.bot.reply("/ask transactions 900, 3, 40, abroad"))
+        self.assertIn("What should the model do", self.bot.reply("build me an ai"))
+        self.assertIn("table classifier", self.bot.reply("it should predict which fruit it is from data/examples/fruit.csv"))
+        # knowledge questions are still answered, not turned into builds
+        self.assertIn("pretrained", self.bot.reply("how do i build an image classifier"))
+
+    def test_neural_and_image_models(self):
+        out = self.bot.reply("build a neural character model called scribe from data/examples/stories.txt")
+        self.assertIn("neural character model 'scribe'", out)
+        try:
+            import PIL  # noqa: F401
+        except ImportError:
+            self.skipTest("Pillow not installed")
+        self.assertIn("image classifier", self.bot.reply("train an ai to recognize shapes in data/examples/shapes"))
+        self.assertIn("triangle", self.bot.reply("/ask shapes data/examples/shapes/triangle/triangle_05.png"))
+
     def test_save_load(self):
         fresh = Assistant(data_dir=self.bot.data_dir, model_dir=self.bot.model_dir).load()
         self.assertIn("Tokyo", fresh.reply("capital of japan"))

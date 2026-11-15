@@ -14,6 +14,7 @@ import re
 
 from .brain import UNKNOWN, Brain
 from .builder import ModelBuilder
+from . import request_parser as rp
 from .language_model import LanguageModel
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -169,12 +170,41 @@ class Assistant:
         return "Got it. I learned that."
 
     # ------------------------------------------------- build other models
-    def build_model(self, name, path):
+    def build_model(self, name, path, kind=None, target=None, k=None):
         for cand in (path, os.path.join(ROOT, path)):
-            if os.path.isfile(cand):
+            if os.path.exists(cand):
                 path = cand
                 break
-        return self.builder.build(name, path)
+        return self.builder.build(name, path, kind=kind, target=target, k=k)
+
+    def handle_build_request(self, req):
+        """Turn an understood request into a built model, or ask for what is missing."""
+        kind = req.get("kind")
+        if not kind and req.get("path"):
+            name = rp.default_name(req)
+            self.memory.pop("pending_build", None)
+            return "Understood: building a model from your file (type detected from the data).\n" + \
+                self.build_model(name, req["path"], target=req.get("target"))
+        if not kind:
+            self.memory["pending_build"] = req
+            return ("I can build that. What should the model do? For example: classify text, predict a number, "
+                    "sort rows into categories, group similar rows, spot unusual rows, forecast future values, "
+                    "recommend items, write text, recognize images, or learn to solve a maze.")
+        path = req.get("path")
+        if not path and req.get("example"):
+            path = os.path.join(ROOT, rp.EXAMPLES[kind])
+        what = rp.DESCRIBE[kind] + (f" that predicts {req['target']}" if req.get("target") and kind in
+                                    ("number", "table", "classify") else "")
+        if not path:
+            self.memory["pending_build"] = req
+            return (f"Understood: you want {what}. Give me {rp.NEEDS[kind]}, for example: "
+                    f"use {rp.EXAMPLES[kind]}. Or say \"use the example data\" to try it now.")
+        self.memory.pop("pending_build", None)
+        name = rp.default_name({**req, "path": path})
+        builder_kind = None if kind == "classify" else kind
+        result = self.build_model(name, path, kind=builder_kind, target=req.get("target"), k=req.get("k"))
+        rel = os.path.relpath(path, ROOT) if os.path.isabs(path) and path.startswith(ROOT) else path
+        return f"Understood: building {what} from {rel}.\n{result}"
 
     def ask_model(self, name, text):
         return self.builder.ask(name, text)
@@ -204,8 +234,12 @@ class Assistant:
         if text.startswith("/build"):
             parts = text.split(maxsplit=2)
             if len(parts) < 3:
-                return "Use: /build name file  (.csv text,label | .csv table, last column = target | .txt text)"
-            return self.build_model(parts[1].lower(), parts[2].strip())
+                return ("Use: /build name file [type]   types: " + ", ".join(self.builder.KIND_NAMES) +
+                        "\nOr just describe it: make me an AI that predicts price from data/examples/houses.csv")
+            rest = parts[2].strip().split()
+            kind = rest[-1].lower() if len(rest) > 1 and rest[-1].lower() in self.builder.KIND_NAMES else None
+            path = " ".join(rest[:-1]) if kind else parts[2].strip()
+            return self.build_model(parts[1].lower(), path, kind=kind)
         if text.startswith("/ask"):
             parts = text.split(maxsplit=2)
             if len(parts) < 3:
@@ -215,6 +249,23 @@ class Assistant:
             return self.list_models()
         if text.startswith("/generate"):
             return self.lm.generate(text[len("/generate"):].strip()) or "Give me a few words to start from."
+
+        # understand requests for new AI models ("make me an AI that ...")
+        req = rp.parse(text, roots=[os.getcwd(), ROOT])
+        pending = self.memory.get("pending_build")
+        if req is None and pending:
+            path = rp.find_path(text, [os.getcwd(), ROOT])
+            follow_up = path or rp.wants_example(text.lower()) or not rp.QUESTION.match(text.lower())
+            kind = pending.get("kind") or rp.infer_kind(text)
+            if follow_up and (path or rp.wants_example(text.lower()) or (kind and not pending.get("kind"))):
+                req = {**pending, "kind": kind, "path": path or pending.get("path"),
+                       "example": rp.wants_example(text.lower())}
+                if not req.get("target"):
+                    req["target"] = (rp.parse("make a model that " + text, [os.getcwd(), ROOT]) or {}).get("target")
+        elif req and pending and not req.get("kind"):
+            req = {**pending, **{k: v for k, v in req.items() if v}}
+        if req:
+            return self.handle_build_request(req)
 
         # tool: name memory
         m = _NAME_RE.search(text)

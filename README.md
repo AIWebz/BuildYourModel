@@ -24,18 +24,26 @@ In chat:
 - `what is 12 times 7`: built-in calculator
 - `/teach what is X | X is ...`: teaches it a new fact (saved to `data/learned.json`)
 - `/generate the capital`: free text from the language model
-- `/build name file`: **builds and trains a new small AI model** from your file, sized to the data, then reports held-out accuracy, parameter count and file size
+- **Describe the AI model you want in plain English** and it builds it: it works out the model type, the column to predict, the number of groups, the name and the data file. If something is missing, it asks and remembers your request.
+- `/build name file [type]`: the same thing as a command
 - `/ask name input`: runs a model it built
-- `/models`: lists built models (saved in `models/custom/`)
+- `/models`: lists built models with parameter counts and file sizes (saved in `models/custom/`)
 
-| File you give it | Model it builds | Example (files in `data/examples/`) |
+| Say something like | Model it builds | Then try |
 |---|---|---|
-| `.csv` with `text,label` | Text classifier (small neural network) | `/build sentiment data/examples/sentiment.csv` → `/ask sentiment I love this` |
-| `.csv` table, last column a number | Number predictor (regression neural network) | `/build houses data/examples/houses.csv` → `/ask houses 100, 3, downtown` |
-| `.csv` table, last column a category | Table classifier (neural network) | `/build fruit data/examples/fruit.csv` → `/ask fruit 90, yellow, bumpy` |
-| `.txt` plain text | Tiny language model (Kneser-Ney trigram) | `/build robot data/examples/stories.txt` → `/ask robot the bird` |
+| *make me an AI that predicts house prices from data/examples/houses.csv* | Number predictor (neural network) | `/ask houses 100, 3, downtown` |
+| *make a model that tells if a review is positive or negative* → *use the example data* | Text classifier (neural network) | `/ask sentiment I love this` |
+| *build an AI that predicts which fruit it is from data/examples/fruit.csv* | Table classifier (neural network) | `/ask fruit 90, yellow, bumpy` |
+| *I want an AI that groups customers into 3 groups using data/examples/customers.csv* | Clustering (k-means, automatic k) | `/ask customers 25, 400, 9, app` |
+| *I need an AI that spots unusual transactions* → *use the example data* | Anomaly detector | `/ask transactions 900, 3, 40, abroad` |
+| *build a model that forecasts sales from data/examples/sales.csv* | Forecaster (autoregressive) | `/ask sales 6` |
+| *create a recommender using data/examples/ratings.csv* | Recommender (collaborative filtering) | `/ask ratings space battle` |
+| *build a neural character model called writer from data/examples/stories.txt* | Neural character-level language model | `/ask writer The robot` |
+| *make an AI that writes stories like data/examples/stories.txt* | Tiny language model (Kneser-Ney trigram) | `/ask stories the bird` |
+| *train an AI to recognize shapes in data/examples/shapes* | Image classifier (neural network, needs Pillow) | `/ask shapes data/examples/shapes/circle/circle_01.png` |
+| *make an AI agent that learns to escape the maze in data/examples/maze.txt* | Reinforcement learning agent (Q-learning) | `/ask maze 3,8` |
 
-`houses.csv` and `fruit.csv` are synthetic data generated for the demos.
+Every model is sized to its data, scored on held-out data it never trained on (against a simple baseline where it makes sense), and saved. The example datasets are synthetic; regenerate them with `python data/examples/make_examples.py`.
 
 Ask it things like *how do I build an AI model*, *how do I make my own LLM*, *how do I prevent overfitting*, *what is RAG* or *show me code for a neural network in pytorch*.
 

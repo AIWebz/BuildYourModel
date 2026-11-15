@@ -19,9 +19,15 @@ import numpy as np
 
 from .brain import UNKNOWN, Adam, Brain
 from .language_model import LanguageModel
+from .model_zoo import (AnomalyModel, CharNN, ClusterModel, Forecaster, ImageClassifier, MazeAgent,
+                        Recommender, is_maze, load_image)
 
-KINDS = {"text": "text classifier", "number": "number predictor",
-         "table": "table classifier", "lm": "tiny language model"}
+KINDS = {"text": "text classifier", "number": "number predictor", "table": "table classifier",
+         "lm": "tiny language model", "cluster": "clustering model", "anomaly": "anomaly detector",
+         "forecast": "forecaster", "recommend": "recommender", "charnn": "neural character model",
+         "image": "image classifier", "rl": "reinforcement learning agent"}
+ZOO = {"cluster": ClusterModel, "anomaly": AnomalyModel, "forecast": Forecaster, "recommend": Recommender,
+       "charnn": CharNN, "image": ImageClassifier, "rl": MazeAgent}
 
 
 def _num(v):
@@ -141,6 +147,8 @@ class TableModel:
 
 # ------------------------------------------------------------------ builder
 class ModelBuilder:
+    KIND_NAMES = ["text", "number", "table", "lm", "charnn", "cluster", "anomaly", "forecast", "recommend",
+                  "image", "rl"]
     def __init__(self, model_dir):
         self.dir = os.path.join(model_dir, "custom")
         self.cache = {}
@@ -151,21 +159,131 @@ class ModelBuilder:
         return base, base + ".meta.json"
 
     # ---------------------------------------------------------------- build
-    def build(self, name, path):
+    def build(self, name, path, kind=None, target=None, k=None):
         if not re.fullmatch(r"[a-z0-9_\-]{1,40}", name):
             return "Model names can use lowercase letters, numbers, - and _."
-        if not os.path.isfile(path):
+        if os.path.isdir(path):
+            kind = "image"
+        elif not os.path.isfile(path):
             return f"I could not find the file {path}."
         try:
-            if path.endswith(".txt"):
-                return self._build_lm(name, path)
+            if kind == "image":
+                return self._build_image(name, path)
+            if path.endswith(".txt") or kind in ("lm", "charnn", "rl"):
+                with open(path, encoding="utf-8") as f:
+                    text = f.read()
+                if kind == "rl" or (kind is None and is_maze(text)):
+                    return self._build_rl(name, text) if is_maze(text) else \
+                        "A maze file needs # for walls, . for open cells, S for start and G for goal."
+                return self._build_charnn(name, text) if kind == "charnn" else self._build_lm(name, path)
             header, rows = self._read_table(path)
-        except (OSError, ValueError, KeyError, csv.Error, UnicodeDecodeError) as e:
-            return f"I could not read that file: {e}"
+            if target:
+                header, rows = self._move_target(header, rows, target)
+        except (OSError, ValueError, KeyError, csv.Error, UnicodeDecodeError, ImportError) as e:
+            return f"I could not build that: {e}"
         if len(rows) < 6:
             return "I need at least 6 rows of data."
+        low = [h.lower() for h in header]
+        if kind is None and any("user" in h for h in low[:2]) and \
+                any(w in h for h in low[:2] for w in ("item", "product", "movie", "song", "book")):
+            kind = "recommend"
+        if kind == "forecast":
+            return self._build_forecast(name, header, rows)
+        if kind == "recommend":
+            return self._build_rec(name, rows)
+        if kind in ("cluster", "anomaly"):
+            return self._build_cluster(name, header, rows, kind, k)
         text_cls = len(header) == 2 and _num(rows[0][0]) is None and any(_num(r[1]) is None for r in rows)
-        return self._build_text(name, rows) if text_cls else self._build_table(name, header, rows)
+        if kind == "text" or (kind in (None, "classify") and text_cls):
+            return self._build_text(name, rows)
+        return self._build_table(name, header, rows)
+
+    @staticmethod
+    def _move_target(header, rows, target):
+        """Move the column the user wants predicted to the end. target may be a phrase."""
+        low = [h.lower() for h in header]
+        words = [w for w in re.findall(r"[a-z_]+", target.lower()) if len(w) > 2]
+        j = None
+        for w in words + [w.rstrip("s") for w in words]:
+            j = next((i for i, h in enumerate(low) if h == w or w in h or (len(h) > 2 and h in w)), None)
+            if j is not None:
+                break
+        if j is None:
+            return header, rows
+        order = [i for i in range(len(header)) if i != j] + [j]
+        return [header[i] for i in order], [[r[i] for i in order] for r in rows]
+
+    # ------------------------------------------------------- new model types
+    def _save_zoo(self, name, model, kind, usage, extra_meta=None):
+        base, _ = self._paths(name)
+        model.save(base + ".zoo.pkl")
+        meta = {"kind": kind, "params": model.n_params(), "usage": usage, **(extra_meta or {})}
+        meta = self._save_meta(name, meta, [base + ".zoo.pkl"])
+        self.cache[name] = model
+        return meta
+
+    def _build_cluster(self, name, header, rows, kind, k):
+        if kind == "anomaly":
+            m = AnomalyModel().fit(header, rows)
+            meta = self._save_zoo(name, m, kind, ", ".join(f"<{c}>" for c in header))
+            return self._done(name, meta, f"Learned what normal rows look like ({len(m.cm.centers)} typical "
+                                          f"patterns). It flags rows beyond the 97.5th percentile of distance; "
+                                          f"{m.flagged} of {len(rows)} training rows were flagged.")
+        m = ClusterModel().fit(header, rows, k=k)
+        meta = self._save_zoo(name, m, kind, ", ".join(f"<{c}>" for c in header))
+        return self._done(name, meta, f"Found {len(m.centers)} groups (silhouette score {m.score:.2f}, "
+                                      f"1.0 is perfect separation). {m.summary()}.")
+
+    def _build_forecast(self, name, header, rows):
+        vals = [_num(r[-1]) for r in rows]
+        if any(v is None for v in vals) or len(vals) < 12:
+            return "A forecaster needs at least 12 rows with a number in the last column."
+        labels = [r[0] for r in rows] if len(header) > 1 else None
+        m = Forecaster().fit(vals, labels)
+        meta = self._save_zoo(name, m, "forecast", "<how many steps ahead>")
+        return self._done(name, meta, f"Uses the last {m.w} values of {header[-1]} to predict the next one. "
+                                      f"Held-out average error {_fmt(m.mae)} (repeating the last value would "
+                                      f"be off by {_fmt(m.naive_mae)}).")
+
+    def _build_rec(self, name, rows):
+        m = Recommender().fit(rows)
+        meta = self._save_zoo(name, m, "recommend", "<item>   or   /ask " + name + " user <user id>")
+        return self._done(name, meta, f"Learned from {len(m.users)} users and {len(m.items)} items. "
+                                      f"Held-out hit rate in top 5: {m.hit}/{m.n_eval} "
+                                      f"(recommending popular items: {m.pop_hit}/{m.n_eval}).")
+
+    def _build_charnn(self, name, text):
+        if len(text) < 500:
+            return "A neural character model needs at least 500 characters of text."
+        m = CharNN().fit(text)
+        meta = self._save_zoo(name, m, "charnn", "<starting text>")
+        return self._done(name, meta, f"A neural network that writes one character at a time ({len(m.chars)} "
+                                      f"characters known). Held-out perplexity {m.ppl:.1f} per character "
+                                      f"(guessing by letter frequency: {m.unigram_ppl:.1f}).")
+
+    def _build_image(self, name, folder):
+        X, y = ImageClassifier.read_folder(folder)
+        classes = sorted(set(y))
+        if len(classes) < 2 or len(X) < 6:
+            return "An image model needs a folder with one sub-folder of pictures per class (2+ classes)."
+        idx = list(range(len(X)))
+        train, test = self._split(idx, 5)
+        probe = ImageClassifier().fit([X[i] for i in train], [y[i] for i in train])
+        hits = sum(probe.predict_vec(X[i])[0] == y[i] for i in test)
+        m = ImageClassifier().fit(X, y)
+        meta = self._save_zoo(name, m, "image", "<path to an image>")
+        return self._done(name, meta, f"Classes: {', '.join(classes)} ({len(X)} images). "
+                                      f"Held-out accuracy {hits}/{len(test)}.")
+
+    def _build_rl(self, name, text):
+        m = MazeAgent().fit(text)
+        meta = self._save_zoo(name, m, "rl", "(no input)   or   /ask " + name + " <row>,<col> to start elsewhere")
+        if m.optimal is None:
+            return self._done(name, meta, "There is no safe route from S to G in this maze (walls or traps block it).")
+        if m.path is None:
+            return self._done(name, meta, "It trained but has not found a path to G yet.")
+        return self._done(name, meta, f"Learned by trial and error over 3,000 games. Its route takes "
+                                      f"{len(m.path) - 1} steps (shortest possible: {m.optimal}).\n{m.draw(m.path)}\n")
 
     @staticmethod
     def _read_table(path):
@@ -175,11 +293,12 @@ class ModelBuilder:
             return ["text", "label"], [[str(r["text"]), str(r["label"])] for r in data]
         with open(path, newline="") as f:
             rows = [[c.strip() for c in r] for r in csv.reader(f) if r and any(c.strip() for c in r)]
-        if not rows or len(rows[0]) < 2:
-            raise ValueError("the CSV needs at least 2 columns")
+        if not rows:
+            raise ValueError("the file is empty")
         width = len(rows[0])
         has_header = all(_num(c) is None for c in rows[0]) and (
-            width > 2 or [c.lower() for c in rows[0]] == ["text", "label"])
+            width > 2 or [c.lower() for c in rows[0]] == ["text", "label"]
+            or (len(rows) > 1 and any(_num(c) is not None for c in rows[1])))
         header = rows[0] if has_header else [f"col{i + 1}" for i in range(width - 1)] + ["target"]
         body = [r for r in (rows[1:] if has_header else rows) if len(r) == width]
         return header, body
@@ -286,6 +405,8 @@ class ModelBuilder:
             m = Brain().load(base + ".npz", rows)
         elif meta["kind"] == "lm":
             m = LanguageModel.load(base + ".lm.pkl")
+        elif meta["kind"] in ZOO:
+            m = ZOO[meta["kind"]].load(base + ".zoo.pkl")
         else:
             m = TableModel.load(base + ".table.npz")
         self.cache[name] = m
@@ -301,6 +422,8 @@ class ModelBuilder:
             return f"[{name}] {label} (confidence {score:.2f})" if label != UNKNOWN else f"[{name}] not sure"
         if meta["kind"] == "lm":
             return f"[{name}] {model.generate(text, max_words=25)}"
+        if meta["kind"] in ZOO:
+            return f"[{name}] " + self._ask_zoo(meta["kind"], model, text.strip())
         vals = next(csv.reader([text]))
         if len(vals) != len(model.cols):
             return f"[{name}] give {len(model.cols)} comma-separated values: {', '.join(model.cols)}"
@@ -308,6 +431,45 @@ class ModelBuilder:
         if model.task == "number":
             return f"[{name}] predicted {model.target}: {_fmt(value)}"
         return f"[{name}] {model.target}: {value} (confidence {conf:.2f})"
+
+    @staticmethod
+    def _ask_zoo(kind, m, text):
+        if kind == "forecast":
+            n = int(_num(text) or 3) if text else 3
+            n = max(1, min(n, 60))
+            return f"next {n}: " + ", ".join(_fmt(v) for v in m.predict(n))
+        if kind == "recommend":
+            if text.lower().startswith("user "):
+                recs = m.for_user(text[5:].strip())
+                return "unknown user" if recs is None else ("recommended: " + ", ".join(recs) if recs else "nothing new")
+            recs = m.similar(text)
+            return f"unknown item. Known items: {', '.join(m.items[:12])}" if recs is None else \
+                "people who liked that also liked: " + ", ".join(recs)
+        if kind == "charnn":
+            return m.generate(text)
+        if kind == "image":
+            if not os.path.isfile(text):
+                return f"I could not find the image {text}"
+            label, conf = m.predict_vec(load_image(text))
+            return f"{label} (confidence {conf:.2f})"
+        if kind == "rl":
+            start = m.start
+            if text:
+                parts = [int(_num(x) or 0) for x in text.split(",")[:2]]
+                if len(parts) == 2:
+                    start = tuple(parts)
+            path = m.solve(start)
+            return "no route found from there" if path is None else f"route in {len(path) - 1} steps:\n{m.draw(path)}"
+        vals = next(csv.reader([text]))
+        cols = m.cm.enc.cols if kind == "anomaly" else m.enc.cols
+        if len(vals) != len(cols):
+            return f"give {len(cols)} comma-separated values: {', '.join(cols)}"
+        vals = [v.strip() for v in vals]
+        if kind == "anomaly":
+            bad, d = m.predict(vals)
+            return f"{'UNUSUAL' if bad else 'normal'} (distance {d:.2f}, threshold {m.threshold:.2f})"
+        j, desc = m.predict(vals)
+        return f"group {j + 1}: {desc}"
 
     def list(self):
         os.makedirs(self.dir, exist_ok=True)

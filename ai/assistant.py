@@ -180,28 +180,34 @@ class Assistant:
         real = os.path.realpath(path)
         return any(real == r or real.startswith(r + os.sep) for r in map(os.path.realpath, self.allowed_roots))
 
-    def build_model(self, name, path, kind=None, target=None, k=None):
+    def build_model(self, name, path, kind=None, target=None, k=None, arch=None):
         for cand in (path, os.path.join(ROOT, path)):
             if os.path.exists(cand):
                 path = cand
                 break
         if not self.path_ok(path):
             return "I can only use files you uploaded or the example data."
-        return self.builder.build(name, path, kind=kind, target=target, k=k)
+        return self.builder.build(name, path, kind=kind, target=target, k=k, arch=arch)
 
     def handle_build_request(self, req):
         """Turn an understood request into a built model, or ask for what is missing."""
         kind = req.get("kind")
+        note = (req.get("note") + "\n") if req.get("note") else ""
+        if req.get("blocked"):
+            self.memory.pop("pending_build", None)
+            return req["note"]
         if not kind and req.get("path"):
             name = rp.default_name(req)
             self.memory.pop("pending_build", None)
-            return "Understood: building a model from your file (type detected from the data).\n" + \
-                self.build_model(name, req["path"], target=req.get("target"))
+            return note + "Understood: building a model from your file (type detected from the data).\n" + \
+                self.build_model(name, req["path"], target=req.get("target"), arch=req.get("arch"))
         if not kind:
             self.memory["pending_build"] = req
             return ("I can build that. What should the model do? For example: classify text, predict a number, "
                     "sort rows into categories, group similar rows, spot unusual rows, forecast future values, "
-                    "recommend items, write text, recognize images, or learn to solve a maze.")
+                    "recommend items, answer questions (chatbot or from a document), summarize, translate, "
+                    "write text (including a small transformer), recognize or generate images, recognize sounds, "
+                    "or learn to solve a maze.")
         path = req.get("path")
         if not path and req.get("example"):
             path = os.path.join(ROOT, rp.EXAMPLES[kind])
@@ -209,16 +215,17 @@ class Assistant:
                                     ("number", "table", "classify") else "")
         if not path:
             self.memory["pending_build"] = req
-            return (f"Understood: you want {what}. Give me {rp.NEEDS[kind]}, for example: "
+            return (f"{note}Understood: you want {what}. Give me {rp.NEEDS[kind]}, for example: "
                     f"use {rp.EXAMPLES[kind]}. Or say \"use the example data\" to try it now.")
         self.memory.pop("pending_build", None)
         name = rp.default_name({**req, "path": path})
         builder_kind = None if kind == "classify" else kind
-        result = self.build_model(name, path, kind=builder_kind, target=req.get("target"), k=req.get("k"))
+        result = self.build_model(name, path, kind=builder_kind, target=req.get("target"), k=req.get("k"),
+                                  arch=req.get("arch"))
         if result.startswith("I can only use files"):
             return result
         rel = os.path.relpath(path, ROOT) if os.path.isabs(path) and path.startswith(ROOT) else path
-        return f"Understood: building {what} from {rel}.\n{result}"
+        return f"{note}Understood: building {what} from {rel}.\n{result}"
 
     def ask_model(self, name, text):
         if os.path.exists(text.strip()) and not self.path_ok(text.strip()):

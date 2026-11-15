@@ -127,6 +127,36 @@ class SolenTest(unittest.TestCase):
         finally:
             self.bot.allowed_roots, self.bot.allow_teach = None, True
 
+    def test_more_model_types(self):
+        out = self.bot.reply("make a customer support chatbot from data/examples/faq.csv")
+        self.assertIn("Built chatbot 'faq'", out)
+        self.assertIn("repair", self.bot.reply("/ask faq can you fix my bike"))
+        self.assertIn("don't know", self.bot.reply("/ask faq who won the world cup"))
+        self.assertIn("document Q&A", self.bot.reply("build an ai that answers questions about data/examples/science_notes.txt"))
+        self.assertIn("Gravity is", self.bot.reply("/ask science_notes what is gravity"))
+        self.assertIn("could not find", self.bot.reply("/ask science_notes who won the world cup"))
+        self.assertIn("summarizer", self.bot.reply("create a summarizer called digest for data/examples/science_notes.txt"))
+        self.assertIn("translator", self.bot.reply("make a translator using data/examples/translations.csv"))
+        self.assertEqual(self.bot.reply("/ask translations the girl is new"), "[translations] la niña es nueva")
+        self.assertIn("image generator", self.bot.reply("train an ai that generates images of shapes from data/examples/shapes called artist"))
+        self.assertIn("new triangle", self.bot.reply("/ask artist triangle"))
+        self.assertIn("audio classifier", self.bot.reply("make an ai that recognizes sounds in data/examples/sounds"))
+        self.assertIn("noise", self.bot.reply("/ask sounds data/examples/sounds/noise/noise_02.wav"))
+
+    def test_mini_gpt(self):
+        out = self.bot.reply("build a mini gpt transformer called tinygpt from data/examples/stories.txt")
+        self.assertIn("decoder-only transformer", out)
+        self.assertTrue(self.bot.reply("/ask tinygpt The robot").startswith("[tinygpt] The robot"))
+
+    def test_custom_architecture_and_scope(self):
+        out = self.bot.reply("build a model that predicts house prices from data/examples/houses.csv with 2 hidden "
+                             "layers of 16 neurons, tanh, 300 epochs, called custom")
+        self.assertIn("2 hidden layers (16, 16 units, tanh)", out)
+        self.assertIn("thousands of GPUs", self.bot.reply("make me an AI like ChatGPT"))
+        out = self.bot.reply("build an ai that generates videos of cats")
+        self.assertIn("Video models", out)
+        self.assertNotIn("Built", out)
+
     def test_save_load(self):
         fresh = Assistant(data_dir=self.bot.data_dir, model_dir=self.bot.model_dir).load()
         self.assertIn("Tokyo", fresh.reply("capital of japan"))

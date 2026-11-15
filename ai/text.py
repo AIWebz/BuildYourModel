@@ -40,6 +40,14 @@ def tokenize(text):
     return _TOKEN_RE.findall(text)
 
 
+_UNICODE_RE = re.compile(r"[^\W_]+(?:'[^\W_]+)?")
+
+
+def tokenize_unicode(text):
+    """Like tokenize, but keeps letters such as ñ, é, ü (for translation)."""
+    return _UNICODE_RE.findall(text.lower())
+
+
 def _h(s, n=N_FEATURES):
     return zlib.crc32(s.encode("utf-8")) % n
 

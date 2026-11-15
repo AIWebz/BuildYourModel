@@ -21,13 +21,20 @@ from .brain import UNKNOWN, Adam, Brain
 from .language_model import LanguageModel
 from .model_zoo import (AnomalyModel, CharNN, ClusterModel, Forecaster, ImageClassifier, MazeAgent,
                         Recommender, is_maze, load_image)
+from .model_zoo2 import (AudioClassifier, ChatbotModel, DocQA, ImageGenerator, MiniGPT, Summarizer, Translator,
+                         sentences)
 
 KINDS = {"text": "text classifier", "number": "number predictor", "table": "table classifier",
          "lm": "tiny language model", "cluster": "clustering model", "anomaly": "anomaly detector",
          "forecast": "forecaster", "recommend": "recommender", "charnn": "neural character model",
-         "image": "image classifier", "rl": "reinforcement learning agent"}
+         "image": "image classifier", "rl": "reinforcement learning agent", "chatbot": "chatbot",
+         "docqa": "document Q&A model", "summarize": "summarizer", "translate": "translator",
+         "gpt": "transformer language model (mini GPT)", "imagegen": "image generator", "audio": "audio classifier"}
 ZOO = {"cluster": ClusterModel, "anomaly": AnomalyModel, "forecast": Forecaster, "recommend": Recommender,
-       "charnn": CharNN, "image": ImageClassifier, "rl": MazeAgent}
+       "charnn": CharNN, "image": ImageClassifier, "rl": MazeAgent, "chatbot": ChatbotModel, "docqa": DocQA,
+       "summarize": Summarizer, "translate": Translator, "gpt": MiniGPT, "imagegen": ImageGenerator,
+       "audio": AudioClassifier}
+TEXT_KINDS = ("lm", "charnn", "rl", "docqa", "summarize", "gpt")
 
 
 def _num(v):
@@ -68,7 +75,7 @@ class TableModel:
             out.append(v)
         return np.array(out, np.float32)
 
-    def fit(self, header, rows, epochs=600, seed=0):
+    def fit(self, header, rows, epochs=600, seed=0, arch=None):
         self.cols, self.target = header[:-1], header[-1]
         feats = [r[:-1] for r in rows]
         ys = [r[-1] for r in rows]
@@ -96,35 +103,75 @@ class TableModel:
             Y[np.arange(len(ys)), [self.classes.index(v.strip()) for v in ys]] = 1
             out = len(self.classes)
         rng = np.random.default_rng(seed)
-        d, h = X.shape[1], 32
-        self.p = {"A1": (rng.standard_normal((d, h)) * math.sqrt(2 / max(d, 1))).astype(np.float32),
-                  "c1": np.zeros(h, np.float32),
-                  "A2": (rng.standard_normal((h, out)) * math.sqrt(1 / h)).astype(np.float32),
-                  "c2": np.zeros(out, np.float32)}
-        opt = Adam(self.p, lr=0.01, wd=1e-4)
-        for _ in range(epochs):
-            z1 = X @ self.p["A1"] + self.p["c1"]
-            a1 = np.maximum(z1, 0)
-            o = a1 @ self.p["A2"] + self.p["c2"]
+        arch = arch or {}
+        self.act = arch.get("act", "relu")
+        sizes = [X.shape[1]] + list(arch.get("layers") or [32]) + [out]
+        self.p = {}
+        for i in range(len(sizes) - 1):
+            scale = math.sqrt((2 if self.act == "relu" else 1) / max(sizes[i], 1))
+            self.p[f"A{i + 1}"] = (rng.standard_normal((sizes[i], sizes[i + 1])) * scale).astype(np.float32)
+            self.p[f"c{i + 1}"] = np.zeros(sizes[i + 1], np.float32)
+        opt = Adam(self.p, lr=float(arch.get("lr", 0.01)), wd=1e-4)
+        for _ in range(int(arch.get("epochs", epochs))):
+            o, cache = self._forward(X)
             if self.task == "number":
                 dout = 2 * (o - Y) / len(X)
             else:
                 e = np.exp(o - o.max(1, keepdims=True))
                 dout = (e / e.sum(1, keepdims=True) - Y) / len(X)
-            g = {"A2": a1.T @ dout, "c2": dout.sum(0)}
-            dz1 = (dout @ self.p["A2"].T) * (z1 > 0)
-            g["A1"], g["c1"] = X.T @ dz1, dz1.sum(0)
-            opt.step(self.p, g)
+            opt.step(self.p, self._backward(dout, cache))
         return self
 
+    def _n_layers(self):
+        return sum(1 for k in self.p if k.startswith("A"))
+
+    def _act(self, z):
+        act = getattr(self, "act", "relu")
+        if act == "tanh":
+            return np.tanh(z)
+        if act == "sigmoid":
+            return 1 / (1 + np.exp(-z))
+        return np.maximum(z, 0)
+
+    def _dact(self, z, a):
+        act = getattr(self, "act", "relu")
+        if act == "tanh":
+            return 1 - a ** 2
+        if act == "sigmoid":
+            return a * (1 - a)
+        return (z > 0).astype(z.dtype)
+
+    def _forward(self, X):
+        cache, a = [], X
+        n = self._n_layers()
+        for i in range(1, n + 1):
+            z = a @ self.p[f"A{i}"] + self.p[f"c{i}"]
+            cache.append((a, z))
+            a = z if i == n else self._act(z)
+        return a, cache
+
+    def _backward(self, dout, cache):
+        g, d = {}, dout
+        n = len(cache)
+        for i in range(n, 0, -1):
+            a_in, z = cache[i - 1]
+            g[f"A{i}"], g[f"c{i}"] = a_in.T @ d, d.sum(0)
+            if i > 1:
+                a_prev, z_prev = cache[i - 2][1], cache[i - 2][1]
+                d = (d @ self.p[f"A{i}"].T) * self._dact(z_prev, self._act(z_prev))
+        return g
+
     def predict(self, feature_rows):
-        X = self._encode(feature_rows)
-        o = np.maximum(X @ self.p["A1"] + self.p["c1"], 0) @ self.p["A2"] + self.p["c2"]
+        o, _ = self._forward(self._encode(feature_rows))
         if self.task == "number":
             return [(float(v) * self.y_std + self.y_mean, None) for v in o[:, 0]]
         e = np.exp(o - o.max(1, keepdims=True))
         pr = e / e.sum(1, keepdims=True)
         return [(self.classes[int(i)], float(pr[k, i])) for k, i in enumerate(pr.argmax(1))]
+
+    def architecture(self):
+        sizes = [self.p[f"A{i}"].shape[1] for i in range(1, self._n_layers())]
+        return f"{len(sizes)} hidden layer{'s' if len(sizes) != 1 else ''} ({', '.join(map(str, sizes))} units, {getattr(self, 'act', 'relu')})"
 
     def n_params(self):
         return int(sum(v.size for v in self.p.values()))
@@ -133,7 +180,7 @@ class TableModel:
         np.savez(path, **self.p)
         with open(path + ".json", "w") as f:
             json.dump({k: getattr(self, k) for k in
-                       ("cols", "spec", "target", "task", "classes", "y_mean", "y_std")}, f)
+                       ("cols", "spec", "target", "task", "classes", "y_mean", "y_std")} | {"act": getattr(self, "act", "relu")}, f)
 
     @classmethod
     def load(cls, path):
@@ -148,7 +195,7 @@ class TableModel:
 # ------------------------------------------------------------------ builder
 class ModelBuilder:
     KIND_NAMES = ["text", "number", "table", "lm", "charnn", "cluster", "anomaly", "forecast", "recommend",
-                  "image", "rl"]
+                  "image", "rl", "chatbot", "docqa", "summarize", "translate", "gpt", "imagegen", "audio"]
     def __init__(self, model_dir):
         self.dir = os.path.join(model_dir, "custom")
         self.cache = {}
@@ -159,22 +206,36 @@ class ModelBuilder:
         return base, base + ".meta.json"
 
     # ---------------------------------------------------------------- build
-    def build(self, name, path, kind=None, target=None, k=None):
+    def build(self, name, path, kind=None, target=None, k=None, arch=None):
         if not re.fullmatch(r"[a-z0-9_\-]{1,40}", name):
             return "Model names can use lowercase letters, numbers, - and _."
         if os.path.isdir(path):
-            kind = "image"
+            has_wav = any(f.lower().endswith(".wav") for _, _, fs in os.walk(path) for f in fs)
+            if kind not in ("imagegen", "audio"):
+                kind = "audio" if has_wav else "image"
         elif not os.path.isfile(path):
             return f"I could not find the file {path}."
+        elif kind in ("image", "imagegen", "audio"):
+            return "That model type needs a folder (or a ZIP) with one sub-folder of files per class."
         try:
             if kind == "image":
                 return self._build_image(name, path)
-            if path.endswith(".txt") or kind in ("lm", "charnn", "rl"):
+            if kind == "imagegen":
+                return self._build_imagegen(name, path)
+            if kind == "audio":
+                return self._build_audio(name, path)
+            if path.endswith(".txt") or kind in TEXT_KINDS:
                 with open(path, encoding="utf-8") as f:
                     text = f.read()
                 if kind == "rl" or (kind is None and is_maze(text)):
                     return self._build_rl(name, text) if is_maze(text) else \
                         "A maze file needs # for walls, . for open cells, S for start and G for goal."
+                if kind == "docqa":
+                    return self._build_docqa(name, text)
+                if kind == "summarize":
+                    return self._build_summarizer(name, text)
+                if kind == "gpt":
+                    return self._build_gpt(name, text)
                 return self._build_charnn(name, text) if kind == "charnn" else self._build_lm(name, path)
             header, rows = self._read_table(path)
             if target:
@@ -187,6 +248,15 @@ class ModelBuilder:
         if kind is None and any("user" in h for h in low[:2]) and \
                 any(w in h for h in low[:2] for w in ("item", "product", "movie", "song", "book")):
             kind = "recommend"
+        if kind is None and len(header) >= 2 and "question" in low[0] and "answer" in low[1]:
+            kind = "chatbot"
+        langs = ("english", "spanish", "french", "german", "italian", "portuguese", "source", "target", "src", "tgt")
+        if kind is None and len(header) == 2 and all(any(w in h for w in langs) for h in low):
+            kind = "translate"
+        if kind == "chatbot":
+            return self._build_chatbot(name, rows)
+        if kind == "translate":
+            return self._build_translator(name, header, rows)
         if kind == "forecast":
             return self._build_forecast(name, header, rows)
         if kind == "recommend":
@@ -196,7 +266,7 @@ class ModelBuilder:
         text_cls = len(header) == 2 and _num(rows[0][0]) is None and any(_num(r[1]) is None for r in rows)
         if kind == "text" or (kind in (None, "classify") and text_cls):
             return self._build_text(name, rows)
-        return self._build_table(name, header, rows)
+        return self._build_table(name, header, rows, arch)
 
     @staticmethod
     def _move_target(header, rows, target):
@@ -218,7 +288,8 @@ class ModelBuilder:
         base, _ = self._paths(name)
         model.save(base + ".zoo.pkl")
         meta = {"kind": kind, "params": model.n_params(), "usage": usage, **(extra_meta or {})}
-        meta = self._save_meta(name, meta, [base + ".zoo.pkl"])
+        files = [f for f in (base + ".zoo.pkl", base + ".zoo.pkl.npz") if os.path.exists(f)]
+        meta = self._save_meta(name, meta, files)
         self.cache[name] = model
         return meta
 
@@ -296,9 +367,12 @@ class ModelBuilder:
         if not rows:
             raise ValueError("the file is empty")
         width = len(rows[0])
+        def looks_like_names(row):  # short identifiers that never appear again in their column
+            return all(re.fullmatch(r"[A-Za-z][A-Za-z0-9_ ]{0,24}", c) and len(c.split()) <= 3 and
+                       all(r[j] != c for r in rows[1:] if len(r) > j) for j, c in enumerate(row))
         has_header = all(_num(c) is None for c in rows[0]) and (
             width > 2 or [c.lower() for c in rows[0]] == ["text", "label"]
-            or (len(rows) > 1 and any(_num(c) is not None for c in rows[1])))
+            or (len(rows) > 1 and any(_num(c) is not None for c in rows[1])) or looks_like_names(rows[0]))
         header = rows[0] if has_header else [f"col{i + 1}" for i in range(width - 1)] + ["target"]
         body = [r for r in (rows[1:] if has_header else rows) if len(r) == width]
         return header, body
@@ -343,11 +417,11 @@ class ModelBuilder:
         self.cache[name] = model
         return self._done(name, meta, f"Labels: {', '.join(labels)}. {report}")
 
-    def _build_table(self, name, header, rows):
+    def _build_table(self, name, header, rows, arch=None):
         report = ""
         if len(rows) >= 15:
             train, test = self._split(rows, 5)
-            probe = TableModel().fit(header, train)
+            probe = TableModel().fit(header, train, arch=arch)
             preds = probe.predict([r[:-1] for r in test])
             if probe.task == "number":
                 truth = [_num(r[-1]) for r in test]
@@ -358,7 +432,7 @@ class ModelBuilder:
             else:
                 hits = sum(p == r[-1].strip() for (p, _), r in zip(preds, test))
                 report = f"Held-out accuracy {hits}/{len(test)}."
-        model = TableModel().fit(header, rows)
+        model = TableModel().fit(header, rows, arch=arch)
         base, _ = self._paths(name)
         model.save(base + ".table.npz")
         usage = ", ".join(f"<{c}>" for c in model.cols)
@@ -366,7 +440,72 @@ class ModelBuilder:
                                [base + ".table.npz", base + ".table.npz.json"])
         self.cache[name] = model
         what = f"Predicts {model.target}" + (f" ({', '.join(model.classes)})" if model.classes else "")
-        return self._done(name, meta, f"{what} from {', '.join(model.cols)}. {report}")
+        return self._done(name, meta, f"{what} from {', '.join(model.cols)}, using a neural network with "
+                                      f"{model.architecture()}. {report}")
+
+    # ---------------------------------------------------- more model types
+    def _build_chatbot(self, name, rows):
+        pairs = [(r[0], r[1]) for r in rows if len(r) >= 2 and r[0] and r[1]]
+        m = ChatbotModel().fit(pairs)
+        meta = self._save_zoo(name, m, "chatbot", "<your question>")
+        return self._done(name, meta, f"Learned {len(m.answers)} answers from {len(pairs)} example questions, "
+                                      f"and says when it does not know.")
+
+    def _build_docqa(self, name, text):
+        m = DocQA().fit(text)
+        if m.n_sents < 3:
+            return "I need a document with at least 3 sentences."
+        meta = self._save_zoo(name, m, "docqa", "<question about the document>")
+        return self._done(name, meta, f"Indexed {m.n_sents} sentences. It answers with the most relevant passage.")
+
+    def _build_summarizer(self, name, text):
+        m = Summarizer().fit(text)
+        if len(m.sents) < 4:
+            return "I need a document with at least 4 sentences."
+        meta = self._save_zoo(name, m, "summarize", "<number of sentences, or text to summarize>")
+        return self._done(name, meta, f"Learned word importance from {len(m.sents)} sentences. "
+                                      f"Summary: {m.summarize(k=2)}")
+
+    def _build_translator(self, name, header, rows):
+        pairs = [(r[0], r[1]) for r in rows if len(r) >= 2 and r[0] and r[1]]
+        report = ""
+        if len(pairs) >= 20:
+            train, test = self._split(pairs, 5)
+            probe = Translator().fit(train)
+            exact = sum(probe.translate(s).lower().split() == t.lower().split() for s, t in test)
+            report = f"Held-out sentences translated exactly right: {exact}/{len(test)}."
+        m = Translator().fit(pairs)
+        meta = self._save_zoo(name, m, "translate", "<sentence to translate>")
+        return self._done(name, meta, f"Translates {header[0]} to {header[1]}, learned from {len(pairs)} sentence "
+                                      f"pairs (IBM Model 1 word alignment + a {header[1]} language model). {report}")
+
+    def _build_gpt(self, name, text):
+        if len(text) < 1000:
+            return "A transformer needs at least 1,000 characters of text."
+        m = MiniGPT().fit(text)
+        V = len(m.chars)
+        meta = self._save_zoo(name, m, "gpt", "<starting text>")
+        return self._done(name, meta, f"A decoder-only transformer ({m.L} layers, {m.d}-dim attention, {m.T}-character "
+                                      f"context), trained for {m.steps} steps in {m.train_seconds:.0f}s. Held-out "
+                                      f"perplexity {m.ppl:.1f} per character (random guessing: {V}).")
+
+    def _build_imagegen(self, name, folder):
+        m = ImageGenerator().fit(folder)
+        meta = self._save_zoo(name, m, "imagegen", "<" + " or ".join(m.classes[:4]) + ">")
+        info = ", ".join(f"{c} ({m.explained[c]:.0%} of variation captured)" for c in m.classes)
+        return self._done(name, meta, f"Learned to generate new 16x16 images for: {info}.")
+
+    def _build_audio(self, name, folder):
+        X, y = AudioClassifier.read_folder(folder)
+        classes = sorted(set(y))
+        if len(classes) < 2 or len(X) < 6:
+            return "An audio model needs a folder with one sub-folder of .wav files per class (2+ classes)."
+        train, test = self._split(list(range(len(X))), 5)
+        probe = AudioClassifier().fit([X[i] for i in train], [y[i] for i in train])
+        hits = sum(probe.net.predict_vec(X[i])[0] == y[i] for i in test)
+        m = AudioClassifier().fit(X, y)
+        meta = self._save_zoo(name, m, "audio", "<path to a .wav file>")
+        return self._done(name, meta, f"Classes: {', '.join(classes)} ({len(X)} sounds). Held-out accuracy {hits}/{len(test)}.")
 
     def _build_lm(self, name, path):
         with open(path, encoding="utf-8") as f:
@@ -434,6 +573,35 @@ class ModelBuilder:
 
     @staticmethod
     def _ask_zoo(kind, m, text):
+        if kind == "chatbot":
+            return m.reply(text)
+        if kind == "docqa":
+            ans, score = m.answer(text)
+            return ans if ans and score >= 1.0 else "I could not find that in the document."
+        if kind == "summarize":
+            if not text or _num(text) is not None:
+                return m.summarize(k=int(_num(text) or 3))
+            return m.summarize(text, k=2) if len(sentences(text)) > 2 else "Give me a few sentences to summarize, or a number."
+        if kind == "translate":
+            return m.translate(text) if text else "Give me a sentence to translate."
+        if kind == "gpt":
+            return m.generate(text)
+        if kind == "imagegen":
+            import tempfile
+            cls, img = m.sample(text.strip().lower() or None)
+            path = os.path.join(tempfile.gettempdir(), f"solen_gen_{os.getpid()}_{np.random.randint(1e9)}.png")
+            note = ""
+            try:
+                m.save_png(img, path)
+                note = f"\n[image] {path}"
+            except ImportError:
+                pass
+            return f"new {cls}:\n{m.ascii(img)}{note}"
+        if kind == "audio":
+            if not os.path.isfile(text):
+                return f"I could not find the sound file {text}"
+            label, conf = m.predict_file(text)
+            return f"{label} (confidence {conf:.2f})"
         if kind == "forecast":
             n = int(_num(text) or 3) if text else 3
             n = max(1, min(n, 60))

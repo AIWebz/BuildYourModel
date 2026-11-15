@@ -26,7 +26,7 @@ SESSIONS_DIR = os.path.join(ROOT, "models", "sessions")
 EXAMPLES = os.path.join(ROOT, "data", "examples")
 MAX_UPLOAD = 20 * 1024 ** 2
 MAX_UNZIPPED = 100 * 1024 ** 2
-UPLOAD_EXT = (".csv", ".txt", ".json", ".zip", ".png", ".jpg", ".jpeg", ".bmp", ".gif", ".webp")
+UPLOAD_EXT = (".csv", ".txt", ".json", ".zip", ".wav", ".png", ".jpg", ".jpeg", ".bmp", ".gif", ".webp")
 STATIC = {"/": ("index.html", "text/html"), "/app.js": ("app.js", "text/javascript"),
           "/style.css": ("style.css", "text/css"), "/favicon.svg": ("favicon.svg", "image/svg+xml")}
 SID_RE = re.compile(r"^[a-f0-9]{32}$")
@@ -52,6 +52,24 @@ def run_as(sid, fn):
         BOT.memory, BOT.builder = s["memory"], s["builder"]
         BOT.allowed_roots = [os.path.join(UPLOADS, sid), EXAMPLES]
         return fn()
+
+
+def attach_image(reply):
+    """Turn a '[image] /path.png' marker from the image generator into a data URI."""
+    import base64
+    m = re.search(r"\n\[image\] (\S+\.png)\s*$", reply)
+    if not m:
+        return reply, None
+    try:
+        with open(m.group(1), "rb") as f:
+            data = "data:image/png;base64," + base64.b64encode(f.read()).decode()
+        os.remove(m.group(1))
+    except OSError:
+        data = None
+    text = reply[:m.start()]
+    if data:  # the picture replaces the text preview
+        text = "\n".join(l for l in text.split("\n") if not re.fullmatch(r"[ .:\-=+*#%@]{16,}", l)).strip()
+    return text, data
 
 
 def safe_extract(data, dest):
@@ -141,10 +159,10 @@ class Handler(BaseHTTPRequestHandler):
                 msg = str(body.get("message", ""))[:2000]
                 if body.get("file"):
                     msg = f'{msg} "{body["file"]}"'.strip()
-                reply = run_as(sid, lambda: BOT.reply(msg))
+                reply, image = attach_image(run_as(sid, lambda: BOT.reply(msg)))
                 reply = reply.replace(f"uploads/{sid}/", "")  # show the user's file name, not the server path
                 reply = re.sub(r"\s*Use it with /ask .*\Z", "\nTry it in Your models.", reply, flags=re.S)
-                return self._send(200, {"reply": reply, "models": session(sid)["builder"].models()})
+                return self._send(200, {"reply": reply, "image": image, "models": session(sid)["builder"].models()})
             if url.path == "/api/ask":
                 body = self._json()
                 sid = self._sid(body.get("session"))
@@ -152,7 +170,8 @@ class Handler(BaseHTTPRequestHandler):
                 if not NAME_RE.match(name):
                     raise ValueError("bad model name")
                 inp = str(body.get("input", ""))[:2000]
-                return self._send(200, {"reply": run_as(sid, lambda: BOT.ask_model(name, inp))})
+                reply, image = attach_image(run_as(sid, lambda: BOT.ask_model(name, inp)))
+                return self._send(200, {"reply": reply, "image": image})
             if url.path == "/api/upload":
                 q = parse_qs(url.query)
                 sid = self._sid(q.get("session", [""])[0])

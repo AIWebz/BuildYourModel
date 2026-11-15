@@ -101,3 +101,4 @@ textarea:focus { border-color: var(--accent); }
   .top { padding: 12px 16px; }
   .msg { max-width: 96%; }
 }
+.gen { display: block; width: 128px; height: 128px; image-rendering: pixelated; border-radius: 8px; border: 1px solid var(--line); margin-top: 6px; }

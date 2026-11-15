@@ -48,6 +48,24 @@ def init(persist_dir):
     return "ready"
 
 
+def attach_image(reply):
+    """Turn a '[image] /path.png' marker from the image generator into a data URI."""
+    import base64
+    m = re.search(r"\n\[image\] (\S+\.png)\s*$", reply)
+    if not m:
+        return reply, None
+    try:
+        with open(m.group(1), "rb") as f:
+            data = "data:image/png;base64," + base64.b64encode(f.read()).decode()
+        os.remove(m.group(1))
+    except OSError:
+        data = None
+    text = reply[:m.start()]
+    if data:  # the picture replaces the text preview
+        text = "\n".join(l for l in text.split("\n") if not re.fullmatch(r"[ .:\-=+*#%@]{16,}", l)).strip()
+    return text, data
+
+
 def _clean(reply):
     reply = reply.replace(UPLOADS + "/", "")
     return re.sub(r"\s*Use it with /ask .*\Z", "\nTry it in Your models.", reply, flags=re.S)
@@ -57,13 +75,15 @@ def chat(message, file_path):
     msg = message[:2000]
     if file_path:
         msg = f'{msg} "{file_path}"'.strip()
-    return json.dumps({"reply": _clean(BOT.reply(msg)), "models": BOT.builder.models()})
+    reply, image = attach_image(BOT.reply(msg))
+    return json.dumps({"reply": _clean(reply), "image": image, "models": BOT.builder.models()})
 
 
 def ask(name, value):
     if not re.fullmatch(r"[a-z0-9_\-]{1,40}", name):
         return json.dumps({"reply": "Unknown model."})
-    return json.dumps({"reply": BOT.ask_model(name, value[:2000])})
+    reply, image = attach_image(BOT.ask_model(name, value[:2000]))
+    return json.dumps({"reply": reply, "image": image})
 
 
 def models():

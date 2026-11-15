@@ -13,16 +13,20 @@ import pickle
 import random
 from collections import defaultdict
 
-from .text import tokenize
+from .text import tokenize, tokenize_unicode
 
 BOS, EOS, UNK = "<s>", "</s>", "<unk>"
 
 
 class LanguageModel:
-    def __init__(self, discount=0.75):
+    def __init__(self, discount=0.75, unicode=False):
         self.d = discount
+        self.unicode = unicode
         self.responses = {}  # intent -> list of templates
         self._last = {}      # intent -> last template used
+
+    def _tok(self, text):
+        return tokenize_unicode(text) if getattr(self, "unicode", False) else tokenize(text)
 
     # ------------------------------------------------------------------ train
     def train(self, sentences, responses=None):
@@ -30,7 +34,7 @@ class LanguageModel:
             self.responses = {k: list(v) for k, v in responses.items()}
         c3 = defaultdict(int)
         for s in sentences:
-            toks = [BOS, BOS] + tokenize(s) + [EOS]
+            toks = [BOS, BOS] + self._tok(s) + [EOS]
             for i in range(2, len(toks)):
                 c3[(toks[i - 2], toks[i - 1], toks[i])] += 1
         self._index(dict(c3))
@@ -79,11 +83,11 @@ class LanguageModel:
         return [t if t in known else UNK for t in toks]
 
     def logprob(self, text):
-        toks = [BOS, BOS] + self._norm(tokenize(text)) + [EOS]
+        toks = [BOS, BOS] + self._norm(self._tok(text)) + [EOS]
         return sum(math.log(self.prob(toks[i - 2], toks[i - 1], toks[i])) for i in range(2, len(toks)))
 
     def perplexity(self, text):
-        n = len(tokenize(text)) + 1
+        n = len(self._tok(text)) + 1
         return math.exp(-self.logprob(text) / n)
 
     # ------------------------------------------------------------- generation

@@ -30,6 +30,14 @@
     ["Recognize shapes", "Train an AI to recognize shapes in data/examples/shapes"],
     ["Solve a maze", "Make an AI agent that learns to escape the maze in data/examples/maze.txt"],
     ["Write stories", "Build a neural character model called writer from data/examples/stories.txt"],
+    ["FAQ chatbot", "Make a customer support chatbot from data/examples/faq.csv"],
+    ["Mini GPT", "Build a mini GPT transformer called gpt from data/examples/stories.txt"],
+    ["Translate", "Make a translator from English to Spanish using data/examples/translations.csv"],
+    ["Generate images", "Train an AI that generates images of shapes from data/examples/shapes called artist"],
+    ["Ask a document", "Build an AI that answers questions about data/examples/science_notes.txt"],
+    ["Summarize", "Create a summarizer called digest for data/examples/science_notes.txt"],
+    ["Recognize sounds", "Make an AI that recognizes sounds in data/examples/sounds"],
+    ["Custom network", "Build a model that predicts house prices from data/examples/houses.csv with 3 hidden layers of 64 neurons, tanh, 400 epochs, called deephouse"],
   ];
   for (const [label, prompt] of EXAMPLES) {
     const b = document.createElement("button");
@@ -44,7 +52,7 @@
     let buf = [], grid = [];
     const flushText = () => { if (buf.length) { el.appendChild(document.createTextNode(buf.join("\n"))); buf = []; } };
     const flushGrid = () => { if (grid.length) { const pre = document.createElement("pre"); pre.textContent = grid.join("\n"); el.appendChild(pre); grid = []; } };
-    const isGrid = (l) => /^[#.*SGX ]{3,}$/.test(l) && l.includes("#");
+    const isGrid = (l) => (/^[#.*SGX ]{3,}$/.test(l) && l.includes("#")) || (/^[ .:\-=+*#%@]{16,}$/.test(l));
     const isCode = (l) => /^(import |from |model|opt|loss|for |    |clf|print\(|X_train)/.test(l);
     for (const l of lines) {
       if (isGrid(l) || isCode(l)) { flushText(); grid.push(l); }
@@ -68,6 +76,13 @@
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
     return div;
+  }
+
+  function showImage(el, src) {
+    if (!src || !/^data:image\/png;base64,/.test(src)) return;
+    const img = document.createElement("img");
+    img.src = src; img.alt = "Generated image"; img.className = "gen";
+    el.appendChild(img);
   }
 
   function typing() {
@@ -126,7 +141,7 @@
         body: JSON.stringify({ session: SID, message: text || "use this file", file: file?.path }),
       });
       t.remove();
-      addMsg("bot", data.reply);
+      showImage(addMsg("bot", data.reply).lastChild, data.image);
       renderModels(data.models);
     } catch (e) {
       t.remove();
@@ -147,6 +162,12 @@
     if (m.kind === "rl") return "optional start row,col";
     if (m.kind === "lm" || m.kind === "charnn") return "starting words";
     if (m.kind === "text") return "type some text";
+    if (m.kind === "chatbot") return "ask a question";
+    if (m.kind === "docqa") return "ask about the document";
+    if (m.kind === "summarize") return "number of sentences, or paste text";
+    if (m.kind === "translate") return "a sentence to translate";
+    if (m.kind === "gpt") return "starting text";
+    if (m.kind === "imagegen") return m.usage.replace(/[<>]/g, "") + " (or leave blank)";
     return m.usage.replace(/[<>]/g, "");
   }
 
@@ -178,8 +199,9 @@
       const form = document.createElement("form"); form.className = "try";
       const out = document.createElement("div"); out.className = "out";
       let field;
-      if (m.kind === "image") {
-        field = document.createElement("input"); field.type = "file"; field.accept = "image/*";
+      if (m.kind === "image" || m.kind === "audio") {
+        field = document.createElement("input"); field.type = "file";
+        field.accept = m.kind === "audio" ? ".wav,audio/wav" : "image/*";
       } else {
         field = document.createElement("input"); field.placeholder = placeholderFor(m);
       }
@@ -191,8 +213,8 @@
         out.textContent = "Running…";
         try {
           let value = field.value;
-          if (m.kind === "image") {
-            if (!field.files[0]) { out.textContent = "Choose an image first."; return; }
+          if (m.kind === "image" || m.kind === "audio") {
+            if (!field.files[0]) { out.textContent = `Choose ${m.kind === "audio" ? "a .wav file" : "an image"} first.`; return; }
             value = (await upload(field.files[0])).path;
           }
           const data = await api("/api/ask", {
@@ -201,6 +223,7 @@
           });
           out.textContent = "";
           renderText(out, data.reply.replace(/^\[[^\]]+\]\s*/, ""));
+          showImage(out, data.image);
         } catch (err) { out.textContent = err.message; }
       };
       const foot = document.createElement("div"); foot.className = "card-foot";

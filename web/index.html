@@ -27,7 +27,7 @@
           <h2>What AI model do you want to build?</h2>
           <p>Tell Solen what the model should do and give it data. It picks the model type, trains it, tests it on data it never saw, and hands it to you.</p>
           <div class="chips" id="chips"></div>
-          <p class="hint">Or attach your own <b>CSV</b>, <b>TXT</b> or <b>ZIP of image folders</b> with the paperclip.</p>
+          <p class="hint">Or attach your own <b>CSV</b>, <b>TXT</b>, or a <b>ZIP of image or .wav folders</b> with the paperclip. You can also describe the network: layers, units, activation, epochs.</p>
         </div>
       </div>
 
@@ -38,7 +38,7 @@
         </div>
         <div class="row">
           <label class="icon-btn" title="Attach a file" aria-label="Attach a file">
-            <input type="file" id="fileInput" accept=".csv,.txt,.json,.zip" hidden>
+            <input type="file" id="fileInput" accept=".csv,.txt,.json,.zip,.wav" hidden>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5l-8.6 8.6a5.5 5.5 0 01-7.8-7.8l8.6-8.6a3.7 3.7 0 015.2 5.2l-8.6 8.6a1.8 1.8 0 01-2.6-2.6l8-8"/></svg>
           </label>
           <textarea id="input" rows="1" placeholder="Describe the AI model you want…" aria-label="Message"></textarea>
@@ -61,17 +61,18 @@
         <summary>What can Solen build?</summary>
         <ul>
           <li><b>Text classifiers</b>: sentiment, spam, topics</li>
-          <li><b>Number predictors</b>: prices, scores</li>
-          <li><b>Table classifiers</b>: which category a row is</li>
-          <li><b>Clustering</b>: find groups in your data</li>
-          <li><b>Anomaly detectors</b>: spot unusual rows</li>
-          <li><b>Forecasters</b>: predict the next values</li>
-          <li><b>Recommenders</b>: people who liked X also liked Y</li>
+          <li><b>Number predictors</b> and <b>table classifiers</b>, with custom layers if you want</li>
+          <li><b>Chatbots</b> from question and answer pairs</li>
+          <li><b>Document Q&amp;A</b> and <b>summarizers</b></li>
+          <li><b>Translators</b> from sentence pairs</li>
+          <li><b>Mini GPT</b>: a real transformer language model</li>
           <li><b>Text generators</b>: n-gram and neural character models</li>
-          <li><b>Image classifiers</b>: small pictures</li>
+          <li><b>Image classifiers</b> and <b>image generators</b></li>
+          <li><b>Audio classifiers</b> for .wav sounds</li>
+          <li><b>Clustering</b>, <b>anomaly detection</b>, <b>forecasting</b>, <b>recommenders</b></li>
           <li><b>Game agents</b>: reinforcement learning in a maze</li>
         </ul>
-        <p>Every model is small, trained from scratch on this server, and scored on held-out data.</p>
+        <p>Every model is small, trained from scratch on this server, and scored on held-out data where possible. Models at ChatGPT or video scale need GPU clusters, so Solen builds the closest small version and says so.</p>
       </details>
     </aside>
   </main>

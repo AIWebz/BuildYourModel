@@ -80,4 +80,54 @@ try:
             img.save(os.path.join(d, f"{shape}_{i:02d}.png"))
 except ImportError:
     print("Pillow not installed: skipped shapes/ images")
+# faq.csv: question,answer pairs for a made-up bike shop (for chatbots)
+faq = [
+    (["what are your opening hours", "when are you open", "what time do you close"], "We are open Monday to Saturday, 9am to 6pm."),
+    (["where are you located", "what is your address", "how do i find the shop"], "We are at 12 River Street, next to the park."),
+    (["do you repair bikes", "can you fix my bike", "do you do repairs"], "Yes, we repair all kinds of bikes. Most repairs take one day."),
+    (["how much does a repair cost", "what is the price of a tune up", "how much is a service"], "A basic tune-up costs $40."),
+    (["do you rent bikes", "can i hire a bike", "how much is bike rental"], "Yes, bike rental is $15 per day."),
+    (["can i return a bike", "what is your return policy", "can i get a refund"], "You can return items within 30 days with a receipt."),
+    (["do you deliver", "can you deliver my bike", "do you offer delivery"], "We deliver within 10 km for $10."),
+    (["how can i contact you", "what is your phone number", "how do i reach you"], "Call us at 555-0123 or email hello@example.com."),
+    (["do you sell electric bikes", "do you have e-bikes", "how much is an electric bike"], "Yes, we sell electric bikes from $900."),
+    (["what payment methods do you accept", "can i pay by card", "do you take cash"], "We accept cash, cards and mobile payments."),
+]
+rows = ["question,answer"] + [f'{q},"{a}"' for qs, a in faq for q in qs]
+write("faq.csv", rows)
+
+# science_notes.txt: a document for question answering and summarizing (from Solen's knowledge base)
+import json
+with open(os.path.join(HERE, "..", "knowledge.json")) as f:
+    facts = [x["answer"] for x in json.load(f)["facts"] if x["topic"] == "science"]
+write("science_notes.txt", [" ".join(facts[i:i + 4]) for i in range(0, len(facts), 4)])
+
+# translations.csv: English -> Spanish sentence pairs (for translators)
+nouns = [("cat", "gato", "m"), ("dog", "perro", "m"), ("house", "casa", "f"), ("car", "coche", "m"),
+         ("boy", "niño", "m"), ("girl", "niña", "f"), ("book", "libro", "m"), ("table", "mesa", "f")]
+adjs = [("big", "grande", "grande"), ("small", "pequeño", "pequeña"), ("red", "rojo", "roja"),
+        ("new", "nuevo", "nueva"), ("old", "viejo", "vieja")]
+rows = ["english,spanish"]
+for en, es, g in nouns:
+    art, una = ("el", "un") if g == "m" else ("la", "una")
+    for a_en, a_m, a_f in adjs:
+        rows.append(f"the {en} is {a_en},{art} {es} es {a_m if g == 'm' else a_f}")
+    rows += [f"i see the {en},yo veo {art} {es}", f"the {en} is here,{art} {es} está aquí", f"i have a {en},yo tengo {una} {es}"]
+write("translations.csv", rows)
+
+# sounds/: short .wav clips of low tones, high tones and noise (for audio classifiers)
+import struct
+import wave
+RATE = 8000
+for kind in ("low_tone", "high_tone", "noise"):
+    d = os.path.join(HERE, "sounds", kind)
+    os.makedirs(d, exist_ok=True)
+    for i in range(15):
+        f0 = r.uniform(150, 300) if kind == "low_tone" else r.uniform(1200, 2000)
+        frames = bytearray()
+        for n in range(RATE // 2):
+            v = r.uniform(-1, 1) if kind == "noise" else math.sin(2 * math.pi * f0 * n / RATE) + r.gauss(0, 0.05)
+            frames += struct.pack("<h", int(max(-1, min(1, 0.6 * v)) * 32767))
+        with wave.open(os.path.join(d, f"{kind}_{i:02d}.wav"), "wb") as w:
+            w.setnchannels(1); w.setsampwidth(2); w.setframerate(RATE); w.writeframes(bytes(frames))
 print("examples written")

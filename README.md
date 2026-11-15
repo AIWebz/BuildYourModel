@@ -10,7 +10,19 @@ A small AI built from scratch in Python and NumPy. It has two models wired toget
 
 The knowledge it is trained on lives in `data/knowledge.json` (479 facts). Its specialty is **building AI models**: 129 facts on the build process, data, training, architectures, LLM techniques, evaluation, tools, deployment and responsible AI, plus step-by-step guides and code examples. It also covers science, space, math, geography, history, computing, health, language and general knowledge. The defined conversation responses live in `data/intents.json`.
 
-## Website
+## Live site
+
+**https://aiwebz.github.io/BuildYourModel/** runs Solen 1.0 entirely in the browser (Python + NumPy via Pyodide), so no server is needed. Built models are saved in the visitor's browser and their files never leave the device. The first visit downloads about 38 MB.
+
+Rebuild and redeploy it with:
+
+```bash
+python tools/build_web.py site --standalone
+```
+
+then publish the `site/` folder to the `gh-pages` branch (or any static host).
+
+## Website (Python server)
 
 ```bash
 python server.py        # then open http://localhost:8000
@@ -37,19 +49,29 @@ In chat:
 - `/ask name input`: runs a model it built
 - `/models`: lists built models with parameter counts and file sizes (saved in `models/custom/`)
 
-| Say something like | Model it builds | Then try |
-|---|---|---|
-| *make me an AI that predicts house prices from data/examples/houses.csv* | Number predictor (neural network) | `/ask houses 100, 3, downtown` |
-| *make a model that tells if a review is positive or negative* → *use the example data* | Text classifier (neural network) | `/ask sentiment I love this` |
-| *build an AI that predicts which fruit it is from data/examples/fruit.csv* | Table classifier (neural network) | `/ask fruit 90, yellow, bumpy` |
-| *I want an AI that groups customers into 3 groups using data/examples/customers.csv* | Clustering (k-means, automatic k) | `/ask customers 25, 400, 9, app` |
-| *I need an AI that spots unusual transactions* → *use the example data* | Anomaly detector | `/ask transactions 900, 3, 40, abroad` |
-| *build a model that forecasts sales from data/examples/sales.csv* | Forecaster (autoregressive) | `/ask sales 6` |
-| *create a recommender using data/examples/ratings.csv* | Recommender (collaborative filtering) | `/ask ratings space battle` |
-| *build a neural character model called writer from data/examples/stories.txt* | Neural character-level language model | `/ask writer The robot` |
-| *make an AI that writes stories like data/examples/stories.txt* | Tiny language model (Kneser-Ney trigram) | `/ask stories the bird` |
-| *train an AI to recognize shapes in data/examples/shapes* | Image classifier (neural network, needs Pillow) | `/ask shapes data/examples/shapes/circle/circle_01.png` |
-| *make an AI agent that learns to escape the maze in data/examples/maze.txt* | Reinforcement learning agent (Q-learning) | `/ask maze 3,8` |
+| Say something like | Model it builds |
+|---|---|
+| *make me an AI that predicts house prices from data/examples/houses.csv* | Number predictor (neural network) |
+| *...with 3 hidden layers of 64 neurons, tanh, 400 epochs* | Number/table model with your own network design |
+| *make a model that tells if a review is positive or negative* → *use the example data* | Text classifier |
+| *build an AI that predicts which fruit it is from data/examples/fruit.csv* | Table classifier |
+| *make a customer support chatbot from data/examples/faq.csv* | Chatbot (question → answer, says when it doesn't know) |
+| *build an AI that answers questions about data/examples/science_notes.txt* | Document Q&A (BM25 passage retrieval) |
+| *create a summarizer for data/examples/science_notes.txt* | Extractive summarizer (TextRank) |
+| *make a translator using data/examples/translations.csv* | Translator (IBM Model 1 + language model, beam search) |
+| *build a mini GPT transformer from data/examples/stories.txt* | Decoder-only transformer, hand-written backprop |
+| *build a neural character model from data/examples/stories.txt* | Neural character-level language model |
+| *make an AI that writes stories like data/examples/stories.txt* | Tiny n-gram language model |
+| *train an AI to recognize shapes in data/examples/shapes* | Image classifier |
+| *train an AI that generates images of shapes from data/examples/shapes* | Image generator (PCA + Gaussian latent model) |
+| *make an AI that recognizes sounds in data/examples/sounds* | Audio classifier (.wav, FFT features) |
+| *I want an AI that groups customers into 3 groups using data/examples/customers.csv* | Clustering (k-means) |
+| *I need an AI that spots unusual transactions* → *use the example data* | Anomaly detector |
+| *build a model that forecasts sales from data/examples/sales.csv* | Forecaster (autoregressive) |
+| *create a recommender using data/examples/ratings.csv* | Recommender (collaborative filtering) |
+| *make an AI agent that learns to escape the maze in data/examples/maze.txt* | Reinforcement learning agent (Q-learning) |
+
+Requests at a scale that can't be trained here (ChatGPT-size language models, photorealistic image or video generators, speech synthesis, music generation) get an honest explanation, and Solen builds the closest small version where one exists.
 
 Every model is sized to its data, scored on held-out data it never trained on (against a simple baseline where it makes sense), and saved. The example datasets are synthetic; regenerate them with `python data/examples/make_examples.py`.
 

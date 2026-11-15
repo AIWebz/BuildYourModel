@@ -1,6 +1,7 @@
 """Build the browser-only Solen 1.0 site (runs the real Python model with Pyodide).
 
-    python tools/build_web.py [out_dir]     # default: dist/
+    python tools/build_web.py [out_dir]                 # artifact build (default: dist/)
+    python tools/build_web.py site --standalone         # full HTML page for GitHub Pages etc.
 
 Output: index.html, app.js, worker.js, solen.zip (code + data + compact model) and
 pyodide/ (runtime + NumPy + Pillow). Serve the folder with any static file host.
@@ -69,7 +70,7 @@ def _pyodide_files(needed):
     return picked
 
 
-def build(out):
+def build(out, standalone=False):
     """Static site where every published file is a plain web type (.txt, .wasm, .json, .js, .csv, .html)."""
     import base64
     import numpy as np
@@ -83,6 +84,16 @@ def build(out):
         shutil.copy(os.path.join(CACHE, f), os.path.join(out, "pyodide", f))
     for f in ("index.html", "app.js", "worker.js"):
         shutil.copy(os.path.join(ROOT, "web_static", f), os.path.join(out, f))
+    if standalone:  # a complete HTML document for ordinary static hosts (GitHub Pages, Netlify, ...)
+        page = open(os.path.join(out, "index.html")).read()
+        with open(os.path.join(out, "index.html"), "w") as fh:
+            fh.write('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+                     '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+                     '<link rel="icon" href="favicon.svg" type="image/svg+xml">\n'
+                     '<style>[hidden]{display:none!important} body{margin:0}</style>\n</head>\n<body>\n'
+                     + page + '</body>\n</html>\n')
+        shutil.copy(os.path.join(ROOT, "web", "favicon.svg"), os.path.join(out, "favicon.svg"))
+        open(os.path.join(out, ".nojekyll"), "w").close()
 
     counter = [0]
 
@@ -139,4 +150,5 @@ def build(out):
 
 
 if __name__ == "__main__":
-    build(sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "dist"))
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    build(args[0] if args else os.path.join(ROOT, "dist"), standalone="--standalone" in sys.argv)

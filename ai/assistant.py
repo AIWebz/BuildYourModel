@@ -55,6 +55,10 @@ def _eval(node):
 def calculate(text):
     """Return (expression, result) if the text contains arithmetic, else None."""
     s = text.lower()
+    f = re.search(r"\b(\d{1,3})\s*(?:!|factorial\b)", s)
+    if f and int(f.group(1)) <= 50:
+        import math
+        return f"{f.group(1)}!", math.factorial(int(f.group(1)))
     for pat, rep in _WORD_OPS:
         s = re.sub(pat, rep, s)
     m = re.findall(r"[\d\.\s\+\-\*/%\(\)]+", s)
@@ -201,7 +205,7 @@ class Assistant:
         label, score = top[0][0], top[0][1]
         if label == UNKNOWN or score < CONFIDENCE:
             alt = next((r for r in top if r[0] != UNKNOWN and r[0].startswith(("fact:", "learned:"))), None)
-            if alt and alt[3] >= 0.3:
+            if alt and alt[2] >= 0.1 and alt[3] >= 0.4:  # net and retriever must both agree
                 return self.lm.respond("maybe", answer=self.lm.respond(alt[0]))
             return self.lm.respond(UNKNOWN)
         if label == "get_name" and not name:

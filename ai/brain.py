@@ -205,7 +205,7 @@ class Brain:
         out = []
         for w in tokenize(text):
             if w not in self._known and len(w) >= 4 and not w.isdigit():
-                m = difflib.get_close_matches(w, self.vocab, n=1, cutoff=0.78)
+                m = difflib.get_close_matches(w, self.vocab, n=1, cutoff=0.81)
                 w = m[0] if m else w
             out.append(w)
         return " ".join(out)

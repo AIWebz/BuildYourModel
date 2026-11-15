@@ -1,107 +1,3056 @@
 {
-  "facts": [
-    {"topic": "science", "patterns": ["what is water made of", "chemical formula of water", "what is h2o"], "answer": "Water is made of two hydrogen atoms and one oxygen atom, so its chemical formula is H2O."},
-    {"topic": "science", "patterns": ["what is photosynthesis", "how do plants make food", "how do plants get energy"], "answer": "Photosynthesis is the process plants use to turn sunlight, water and carbon dioxide into glucose and oxygen."},
-    {"topic": "science", "patterns": ["what is gravity", "why do things fall", "explain gravity"], "answer": "Gravity is the force that pulls objects with mass toward each other. On Earth it accelerates falling objects at about 9.8 meters per second squared."},
-    {"topic": "science", "patterns": ["what is an atom", "what are atoms made of", "explain atoms"], "answer": "An atom is the smallest unit of a chemical element. It has a nucleus of protons and neutrons surrounded by electrons."},
-    {"topic": "science", "patterns": ["what is dna", "what does dna do", "explain dna"], "answer": "DNA is the molecule that carries the genetic instructions for growth, function and reproduction of all known living things."},
-    {"topic": "science", "patterns": ["what is a cell", "what are cells", "basic unit of life"], "answer": "A cell is the basic unit of life. All living things are made of one or more cells."},
-    {"topic": "science", "patterns": ["speed of light", "how fast is light", "how fast does light travel"], "answer": "Light travels at about 299,792 kilometers per second in a vacuum."},
-    {"topic": "science", "patterns": ["what is the sun", "is the sun a star", "what is the sun made of"], "answer": "The Sun is a star made mostly of hydrogen and helium. It produces energy by nuclear fusion."},
-    {"topic": "science", "patterns": ["how many planets are in the solar system", "list the planets", "what are the planets"], "answer": "There are eight planets: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune."},
-    {"topic": "science", "patterns": ["largest planet", "biggest planet in the solar system", "what is the largest planet"], "answer": "Jupiter is the largest planet in the solar system."},
-    {"topic": "science", "patterns": ["what is the moon", "how far is the moon", "distance to the moon"], "answer": "The Moon is Earth's only natural satellite. It is about 384,400 kilometers away."},
-    {"topic": "science", "patterns": ["boiling point of water", "at what temperature does water boil", "when does water boil"], "answer": "Water boils at 100 degrees Celsius, or 212 degrees Fahrenheit, at sea level."},
-    {"topic": "science", "patterns": ["freezing point of water", "at what temperature does water freeze", "when does water freeze"], "answer": "Water freezes at 0 degrees Celsius, or 32 degrees Fahrenheit."},
-    {"topic": "science", "patterns": ["what are the states of matter", "states of matter", "solid liquid gas"], "answer": "The common states of matter are solid, liquid, gas and plasma."},
-    {"topic": "science", "patterns": ["what is energy", "explain energy", "types of energy"], "answer": "Energy is the ability to do work. It comes in forms such as kinetic, potential, thermal, chemical and electrical energy, and it cannot be created or destroyed, only changed."},
-    {"topic": "science", "patterns": ["what is evolution", "explain evolution", "natural selection"], "answer": "Evolution is the change in living things over generations. Natural selection favors traits that help organisms survive and reproduce."},
-    {"topic": "science", "patterns": ["what is oxygen", "why do we need oxygen", "what gas do we breathe"], "answer": "Oxygen is a gas that makes up about 21 percent of air. Our cells use it to release energy from food."},
-    {"topic": "science", "patterns": ["what is electricity", "explain electricity", "how does electricity work"], "answer": "Electricity is the flow of electric charge, usually electrons moving through a conductor such as a copper wire."},
-
-    {"topic": "math", "patterns": ["what is pi", "value of pi", "what does pi equal"], "answer": "Pi is the ratio of a circle's circumference to its diameter. It is about 3.14159."},
-    {"topic": "math", "patterns": ["what is a prime number", "define prime number", "examples of prime numbers"], "answer": "A prime number is a whole number greater than 1 that has only two divisors, 1 and itself. Examples are 2, 3, 5, 7 and 11."},
-    {"topic": "math", "patterns": ["pythagorean theorem", "what is the pythagorean theorem", "a squared plus b squared"], "answer": "The Pythagorean theorem says that in a right triangle a squared plus b squared equals c squared, where c is the longest side."},
-    {"topic": "math", "patterns": ["area of a circle", "how do i find the area of a circle", "circle area formula"], "answer": "The area of a circle is pi times the radius squared."},
-    {"topic": "math", "patterns": ["area of a rectangle", "how to find area of rectangle", "rectangle area formula"], "answer": "The area of a rectangle is its length times its width."},
-    {"topic": "math", "patterns": ["what is a fraction", "explain fractions", "numerator and denominator"], "answer": "A fraction shows part of a whole. The top number is the numerator and the bottom number is the denominator."},
-    {"topic": "math", "patterns": ["what is algebra", "explain algebra", "what is a variable in math"], "answer": "Algebra is the part of math that uses letters, called variables, to stand for unknown numbers in equations."},
-    {"topic": "math", "patterns": ["what is a percentage", "how do percentages work", "what does percent mean"], "answer": "A percentage is a number out of 100. For example 25 percent means 25 out of every 100."},
-    {"topic": "math", "patterns": ["what is zero", "who invented zero", "history of zero"], "answer": "Zero is the number that means nothing or no amount. It was developed as a number by mathematicians in ancient India."},
-    {"topic": "math", "patterns": ["how many degrees in a triangle", "angles of a triangle add up to", "sum of angles in a triangle"], "answer": "The angles of a triangle always add up to 180 degrees."},
-    {"topic": "math", "patterns": ["what is the order of operations", "pemdas", "bodmas"], "answer": "The order of operations is parentheses, exponents, multiplication and division, then addition and subtraction."},
-
-    {"topic": "geography", "patterns": ["capital of france", "what is the capital of france"], "answer": "The capital of France is Paris."},
-    {"topic": "geography", "patterns": ["capital of japan", "what is the capital of japan"], "answer": "The capital of Japan is Tokyo."},
-    {"topic": "geography", "patterns": ["capital of the united states", "capital of the usa", "capital of america"], "answer": "The capital of the United States is Washington, D.C."},
-    {"topic": "geography", "patterns": ["capital of the united kingdom", "capital of england", "capital of the uk"], "answer": "The capital of the United Kingdom is London."},
-    {"topic": "geography", "patterns": ["capital of germany", "what is the capital of germany"], "answer": "The capital of Germany is Berlin."},
-    {"topic": "geography", "patterns": ["capital of italy", "what is the capital of italy"], "answer": "The capital of Italy is Rome."},
-    {"topic": "geography", "patterns": ["capital of canada", "what is the capital of canada"], "answer": "The capital of Canada is Ottawa."},
-    {"topic": "geography", "patterns": ["capital of australia", "what is the capital of australia"], "answer": "The capital of Australia is Canberra."},
-    {"topic": "geography", "patterns": ["capital of china", "what is the capital of china"], "answer": "The capital of China is Beijing."},
-    {"topic": "geography", "patterns": ["capital of india", "what is the capital of india"], "answer": "The capital of India is New Delhi."},
-    {"topic": "geography", "patterns": ["capital of brazil", "what is the capital of brazil"], "answer": "The capital of Brazil is Brasilia."},
-    {"topic": "geography", "patterns": ["capital of spain", "what is the capital of spain"], "answer": "The capital of Spain is Madrid."},
-    {"topic": "geography", "patterns": ["how many continents are there", "list the continents", "what are the continents"], "answer": "There are seven continents: Africa, Antarctica, Asia, Australia, Europe, North America and South America."},
-    {"topic": "geography", "patterns": ["largest ocean", "biggest ocean", "what is the largest ocean"], "answer": "The Pacific Ocean is the largest and deepest ocean on Earth."},
-    {"topic": "geography", "patterns": ["tallest mountain", "highest mountain in the world", "how tall is mount everest"], "answer": "Mount Everest is the highest mountain above sea level, at about 8,849 meters."},
-    {"topic": "geography", "patterns": ["longest river", "what is the longest river", "longest river in the world"], "answer": "The Nile and the Amazon are the two longest rivers, each about 6,400 to 6,650 kilometers long."},
-    {"topic": "geography", "patterns": ["largest country", "biggest country in the world", "largest country by area"], "answer": "Russia is the largest country by area."},
-    {"topic": "geography", "patterns": ["largest desert", "biggest desert", "what is the largest hot desert"], "answer": "Antarctica is the largest desert overall. The Sahara is the largest hot desert."},
-    {"topic": "geography", "patterns": ["how many countries are there", "number of countries in the world"], "answer": "There are 195 countries: 193 United Nations members plus 2 observer states."},
-
-    {"topic": "history", "patterns": ["who was the first president of the united states", "first us president", "who was george washington"], "answer": "George Washington was the first President of the United States, serving from 1789 to 1797."},
-    {"topic": "history", "patterns": ["when did world war 2 end", "end of world war two", "when did ww2 end"], "answer": "World War II ended in 1945."},
-    {"topic": "history", "patterns": ["when did world war 1 start", "start of world war one", "when did ww1 begin"], "answer": "World War I began in 1914 and ended in 1918."},
-    {"topic": "history", "patterns": ["who landed on the moon first", "first man on the moon", "when did humans land on the moon"], "answer": "Neil Armstrong was the first person to walk on the Moon, on July 20, 1969, during the Apollo 11 mission."},
-    {"topic": "history", "patterns": ["who invented the light bulb", "inventor of the light bulb", "who made the first light bulb"], "answer": "Thomas Edison made the first practical long lasting light bulb in 1879, building on work by earlier inventors."},
-    {"topic": "history", "patterns": ["who invented the telephone", "inventor of the telephone"], "answer": "Alexander Graham Bell received the first patent for the telephone in 1876."},
-    {"topic": "history", "patterns": ["who discovered penicillin", "discovery of penicillin", "first antibiotic"], "answer": "Alexander Fleming discovered penicillin, the first widely used antibiotic, in 1928."},
-    {"topic": "history", "patterns": ["who was albert einstein", "what did einstein discover", "theory of relativity"], "answer": "Albert Einstein was a physicist known for the theory of relativity and the equation E equals m c squared."},
-    {"topic": "history", "patterns": ["who was isaac newton", "what did newton discover", "laws of motion"], "answer": "Isaac Newton was a scientist who described the laws of motion and universal gravitation."},
-    {"topic": "history", "patterns": ["who built the pyramids", "egyptian pyramids", "when were the pyramids built"], "answer": "The great pyramids of Giza were built by ancient Egyptians about 4,500 years ago as tombs for pharaohs."},
-    {"topic": "history", "patterns": ["what was the industrial revolution", "industrial revolution", "when was the industrial revolution"], "answer": "The Industrial Revolution began in Britain around 1760 and moved production from hand tools to machines and factories."},
-    {"topic": "history", "patterns": ["who invented the printing press", "printing press inventor", "gutenberg"], "answer": "Johannes Gutenberg invented the movable type printing press in Europe around 1440."},
-
-    {"topic": "computing", "patterns": ["what is a computer", "how does a computer work", "explain computers"], "answer": "A computer is a machine that follows instructions, called programs, to take input, process data and produce output."},
-    {"topic": "computing", "patterns": ["what is artificial intelligence", "what is ai", "explain artificial intelligence"], "answer": "Artificial intelligence is the field of building computer systems that can learn, reason and solve problems in ways that normally need human intelligence."},
-    {"topic": "computing", "patterns": ["what is machine learning", "explain machine learning", "how do machines learn"], "answer": "Machine learning is a type of AI where a model learns patterns from data instead of being programmed with fixed rules."},
-    {"topic": "computing", "patterns": ["what is a neural network", "explain neural networks", "how do neural networks work"], "answer": "A neural network is a model made of layers of connected units. It learns by adjusting the weights between units to reduce its errors."},
-    {"topic": "computing", "patterns": ["what is a language model", "explain language models", "how do language models work"], "answer": "A language model predicts which word comes next given the words before it. By repeating that prediction it can generate text."},
-    {"topic": "computing", "patterns": ["what is the internet", "how does the internet work", "explain the internet"], "answer": "The internet is a global network of computers that share data using common rules called protocols, such as TCP and IP."},
-    {"topic": "computing", "patterns": ["what is binary", "explain binary numbers", "ones and zeros"], "answer": "Binary is a number system with only two digits, 0 and 1. Computers store all data in binary."},
-    {"topic": "computing", "patterns": ["what is python", "python programming language", "what is python used for"], "answer": "Python is a popular programming language known for clear syntax. It is used for web development, data science, automation and AI."},
-    {"topic": "computing", "patterns": ["what is an algorithm", "define algorithm", "explain algorithms"], "answer": "An algorithm is a step by step set of instructions for solving a problem or completing a task."},
-    {"topic": "computing", "patterns": ["what is a cpu", "what does a processor do", "central processing unit"], "answer": "The CPU, or central processing unit, is the part of a computer that carries out program instructions."},
-    {"topic": "computing", "patterns": ["what is ram", "what is memory in a computer", "random access memory"], "answer": "RAM, or random access memory, is fast short term memory a computer uses to hold data that programs are actively using."},
-    {"topic": "computing", "patterns": ["what is a byte", "how many bits in a byte", "bits and bytes"], "answer": "A byte is 8 bits. A bit is a single binary digit, either 0 or 1."},
-
-    {"topic": "health", "patterns": ["how much water should i drink", "daily water intake", "how much water a day"], "answer": "Many adults need roughly 2 to 3 liters of fluid a day, though needs vary with body size, activity and climate."},
-    {"topic": "health", "patterns": ["how much sleep do i need", "how many hours of sleep", "recommended sleep"], "answer": "Most adults need 7 to 9 hours of sleep per night. Teenagers need about 8 to 10."},
-    {"topic": "health", "patterns": ["why is exercise important", "benefits of exercise", "how much exercise do i need"], "answer": "Exercise strengthens the heart, muscles and bones and improves mood. Adults are advised to get about 150 minutes of moderate activity a week."},
-    {"topic": "health", "patterns": ["what is a healthy diet", "how to eat healthy", "balanced diet"], "answer": "A healthy diet includes plenty of vegetables, fruits, whole grains, lean proteins and water, with limited sugar, salt and processed food."},
-    {"topic": "health", "patterns": ["how many bones in the human body", "number of bones in adults"], "answer": "An adult human body has 206 bones."},
-    {"topic": "health", "patterns": ["what does the heart do", "how does the heart work", "function of the heart"], "answer": "The heart is a muscle that pumps blood through the body, delivering oxygen and nutrients to cells."},
-    {"topic": "health", "patterns": ["what do the lungs do", "how do lungs work", "function of the lungs"], "answer": "The lungs take in oxygen from the air and remove carbon dioxide from the blood."},
-    {"topic": "health", "patterns": ["what is the largest organ", "largest organ in the human body"], "answer": "The skin is the largest organ of the human body."},
-
-    {"topic": "language", "patterns": ["what is a noun", "define noun", "examples of nouns"], "answer": "A noun is a word for a person, place, thing or idea, such as teacher, city, book or happiness."},
-    {"topic": "language", "patterns": ["what is a verb", "define verb", "examples of verbs"], "answer": "A verb is a word that shows an action or a state of being, such as run, think or is."},
-    {"topic": "language", "patterns": ["what is an adjective", "define adjective", "examples of adjectives"], "answer": "An adjective is a word that describes a noun, such as big, red or happy."},
-    {"topic": "language", "patterns": ["what is an adverb", "define adverb", "examples of adverbs"], "answer": "An adverb describes a verb, adjective or other adverb, often telling how, when or where, such as quickly or very."},
-    {"topic": "language", "patterns": ["how many letters in the alphabet", "letters in the english alphabet"], "answer": "The English alphabet has 26 letters."},
-    {"topic": "language", "patterns": ["what are vowels", "list the vowels", "which letters are vowels"], "answer": "The English vowels are A, E, I, O and U, and sometimes Y."},
-    {"topic": "language", "patterns": ["most spoken language", "what language do most people speak", "most common language in the world"], "answer": "English has the most total speakers, while Mandarin Chinese has the most native speakers."},
-    {"topic": "language", "patterns": ["what is a sentence", "define sentence", "parts of a sentence"], "answer": "A sentence is a group of words that expresses a complete thought. It usually has a subject and a verb."},
-
-    {"topic": "general", "patterns": ["how many days in a year", "days in a year", "what is a leap year"], "answer": "A normal year has 365 days. A leap year, every four years in most cases, has 366 days."},
-    {"topic": "general", "patterns": ["how many hours in a day", "hours in a day", "minutes in an hour"], "answer": "A day has 24 hours, an hour has 60 minutes and a minute has 60 seconds."},
-    {"topic": "general", "patterns": ["what are the primary colors", "primary colors", "list primary colors"], "answer": "The traditional primary colors are red, yellow and blue. For light, they are red, green and blue."},
-    {"topic": "general", "patterns": ["how many days in a week", "days of the week", "list the days of the week"], "answer": "A week has seven days: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday."},
-    {"topic": "general", "patterns": ["how many months in a year", "months of the year", "list the months"], "answer": "A year has twelve months, from January to December."},
-    {"topic": "general", "patterns": ["what are the seasons", "four seasons", "why do we have seasons"], "answer": "The four seasons are spring, summer, autumn and winter. They happen because Earth's axis is tilted as it orbits the Sun."},
-    {"topic": "general", "patterns": ["fastest land animal", "what is the fastest animal", "how fast is a cheetah"], "answer": "The cheetah is the fastest land animal, reaching about 100 to 120 kilometers per hour in short bursts."},
-    {"topic": "general", "patterns": ["largest animal", "biggest animal in the world", "how big is a blue whale"], "answer": "The blue whale is the largest animal ever known, growing up to about 30 meters long."}
-  ]
+ "facts": [
+  {
+   "topic": "science",
+   "patterns": [
+    "what is water made of",
+    "chemical formula of water",
+    "what is h2o"
+   ],
+   "answer": "Water is made of two hydrogen atoms and one oxygen atom, so its chemical formula is H2O."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is photosynthesis",
+    "how do plants make food",
+    "how do plants get energy"
+   ],
+   "answer": "Photosynthesis is the process plants use to turn sunlight, water and carbon dioxide into glucose and oxygen."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is gravity",
+    "why do things fall",
+    "explain gravity"
+   ],
+   "answer": "Gravity is the force that pulls objects with mass toward each other. On Earth it accelerates falling objects at about 9.8 meters per second squared."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is an atom",
+    "what are atoms made of",
+    "explain atoms"
+   ],
+   "answer": "An atom is the smallest unit of a chemical element. It has a nucleus of protons and neutrons surrounded by electrons."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is dna",
+    "what does dna do",
+    "explain dna"
+   ],
+   "answer": "DNA is the molecule that carries the genetic instructions for growth, function and reproduction of all known living things."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a cell",
+    "what are cells",
+    "basic unit of life"
+   ],
+   "answer": "A cell is the basic unit of life. All living things are made of one or more cells."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "speed of light",
+    "how fast is light",
+    "how fast does light travel"
+   ],
+   "answer": "Light travels at about 299,792 kilometers per second in a vacuum."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is the sun",
+    "is the sun a star",
+    "what is the sun made of"
+   ],
+   "answer": "The Sun is a star made mostly of hydrogen and helium. It produces energy by nuclear fusion."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "how many planets are in the solar system",
+    "list the planets",
+    "what are the planets"
+   ],
+   "answer": "There are eight planets: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "largest planet",
+    "biggest planet in the solar system",
+    "what is the largest planet",
+    "how big is jupiter",
+    "tell me about jupiter",
+    "which planet is the biggest"
+   ],
+   "answer": "Jupiter is the largest planet in the solar system."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is the moon",
+    "how far is the moon",
+    "distance to the moon"
+   ],
+   "answer": "The Moon is Earth's only natural satellite. It is about 384,400 kilometers away."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "boiling point of water",
+    "at what temperature does water boil",
+    "when does water boil"
+   ],
+   "answer": "Water boils at 100 degrees Celsius, or 212 degrees Fahrenheit, at sea level."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "freezing point of water",
+    "at what temperature does water freeze",
+    "when does water freeze"
+   ],
+   "answer": "Water freezes at 0 degrees Celsius, or 32 degrees Fahrenheit."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what are the states of matter",
+    "states of matter",
+    "solid liquid gas"
+   ],
+   "answer": "The common states of matter are solid, liquid, gas and plasma."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is energy",
+    "explain energy",
+    "types of energy"
+   ],
+   "answer": "Energy is the ability to do work. It comes in forms such as kinetic, potential, thermal, chemical and electrical energy, and it cannot be created or destroyed, only changed."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is evolution",
+    "explain evolution",
+    "natural selection"
+   ],
+   "answer": "Evolution is the change in living things over generations. Natural selection favors traits that help organisms survive and reproduce."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is oxygen",
+    "why do we need oxygen",
+    "what gas do we breathe"
+   ],
+   "answer": "Oxygen is a gas that makes up about 21 percent of air. Our cells use it to release energy from food."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is electricity",
+    "explain electricity",
+    "how does electricity work"
+   ],
+   "answer": "Electricity is the flow of electric charge, usually electrons moving through a conductor such as a copper wire."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is pi",
+    "value of pi",
+    "what does pi equal"
+   ],
+   "answer": "Pi is the ratio of a circle's circumference to its diameter. It is about 3.14159."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is a prime number",
+    "define prime number",
+    "examples of prime numbers"
+   ],
+   "answer": "A prime number is a whole number greater than 1 that has only two divisors, 1 and itself. Examples are 2, 3, 5, 7 and 11."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "pythagorean theorem",
+    "what is the pythagorean theorem",
+    "a squared plus b squared"
+   ],
+   "answer": "The Pythagorean theorem says that in a right triangle a squared plus b squared equals c squared, where c is the longest side."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "area of a circle",
+    "how do i find the area of a circle",
+    "circle area formula"
+   ],
+   "answer": "The area of a circle is pi times the radius squared."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "area of a rectangle",
+    "how to find area of rectangle",
+    "rectangle area formula"
+   ],
+   "answer": "The area of a rectangle is its length times its width."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is a fraction",
+    "explain fractions",
+    "numerator and denominator"
+   ],
+   "answer": "A fraction shows part of a whole. The top number is the numerator and the bottom number is the denominator."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is algebra",
+    "explain algebra",
+    "what is a variable in math"
+   ],
+   "answer": "Algebra is the part of math that uses letters, called variables, to stand for unknown numbers in equations."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is a percentage",
+    "how do percentages work",
+    "what does percent mean"
+   ],
+   "answer": "A percentage is a number out of 100. For example 25 percent means 25 out of every 100."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is zero",
+    "who invented zero",
+    "history of zero"
+   ],
+   "answer": "Zero is the number that means nothing or no amount. It was developed as a number by mathematicians in ancient India."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "how many degrees in a triangle",
+    "angles of a triangle add up to",
+    "sum of angles in a triangle"
+   ],
+   "answer": "The angles of a triangle always add up to 180 degrees."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is the order of operations",
+    "pemdas",
+    "bodmas"
+   ],
+   "answer": "The order of operations is parentheses, exponents, multiplication and division, then addition and subtraction."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of france",
+    "what is the capital of france"
+   ],
+   "answer": "The capital of France is Paris."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of japan",
+    "what is the capital of japan"
+   ],
+   "answer": "The capital of Japan is Tokyo."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of the united states",
+    "capital of the usa",
+    "capital of america"
+   ],
+   "answer": "The capital of the United States is Washington, D.C."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of the united kingdom",
+    "capital of england",
+    "capital of the uk"
+   ],
+   "answer": "The capital of the United Kingdom is London."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of germany",
+    "what is the capital of germany"
+   ],
+   "answer": "The capital of Germany is Berlin."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of italy",
+    "what is the capital of italy"
+   ],
+   "answer": "The capital of Italy is Rome."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of canada",
+    "what is the capital of canada"
+   ],
+   "answer": "The capital of Canada is Ottawa."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of australia",
+    "what is the capital of australia"
+   ],
+   "answer": "The capital of Australia is Canberra."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of china",
+    "what is the capital of china"
+   ],
+   "answer": "The capital of China is Beijing."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of india",
+    "what is the capital of india"
+   ],
+   "answer": "The capital of India is New Delhi."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of brazil",
+    "what is the capital of brazil"
+   ],
+   "answer": "The capital of Brazil is Brasilia."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of spain",
+    "what is the capital of spain"
+   ],
+   "answer": "The capital of Spain is Madrid."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "how many continents are there",
+    "list the continents",
+    "what are the continents"
+   ],
+   "answer": "There are seven continents: Africa, Antarctica, Asia, Australia, Europe, North America and South America."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "largest ocean",
+    "biggest ocean",
+    "what is the largest ocean"
+   ],
+   "answer": "The Pacific Ocean is the largest and deepest ocean on Earth."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "tallest mountain",
+    "highest mountain in the world",
+    "how tall is mount everest"
+   ],
+   "answer": "Mount Everest is the highest mountain above sea level, at about 8,849 meters."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "longest river",
+    "what is the longest river",
+    "longest river in the world"
+   ],
+   "answer": "The Nile and the Amazon are the two longest rivers, each about 6,400 to 6,650 kilometers long."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "largest country",
+    "biggest country in the world",
+    "largest country by area"
+   ],
+   "answer": "Russia is the largest country by area."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "largest desert",
+    "biggest desert",
+    "what is the largest hot desert"
+   ],
+   "answer": "Antarctica is the largest desert overall. The Sahara is the largest hot desert."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "how many countries are there",
+    "number of countries in the world"
+   ],
+   "answer": "There are 195 countries: 193 United Nations members plus 2 observer states."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was the first president of the united states",
+    "first us president",
+    "who was george washington"
+   ],
+   "answer": "George Washington was the first President of the United States, serving from 1789 to 1797."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "when did world war 2 end",
+    "end of world war two",
+    "when did ww2 end"
+   ],
+   "answer": "World War II ended in 1945."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "when did world war 1 start",
+    "start of world war one",
+    "when did ww1 begin"
+   ],
+   "answer": "World War I began in 1914 and ended in 1918."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who landed on the moon first",
+    "first man on the moon",
+    "when did humans land on the moon"
+   ],
+   "answer": "Neil Armstrong was the first person to walk on the Moon, on July 20, 1969, during the Apollo 11 mission."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who invented the light bulb",
+    "inventor of the light bulb",
+    "who made the first light bulb"
+   ],
+   "answer": "Thomas Edison made the first practical long lasting light bulb in 1879, building on work by earlier inventors."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who invented the telephone",
+    "inventor of the telephone"
+   ],
+   "answer": "Alexander Graham Bell received the first patent for the telephone in 1876."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who discovered penicillin",
+    "discovery of penicillin",
+    "first antibiotic"
+   ],
+   "answer": "Alexander Fleming discovered penicillin, the first widely used antibiotic, in 1928."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was albert einstein",
+    "what did einstein discover",
+    "theory of relativity"
+   ],
+   "answer": "Albert Einstein was a physicist known for the theory of relativity and the equation E equals m c squared."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was isaac newton",
+    "what did newton discover",
+    "laws of motion"
+   ],
+   "answer": "Isaac Newton was a scientist who described the laws of motion and universal gravitation."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who built the pyramids",
+    "egyptian pyramids",
+    "when were the pyramids built"
+   ],
+   "answer": "The great pyramids of Giza were built by ancient Egyptians about 4,500 years ago as tombs for pharaohs."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "what was the industrial revolution",
+    "industrial revolution",
+    "when was the industrial revolution"
+   ],
+   "answer": "The Industrial Revolution began in Britain around 1760 and moved production from hand tools to machines and factories."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who invented the printing press",
+    "printing press inventor",
+    "gutenberg"
+   ],
+   "answer": "Johannes Gutenberg invented the movable type printing press in Europe around 1440."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a computer",
+    "how does a computer work",
+    "explain computers"
+   ],
+   "answer": "A computer is a machine that follows instructions, called programs, to take input, process data and produce output."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is artificial intelligence",
+    "what is ai",
+    "explain artificial intelligence"
+   ],
+   "answer": "Artificial intelligence is the field of building computer systems that can learn, reason and solve problems in ways that normally need human intelligence."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is machine learning",
+    "explain machine learning",
+    "how do machines learn"
+   ],
+   "answer": "Machine learning is a type of AI where a model learns patterns from data instead of being programmed with fixed rules."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a neural network",
+    "explain neural networks",
+    "how do neural networks work"
+   ],
+   "answer": "A neural network is a model made of layers of connected units. It learns by adjusting the weights between units to reduce its errors."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a language model",
+    "explain language models",
+    "how do language models work"
+   ],
+   "answer": "A language model predicts which word comes next given the words before it. By repeating that prediction it can generate text."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is the internet",
+    "how does the internet work",
+    "explain the internet"
+   ],
+   "answer": "The internet is a global network of computers that share data using common rules called protocols, such as TCP and IP."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is binary",
+    "explain binary numbers",
+    "ones and zeros"
+   ],
+   "answer": "Binary is a number system with only two digits, 0 and 1. Computers store all data in binary."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is python",
+    "python programming language",
+    "what is python used for"
+   ],
+   "answer": "Python is a popular programming language known for clear syntax. It is used for web development, data science, automation and AI."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is an algorithm",
+    "define algorithm",
+    "explain algorithms"
+   ],
+   "answer": "An algorithm is a step by step set of instructions for solving a problem or completing a task."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a cpu",
+    "what does a processor do",
+    "central processing unit"
+   ],
+   "answer": "The CPU, or central processing unit, is the part of a computer that carries out program instructions."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is ram",
+    "what is memory in a computer",
+    "random access memory"
+   ],
+   "answer": "RAM, or random access memory, is fast short term memory a computer uses to hold data that programs are actively using."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a byte",
+    "how many bits in a byte",
+    "bits and bytes"
+   ],
+   "answer": "A byte is 8 bits. A bit is a single binary digit, either 0 or 1."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "how much water should i drink",
+    "daily water intake",
+    "how much water a day"
+   ],
+   "answer": "Many adults need roughly 2 to 3 liters of fluid a day, though needs vary with body size, activity and climate."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "how much sleep do i need",
+    "how many hours of sleep",
+    "recommended sleep"
+   ],
+   "answer": "Most adults need 7 to 9 hours of sleep per night. Teenagers need about 8 to 10."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "why is exercise important",
+    "benefits of exercise",
+    "how much exercise do i need"
+   ],
+   "answer": "Exercise strengthens the heart, muscles and bones and improves mood. Adults are advised to get about 150 minutes of moderate activity a week."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what is a healthy diet",
+    "how to eat healthy",
+    "balanced diet"
+   ],
+   "answer": "A healthy diet includes plenty of vegetables, fruits, whole grains, lean proteins and water, with limited sugar, salt and processed food."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "how many bones in the human body",
+    "number of bones in adults"
+   ],
+   "answer": "An adult human body has 206 bones."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what does the heart do",
+    "how does the heart work",
+    "function of the heart"
+   ],
+   "answer": "The heart is a muscle that pumps blood through the body, delivering oxygen and nutrients to cells."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what do the lungs do",
+    "how do lungs work",
+    "function of the lungs"
+   ],
+   "answer": "The lungs take in oxygen from the air and remove carbon dioxide from the blood."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what is the largest organ",
+    "largest organ in the human body"
+   ],
+   "answer": "The skin is the largest organ of the human body."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a noun",
+    "define noun",
+    "examples of nouns"
+   ],
+   "answer": "A noun is a word for a person, place, thing or idea, such as teacher, city, book or happiness."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a verb",
+    "define verb",
+    "examples of verbs"
+   ],
+   "answer": "A verb is a word that shows an action or a state of being, such as run, think or is."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is an adjective",
+    "define adjective",
+    "examples of adjectives"
+   ],
+   "answer": "An adjective is a word that describes a noun, such as big, red or happy."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is an adverb",
+    "define adverb",
+    "examples of adverbs"
+   ],
+   "answer": "An adverb describes a verb, adjective or other adverb, often telling how, when or where, such as quickly or very."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "how many letters in the alphabet",
+    "letters in the english alphabet"
+   ],
+   "answer": "The English alphabet has 26 letters."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what are vowels",
+    "list the vowels",
+    "which letters are vowels"
+   ],
+   "answer": "The English vowels are A, E, I, O and U, and sometimes Y."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "most spoken language",
+    "what language do most people speak",
+    "most common language in the world"
+   ],
+   "answer": "English has the most total speakers, while Mandarin Chinese has the most native speakers."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a sentence",
+    "define sentence",
+    "parts of a sentence"
+   ],
+   "answer": "A sentence is a group of words that expresses a complete thought. It usually has a subject and a verb."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how many days in a year",
+    "days in a year",
+    "what is a leap year"
+   ],
+   "answer": "A normal year has 365 days. A leap year, every four years in most cases, has 366 days."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how many hours in a day",
+    "hours in a day",
+    "minutes in an hour"
+   ],
+   "answer": "A day has 24 hours, an hour has 60 minutes and a minute has 60 seconds."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "what are the primary colors",
+    "primary colors",
+    "list primary colors"
+   ],
+   "answer": "The traditional primary colors are red, yellow and blue. For light, they are red, green and blue."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how many days in a week",
+    "days of the week",
+    "list the days of the week"
+   ],
+   "answer": "A week has seven days: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how many months in a year",
+    "months of the year",
+    "list the months"
+   ],
+   "answer": "A year has twelve months, from January to December."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "what are the seasons",
+    "four seasons",
+    "why do we have seasons"
+   ],
+   "answer": "The four seasons are spring, summer, autumn and winter. They happen because Earth's axis is tilted as it orbits the Sun."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "fastest land animal",
+    "what is the fastest animal",
+    "how fast is a cheetah"
+   ],
+   "answer": "The cheetah is the fastest land animal, reaching about 100 to 120 kilometers per hour in short bursts."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "largest animal",
+    "biggest animal in the world",
+    "how big is a blue whale"
+   ],
+   "answer": "The blue whale is the largest animal ever known, growing up to about 30 meters long."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a black hole",
+    "explain black holes",
+    "how do black holes form"
+   ],
+   "answer": "A black hole is a region of space where gravity is so strong that nothing, not even light, can escape. Many form when huge stars collapse."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a galaxy",
+    "what is the milky way",
+    "which galaxy do we live in"
+   ],
+   "answer": "A galaxy is a huge system of stars, gas and dust held together by gravity. We live in the Milky Way, which has hundreds of billions of stars."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "how old is the universe",
+    "age of the universe",
+    "when did the big bang happen"
+   ],
+   "answer": "The universe is about 13.8 billion years old, dating back to the Big Bang."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "how old is the earth",
+    "age of the earth",
+    "when did earth form"
+   ],
+   "answer": "Earth is about 4.54 billion years old."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a light year",
+    "how far is a light year",
+    "define light year"
+   ],
+   "answer": "A light year is the distance light travels in one year, about 9.46 trillion kilometers."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "closest star to earth",
+    "nearest star",
+    "what star is closest to us"
+   ],
+   "answer": "The Sun is the closest star to Earth. The next closest is Proxima Centauri, about 4.24 light years away."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "smallest planet",
+    "what is the smallest planet",
+    "smallest planet in the solar system"
+   ],
+   "answer": "Mercury is the smallest planet in the solar system and the closest to the Sun."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "hottest planet",
+    "what is the hottest planet",
+    "why is venus so hot"
+   ],
+   "answer": "Venus is the hottest planet. Its thick carbon dioxide atmosphere traps heat, making its surface about 465 degrees Celsius."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "which planet is the red planet",
+    "why is mars red",
+    "tell me about mars"
+   ],
+   "answer": "Mars is called the Red Planet because iron oxide, or rust, in its soil gives it a reddish color."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "which planet has rings",
+    "does saturn have rings",
+    "what are saturn's rings made of"
+   ],
+   "answer": "Saturn has the most famous rings, made of ice and rock. Jupiter, Uranus and Neptune have fainter rings too."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is an eclipse",
+    "solar eclipse",
+    "lunar eclipse"
+   ],
+   "answer": "A solar eclipse happens when the Moon passes between the Sun and Earth. A lunar eclipse happens when Earth's shadow falls on the Moon."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what causes tides",
+    "why does the ocean have tides",
+    "how do tides work"
+   ],
+   "answer": "Tides are caused mainly by the Moon's gravity pulling on Earth's oceans, with a smaller effect from the Sun."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a volcano",
+    "how do volcanoes work",
+    "why do volcanoes erupt"
+   ],
+   "answer": "A volcano is an opening in Earth's crust where molten rock, called magma, gas and ash escape. Pressure from rising magma causes eruptions."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what causes earthquakes",
+    "why do earthquakes happen",
+    "what is an earthquake"
+   ],
+   "answer": "Earthquakes happen when tectonic plates in Earth's crust suddenly slip past each other, releasing energy as shaking."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is the periodic table",
+    "how many elements are there",
+    "explain the periodic table"
+   ],
+   "answer": "The periodic table organizes all 118 known chemical elements by atomic number and shared properties."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what gas is most of the air",
+    "what is air made of",
+    "most common gas in the atmosphere"
+   ],
+   "answer": "Air is about 78 percent nitrogen, 21 percent oxygen, and small amounts of argon, carbon dioxide and other gases."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is carbon dioxide",
+    "what is co2",
+    "why does carbon dioxide matter"
+   ],
+   "answer": "Carbon dioxide, CO2, is a gas made of one carbon and two oxygen atoms. Animals breathe it out, plants use it, and it traps heat in the atmosphere."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a molecule",
+    "define molecule",
+    "molecule vs atom"
+   ],
+   "answer": "A molecule is two or more atoms bonded together, such as water, H2O."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a chemical element",
+    "what is a compound",
+    "element vs compound"
+   ],
+   "answer": "An element is a pure substance made of one kind of atom, like gold. A compound is made of two or more elements bonded together, like salt."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is friction",
+    "explain friction",
+    "why does friction happen"
+   ],
+   "answer": "Friction is a force that resists motion when two surfaces rub against each other. It slows things down and creates heat."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what are newton's laws",
+    "newton's three laws of motion",
+    "what is newton's first law"
+   ],
+   "answer": "Newton's laws: 1, an object stays at rest or in motion unless a force acts on it. 2, force equals mass times acceleration. 3, every action has an equal and opposite reaction."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is sound",
+    "speed of sound",
+    "how fast does sound travel"
+   ],
+   "answer": "Sound is a vibration that travels as a wave through air, water or solids. In air it travels about 343 meters per second."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "how do magnets work",
+    "what is a magnet",
+    "explain magnetism"
+   ],
+   "answer": "A magnet produces a magnetic field that attracts iron and other magnetic metals. Every magnet has a north and a south pole, and opposite poles attract."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a virus",
+    "difference between virus and bacteria",
+    "what are bacteria"
+   ],
+   "answer": "Bacteria are tiny single celled living organisms, some helpful and some harmful. Viruses are even smaller and can only reproduce inside the cells of a host."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is the water cycle",
+    "explain the water cycle",
+    "how does rain form"
+   ],
+   "answer": "In the water cycle, water evaporates, condenses into clouds, falls as precipitation such as rain or snow, and collects in oceans, rivers and the ground."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is the ozone layer",
+    "why is the ozone layer important"
+   ],
+   "answer": "The ozone layer is a part of the upper atmosphere that absorbs most of the Sun's harmful ultraviolet radiation."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is climate change",
+    "what is global warming",
+    "why is the earth getting warmer"
+   ],
+   "answer": "Climate change is the long term warming of Earth and shifts in weather patterns, driven mainly by greenhouse gases from burning fossil fuels."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is the greenhouse effect",
+    "explain the greenhouse effect",
+    "what are greenhouse gases"
+   ],
+   "answer": "The greenhouse effect is when gases like carbon dioxide and methane trap heat in the atmosphere, keeping Earth warm. More of these gases cause more warming."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is an ecosystem",
+    "define ecosystem",
+    "examples of ecosystems"
+   ],
+   "answer": "An ecosystem is a community of living things interacting with each other and their environment, such as a forest, a reef or a pond."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a food chain",
+    "explain food chains",
+    "producers and consumers"
+   ],
+   "answer": "A food chain shows how energy passes between living things: plants make food from sunlight, herbivores eat plants, and carnivores eat other animals."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a mammal",
+    "define mammal",
+    "examples of mammals"
+   ],
+   "answer": "A mammal is a warm blooded animal with hair or fur that feeds its young with milk. Humans, dogs, whales and bats are mammals."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a reptile",
+    "define reptile",
+    "examples of reptiles"
+   ],
+   "answer": "A reptile is a cold blooded animal with scales that usually lays eggs, such as snakes, lizards, turtles and crocodiles."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is an insect",
+    "how many legs does an insect have",
+    "examples of insects"
+   ],
+   "answer": "An insect has six legs and three body parts: head, thorax and abdomen. Ants, bees and butterflies are insects."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "how many legs does a spider have",
+    "is a spider an insect"
+   ],
+   "answer": "A spider has eight legs. It is an arachnid, not an insect."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "hardest natural substance",
+    "what is the hardest material",
+    "how hard is a diamond"
+   ],
+   "answer": "Diamond is the hardest natural substance. It is made of carbon atoms in a strong crystal structure."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is the ph scale",
+    "what is an acid",
+    "what is a base in chemistry"
+   ],
+   "answer": "The pH scale runs from 0 to 14. Below 7 is acidic, like lemon juice, 7 is neutral, like pure water, and above 7 is basic, like soap."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a chemical reaction",
+    "examples of chemical reactions",
+    "explain chemical reactions"
+   ],
+   "answer": "A chemical reaction is a process where substances change into new substances, such as burning wood, rusting iron or baking a cake."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "difference between mass and weight",
+    "what is mass",
+    "what is weight"
+   ],
+   "answer": "Mass is how much matter an object has and stays the same everywhere. Weight is the force of gravity on that mass, so it changes on different planets."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is absolute zero",
+    "coldest possible temperature",
+    "what is temperature"
+   ],
+   "answer": "Temperature measures how hot or cold something is. Absolute zero, minus 273.15 degrees Celsius, is the coldest possible temperature."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is nuclear energy",
+    "how does nuclear power work",
+    "what is nuclear fission"
+   ],
+   "answer": "Nuclear energy is released by splitting heavy atoms, called fission, or joining light atoms, called fusion. Power plants use fission to boil water and spin turbines."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is renewable energy",
+    "examples of renewable energy",
+    "solar and wind power"
+   ],
+   "answer": "Renewable energy comes from sources that refill naturally, such as sunlight, wind, flowing water and geothermal heat."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what are mitochondria",
+    "what does the mitochondria do",
+    "powerhouse of the cell"
+   ],
+   "answer": "Mitochondria are the powerhouses of the cell. They turn food and oxygen into energy the cell can use."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what are chromosomes",
+    "how many chromosomes do humans have",
+    "explain genes"
+   ],
+   "answer": "Chromosomes are packages of DNA. Humans have 46 chromosomes in 23 pairs, and genes are sections of DNA on them."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is metamorphosis",
+    "how does a caterpillar become a butterfly"
+   ],
+   "answer": "Metamorphosis is a big change in body form during growth, like a caterpillar becoming a butterfly or a tadpole becoming a frog."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "why is the sky blue",
+    "what makes the sky blue"
+   ],
+   "answer": "The sky looks blue because air molecules scatter blue sunlight more than other colors. This is called Rayleigh scattering."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "why is the ocean salty",
+    "where does salt in the sea come from"
+   ],
+   "answer": "The ocean is salty because rivers carry dissolved minerals from rocks into the sea, and evaporation leaves the salt behind."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "what is a rainbow",
+    "how do rainbows form",
+    "colors of the rainbow"
+   ],
+   "answer": "A rainbow forms when sunlight is bent and split by raindrops. Its colors are red, orange, yellow, green, blue, indigo and violet."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "most common element in the universe",
+    "most abundant element",
+    "what is hydrogen"
+   ],
+   "answer": "Hydrogen is the most common element in the universe. It is the lightest element and fuels stars."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "chemical symbols",
+    "chemical symbol for gold",
+    "what is the symbol for iron"
+   ],
+   "answer": "Some chemical symbols: gold is Au, silver is Ag, iron is Fe, sodium is Na, oxygen is O, carbon is C and hydrogen is H."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "how long does it take earth to orbit the sun",
+    "how long is a year on earth",
+    "earth orbit time"
+   ],
+   "answer": "Earth takes about 365.25 days to orbit the Sun. The extra quarter day is why we add a leap day every four years."
+  },
+  {
+   "topic": "science",
+   "patterns": [
+    "why do we have day and night",
+    "what causes day and night",
+    "how long does earth take to spin"
+   ],
+   "answer": "Day and night happen because Earth spins on its axis once about every 24 hours, so each side faces the Sun and then turns away."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is a square root",
+    "square root of 16",
+    "explain square roots"
+   ],
+   "answer": "A square root of a number is a value that multiplied by itself gives that number. The square root of 16 is 4."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is an exponent",
+    "what does squared mean",
+    "explain powers in math"
+   ],
+   "answer": "An exponent tells how many times to multiply a number by itself. 2 to the power of 3 means 2 times 2 times 2, which is 8."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is a factorial",
+    "what does 5 factorial mean",
+    "explain factorials"
+   ],
+   "answer": "A factorial, written n!, multiplies all whole numbers from 1 to n. For example 5! equals 120."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is perimeter",
+    "how do you find the perimeter",
+    "perimeter formula"
+   ],
+   "answer": "Perimeter is the total distance around a shape. Add up the lengths of all its sides."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "volume of a cube",
+    "how to find volume",
+    "volume of a box"
+   ],
+   "answer": "Volume is the space inside a 3D shape. A cube's volume is side times side times side, and a box is length times width times height."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "volume of a sphere",
+    "sphere volume formula"
+   ],
+   "answer": "The volume of a sphere is four thirds times pi times the radius cubed."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "circumference of a circle",
+    "how to find circumference",
+    "circle perimeter formula"
+   ],
+   "answer": "The circumference of a circle is 2 times pi times the radius, or pi times the diameter."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is an integer",
+    "define integer",
+    "what are whole numbers"
+   ],
+   "answer": "An integer is a whole number with no fraction part. It can be positive, negative or zero, like minus 3, 0 or 7."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is a decimal",
+    "explain decimals",
+    "what is a decimal point"
+   ],
+   "answer": "A decimal uses a point to show parts of a whole. For example 0.5 means five tenths, which equals one half."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is the mean median and mode",
+    "how do you find the average",
+    "what is the median"
+   ],
+   "answer": "The mean is the average: add the numbers and divide by how many there are. The median is the middle value, and the mode is the most common value."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is probability",
+    "explain probability",
+    "chance of flipping heads"
+   ],
+   "answer": "Probability measures how likely something is, from 0, impossible, to 1, certain. A fair coin has a probability of 0.5 of landing heads."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is a right angle",
+    "how many degrees is a right angle",
+    "types of angles"
+   ],
+   "answer": "A right angle is exactly 90 degrees. Smaller angles are acute, and angles between 90 and 180 degrees are obtuse."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "types of triangles",
+    "what is an equilateral triangle",
+    "what is an isosceles triangle"
+   ],
+   "answer": "An equilateral triangle has three equal sides, an isosceles triangle has two equal sides, and a scalene triangle has no equal sides."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is a polygon",
+    "how many sides does a hexagon have",
+    "names of shapes by sides"
+   ],
+   "answer": "A polygon is a flat closed shape with straight sides. A triangle has 3, a square 4, a pentagon 5, a hexagon 6, a heptagon 7 and an octagon 8 sides."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is geometry",
+    "explain geometry"
+   ],
+   "answer": "Geometry is the branch of math about shapes, sizes, angles, lines and space."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is calculus",
+    "explain calculus",
+    "who invented calculus"
+   ],
+   "answer": "Calculus is the math of change. It studies rates of change, called derivatives, and accumulation, called integrals. Newton and Leibniz developed it."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is a negative number",
+    "explain negative numbers"
+   ],
+   "answer": "A negative number is less than zero, like minus 5. It is used for things like temperatures below zero or debts."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is an even number",
+    "what is an odd number",
+    "even and odd numbers"
+   ],
+   "answer": "An even number can be divided by 2 with no remainder, like 4 or 10. An odd number leaves a remainder of 1, like 3 or 7."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is a ratio",
+    "explain ratios",
+    "how do ratios work"
+   ],
+   "answer": "A ratio compares two amounts. A ratio of 2 to 3 means for every 2 of one thing there are 3 of another."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what is infinity",
+    "is infinity a number",
+    "explain infinity"
+   ],
+   "answer": "Infinity is the idea of something without any end. It is a concept rather than a regular number."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "what are roman numerals",
+    "roman numerals",
+    "what is x in roman numerals"
+   ],
+   "answer": "Roman numerals use letters: I is 1, V is 5, X is 10, L is 50, C is 100, D is 500 and M is 1000."
+  },
+  {
+   "topic": "math",
+   "patterns": [
+    "how many zeros in a million",
+    "what is a billion",
+    "how big is a million"
+   ],
+   "answer": "A million is 1,000,000, with six zeros. A billion is 1,000,000,000, with nine zeros, which is a thousand millions."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of russia",
+    "what is the capital of russia"
+   ],
+   "answer": "The capital of Russia is Moscow."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of mexico",
+    "what is the capital of mexico"
+   ],
+   "answer": "The capital of Mexico is Mexico City."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of egypt",
+    "what is the capital of egypt"
+   ],
+   "answer": "The capital of Egypt is Cairo."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of nigeria",
+    "what is the capital of nigeria"
+   ],
+   "answer": "The capital of Nigeria is Abuja."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of kenya",
+    "what is the capital of kenya"
+   ],
+   "answer": "The capital of Kenya is Nairobi."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of argentina",
+    "what is the capital of argentina"
+   ],
+   "answer": "The capital of Argentina is Buenos Aires."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of south korea",
+    "what is the capital of south korea"
+   ],
+   "answer": "The capital of South Korea is Seoul."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of turkey",
+    "what is the capital of turkey"
+   ],
+   "answer": "The capital of Turkey is Ankara."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of saudi arabia",
+    "what is the capital of saudi arabia"
+   ],
+   "answer": "The capital of Saudi Arabia is Riyadh."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of netherlands",
+    "what is the capital of netherlands"
+   ],
+   "answer": "The capital of Netherlands is Amsterdam."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of sweden",
+    "what is the capital of sweden"
+   ],
+   "answer": "The capital of Sweden is Stockholm."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of norway",
+    "what is the capital of norway"
+   ],
+   "answer": "The capital of Norway is Oslo."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of greece",
+    "what is the capital of greece"
+   ],
+   "answer": "The capital of Greece is Athens."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of portugal",
+    "what is the capital of portugal"
+   ],
+   "answer": "The capital of Portugal is Lisbon."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of ireland",
+    "what is the capital of ireland"
+   ],
+   "answer": "The capital of Ireland is Dublin."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of poland",
+    "what is the capital of poland"
+   ],
+   "answer": "The capital of Poland is Warsaw."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of pakistan",
+    "what is the capital of pakistan"
+   ],
+   "answer": "The capital of Pakistan is Islamabad."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of thailand",
+    "what is the capital of thailand"
+   ],
+   "answer": "The capital of Thailand is Bangkok."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of vietnam",
+    "what is the capital of vietnam"
+   ],
+   "answer": "The capital of Vietnam is Hanoi."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of philippines",
+    "what is the capital of philippines"
+   ],
+   "answer": "The capital of Philippines is Manila."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of new zealand",
+    "what is the capital of new zealand"
+   ],
+   "answer": "The capital of New Zealand is Wellington."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of switzerland",
+    "what is the capital of switzerland"
+   ],
+   "answer": "The capital of Switzerland is Bern."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of ukraine",
+    "what is the capital of ukraine"
+   ],
+   "answer": "The capital of Ukraine is Kyiv."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of iran",
+    "what is the capital of iran"
+   ],
+   "answer": "The capital of Iran is Tehran."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of colombia",
+    "what is the capital of colombia"
+   ],
+   "answer": "The capital of Colombia is Bogota."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of peru",
+    "what is the capital of peru"
+   ],
+   "answer": "The capital of Peru is Lima."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of chile",
+    "what is the capital of chile"
+   ],
+   "answer": "The capital of Chile is Santiago."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of cuba",
+    "what is the capital of cuba"
+   ],
+   "answer": "The capital of Cuba is Havana."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of ethiopia",
+    "what is the capital of ethiopia"
+   ],
+   "answer": "The capital of Ethiopia is Addis Ababa."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of morocco",
+    "what is the capital of morocco"
+   ],
+   "answer": "The capital of Morocco is Rabat."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of austria",
+    "what is the capital of austria"
+   ],
+   "answer": "The capital of Austria is Vienna."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of belgium",
+    "what is the capital of belgium"
+   ],
+   "answer": "The capital of Belgium is Brussels."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of denmark",
+    "what is the capital of denmark"
+   ],
+   "answer": "The capital of Denmark is Copenhagen."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of finland",
+    "what is the capital of finland"
+   ],
+   "answer": "The capital of Finland is Helsinki."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of scotland",
+    "what is the capital of scotland"
+   ],
+   "answer": "The capital of Scotland is Edinburgh."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of south africa",
+    "what is the capital of south africa"
+   ],
+   "answer": "South Africa has three capitals: Pretoria, the executive capital, Cape Town, the legislative capital, and Bloemfontein, the judicial capital."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "capital of indonesia",
+    "what is the capital of indonesia"
+   ],
+   "answer": "Jakarta has long been the capital of Indonesia. The country is building a new capital, Nusantara, on the island of Borneo."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "most populated country",
+    "country with the most people",
+    "which country has the largest population"
+   ],
+   "answer": "India has the largest population in the world, having passed China in 2023. Each has over 1.4 billion people."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "smallest country",
+    "what is the smallest country in the world"
+   ],
+   "answer": "Vatican City is the smallest country in the world, at about 0.44 square kilometers, inside Rome."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "largest continent",
+    "biggest continent",
+    "what is the largest continent"
+   ],
+   "answer": "Asia is the largest continent by both area and population."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "smallest continent",
+    "what is the smallest continent"
+   ],
+   "answer": "Australia is the smallest continent."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "deepest point in the ocean",
+    "what is the mariana trench",
+    "deepest place on earth"
+   ],
+   "answer": "The deepest known point is the Challenger Deep in the Mariana Trench in the Pacific Ocean, about 10,900 meters deep."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "largest lake",
+    "biggest lake in the world",
+    "largest freshwater lake"
+   ],
+   "answer": "The Caspian Sea is the largest lake by area. Lake Superior is the largest freshwater lake by area, and Lake Baikal holds the most fresh water."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "what is the equator",
+    "where is the equator",
+    "define equator"
+   ],
+   "answer": "The equator is an imaginary line around the middle of Earth at 0 degrees latitude, dividing it into the Northern and Southern Hemispheres."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "world population",
+    "how many people live on earth",
+    "population of the world"
+   ],
+   "answer": "There are more than 8 billion people living on Earth."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "largest rainforest",
+    "what is the amazon rainforest",
+    "biggest rainforest in the world"
+   ],
+   "answer": "The Amazon in South America is the largest tropical rainforest, covering about 5.5 million square kilometers."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "largest city in the world",
+    "biggest city by population",
+    "most populated city"
+   ],
+   "answer": "Tokyo is often ranked as the largest metropolitan area in the world, with around 37 million people, though rankings vary by how cities are measured."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "how many oceans are there",
+    "list the oceans",
+    "names of the oceans"
+   ],
+   "answer": "There are five oceans: the Pacific, Atlantic, Indian, Southern and Arctic."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "what is the great wall of china",
+    "how long is the great wall of china"
+   ],
+   "answer": "The Great Wall of China is a series of ancient fortifications in northern China. All its sections together stretch over 21,000 kilometers."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "tallest building",
+    "what is the tallest building in the world",
+    "how tall is the burj khalifa"
+   ],
+   "answer": "The Burj Khalifa in Dubai is the tallest building in the world, at about 828 meters."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "how many states are in the us",
+    "how many states in america",
+    "number of us states"
+   ],
+   "answer": "The United States has 50 states."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "largest us state",
+    "biggest state in america",
+    "largest state by area"
+   ],
+   "answer": "Alaska is the largest US state by area. Texas is second, and California has the most people."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "what countries are in the uk",
+    "what makes up the united kingdom"
+   ],
+   "answer": "The United Kingdom is made up of England, Scotland, Wales and Northern Ireland."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "largest island",
+    "biggest island in the world",
+    "what is the largest island"
+   ],
+   "answer": "Greenland is the largest island in the world. Australia is larger but is counted as a continent."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "where is the eiffel tower",
+    "how tall is the eiffel tower"
+   ],
+   "answer": "The Eiffel Tower is in Paris, France. It was completed in 1889 and is about 330 meters tall."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "where is the statue of liberty",
+    "who gave the statue of liberty"
+   ],
+   "answer": "The Statue of Liberty is in New York Harbor. France gave it to the United States in 1886."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "where is the taj mahal",
+    "what is the taj mahal"
+   ],
+   "answer": "The Taj Mahal is in Agra, India. Emperor Shah Jahan built it as a tomb for his wife Mumtaz Mahal, finishing the main building around 1643."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "what is latitude and longitude",
+    "explain latitude",
+    "explain longitude"
+   ],
+   "answer": "Latitude measures how far north or south a place is from the equator. Longitude measures how far east or west it is from the Prime Meridian."
+  },
+  {
+   "topic": "geography",
+   "patterns": [
+    "how many time zones are there",
+    "what are time zones"
+   ],
+   "answer": "Time zones divide the world so local clocks match daylight. There are 24 standard hourly zones, plus several regions with half hour offsets."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "when did columbus reach america",
+    "who was christopher columbus",
+    "1492 columbus"
+   ],
+   "answer": "Christopher Columbus reached the Caribbean in 1492 on a voyage funded by Spain."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "when was the declaration of independence signed",
+    "when did america become independent",
+    "us independence year"
+   ],
+   "answer": "The US Declaration of Independence was adopted on July 4, 1776."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was abraham lincoln",
+    "what did lincoln do"
+   ],
+   "answer": "Abraham Lincoln was the 16th US President. He led the country through the Civil War and worked to end slavery. He was assassinated in 1865."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was martin luther king jr",
+    "what did martin luther king do",
+    "i have a dream speech"
+   ],
+   "answer": "Martin Luther King Jr. was a leader of the American civil rights movement who used nonviolent protest. He gave the I Have a Dream speech in 1963."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was nelson mandela",
+    "what did nelson mandela do"
+   ],
+   "answer": "Nelson Mandela fought against apartheid in South Africa, spent 27 years in prison, and became the country's first Black president in 1994."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was gandhi",
+    "mahatma gandhi",
+    "what did gandhi do"
+   ],
+   "answer": "Mahatma Gandhi led India's nonviolent independence movement against British rule. India became independent in 1947."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "when did the berlin wall fall",
+    "fall of the berlin wall",
+    "what was the berlin wall"
+   ],
+   "answer": "The Berlin Wall divided East and West Berlin from 1961 and fell in 1989. Germany reunified in 1990."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "when did the titanic sink",
+    "what happened to the titanic"
+   ],
+   "answer": "The Titanic sank on April 15, 1912, after hitting an iceberg on its first voyage. More than 1,500 people died."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "what was the cold war",
+    "explain the cold war",
+    "when was the cold war"
+   ],
+   "answer": "The Cold War was a period of tension between the United States and the Soviet Union from about 1947 to 1991, without direct full scale war between them."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "when did the soviet union collapse",
+    "end of the ussr",
+    "what was the soviet union"
+   ],
+   "answer": "The Soviet Union was a communist state led from Moscow. It dissolved in December 1991 into 15 independent countries."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was napoleon",
+    "napoleon bonaparte",
+    "what did napoleon do"
+   ],
+   "answer": "Napoleon Bonaparte was a French military leader who became emperor of France in 1804 and conquered much of Europe before his defeat at Waterloo in 1815."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was cleopatra",
+    "tell me about cleopatra"
+   ],
+   "answer": "Cleopatra VII was the last active ruler of ancient Egypt's Ptolemaic kingdom. She died in 30 BC."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was julius caesar",
+    "what happened to julius caesar"
+   ],
+   "answer": "Julius Caesar was a Roman general and statesman who took control of Rome. He was assassinated on the Ides of March in 44 BC."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "what was the roman empire",
+    "when did the roman empire fall",
+    "ancient rome"
+   ],
+   "answer": "The Roman Empire ruled much of Europe, North Africa and the Middle East. The western half fell in 476 AD, while the eastern half lasted until 1453."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who painted the mona lisa",
+    "who was leonardo da vinci",
+    "what did da vinci do"
+   ],
+   "answer": "Leonardo da Vinci was an Italian Renaissance artist and inventor who painted the Mona Lisa and The Last Supper."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was shakespeare",
+    "who wrote romeo and juliet",
+    "who wrote hamlet"
+   ],
+   "answer": "William Shakespeare was an English playwright and poet who wrote Romeo and Juliet, Hamlet, Macbeth and many other works."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was marie curie",
+    "what did marie curie discover"
+   ],
+   "answer": "Marie Curie was a scientist who researched radioactivity and discovered polonium and radium. She was the first person to win Nobel Prizes in two sciences."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was charles darwin",
+    "what did darwin discover",
+    "origin of species",
+    "who discovered evolution",
+    "who proposed natural selection"
+   ],
+   "answer": "Charles Darwin was a naturalist who explained evolution by natural selection in his 1859 book On the Origin of Species."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who invented the airplane",
+    "wright brothers",
+    "first airplane flight"
+   ],
+   "answer": "The Wright brothers, Orville and Wilbur, made the first powered airplane flight in 1903 at Kitty Hawk, North Carolina."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who invented the world wide web",
+    "who invented the internet",
+    "who created the web"
+   ],
+   "answer": "Tim Berners-Lee invented the World Wide Web in 1989. The internet itself grew from ARPANET, and Vint Cerf and Bob Kahn designed its TCP/IP protocols."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who invented the steam engine",
+    "steam engine inventor",
+    "james watt"
+   ],
+   "answer": "Thomas Newcomen built an early practical steam engine in 1712, and James Watt greatly improved it in the 1760s and 1770s."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "when was the first iphone released",
+    "first iphone",
+    "who made the iphone"
+   ],
+   "answer": "Apple released the first iPhone in 2007, introduced by Steve Jobs."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "who was galileo",
+    "what did galileo discover"
+   ],
+   "answer": "Galileo Galilei was an Italian scientist who improved the telescope, discovered four moons of Jupiter, and supported the idea that Earth orbits the Sun."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "what was the renaissance",
+    "when was the renaissance"
+   ],
+   "answer": "The Renaissance was a period of renewed art, science and learning in Europe from about the 14th to the 17th century, starting in Italy."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "when did world war 2 start",
+    "start of world war two",
+    "how did ww2 begin"
+   ],
+   "answer": "World War II began in 1939 when Germany invaded Poland, and lasted until 1945."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "what was the french revolution",
+    "when was the french revolution"
+   ],
+   "answer": "The French Revolution began in 1789. It overthrew the monarchy and spread ideas of liberty, equality and fraternity."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "first person in space",
+    "who was yuri gagarin",
+    "first human in space"
+   ],
+   "answer": "Yuri Gagarin of the Soviet Union was the first person in space, on April 12, 1961."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "first woman in space",
+    "who was valentina tereshkova"
+   ],
+   "answer": "Valentina Tereshkova of the Soviet Union became the first woman in space in 1963."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "when was the united nations founded",
+    "what is the united nations",
+    "what does the un do"
+   ],
+   "answer": "The United Nations was founded in 1945 to promote peace and cooperation between countries. It has 193 member states."
+  },
+  {
+   "topic": "history",
+   "patterns": [
+    "what was the civil war",
+    "american civil war",
+    "when was the us civil war"
+   ],
+   "answer": "The American Civil War was fought from 1861 to 1865 between the Union and the Confederate states, mainly over slavery. The Union won."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is software",
+    "what is hardware",
+    "software vs hardware"
+   ],
+   "answer": "Hardware is the physical parts of a computer, like the screen and processor. Software is the programs and data that run on it."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is an operating system",
+    "examples of operating systems",
+    "what does an os do"
+   ],
+   "answer": "An operating system manages a computer's hardware and runs other programs. Examples are Windows, macOS, Linux, Android and iOS."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a database",
+    "explain databases",
+    "what is sql"
+   ],
+   "answer": "A database is an organized collection of data. SQL is a common language for storing and querying data in databases."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is cloud computing",
+    "what is the cloud",
+    "explain cloud storage"
+   ],
+   "answer": "Cloud computing means using computers, storage and software over the internet instead of on your own machine."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a programming language",
+    "examples of programming languages",
+    "what is coding"
+   ],
+   "answer": "A programming language is a way to write instructions a computer can run. Examples are Python, JavaScript, Java, C and C++."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is html",
+    "what is css",
+    "how are websites made"
+   ],
+   "answer": "HTML structures the content of web pages, CSS styles how they look, and JavaScript makes them interactive."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is javascript",
+    "what is javascript used for"
+   ],
+   "answer": "JavaScript is a programming language that runs in web browsers and servers. It makes websites interactive."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a website",
+    "what is a web browser",
+    "how do websites work"
+   ],
+   "answer": "A website is a set of web pages stored on a server. A web browser, like Chrome or Firefox, downloads and displays them."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a bug in programming",
+    "what is debugging",
+    "why is it called a bug"
+   ],
+   "answer": "A bug is a mistake in a program that makes it behave wrongly. Debugging is the process of finding and fixing bugs."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is cybersecurity",
+    "how to stay safe online",
+    "online safety tips"
+   ],
+   "answer": "Cybersecurity is protecting computers and data from attacks. Use strong unique passwords, turn on two factor authentication, keep software updated and avoid suspicious links."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what makes a strong password",
+    "password tips",
+    "how to make a good password"
+   ],
+   "answer": "A strong password is long, unique for each account and hard to guess. A passphrase of several random words or a password manager works well."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is encryption",
+    "how does encryption work",
+    "explain encryption"
+   ],
+   "answer": "Encryption scrambles data so only someone with the right key can read it. It protects messages, passwords and payments."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a gpu",
+    "what does a graphics card do",
+    "graphics processing unit"
+   ],
+   "answer": "A GPU, or graphics processing unit, does many calculations at once. It renders graphics and is widely used to train AI models."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is an app",
+    "what is an application",
+    "what are mobile apps"
+   ],
+   "answer": "An app, short for application, is a software program designed for a task, like messaging, games or maps, on a phone or computer."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is wifi",
+    "how does wifi work",
+    "what is wireless internet"
+   ],
+   "answer": "Wi-Fi is wireless networking that uses radio waves to connect devices to a router and the internet."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a robot",
+    "how do robots work",
+    "what are robots used for"
+   ],
+   "answer": "A robot is a machine that senses its surroundings, makes decisions and moves to do tasks, such as building cars or vacuuming floors."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is deep learning",
+    "explain deep learning",
+    "deep learning vs machine learning"
+   ],
+   "answer": "Deep learning is machine learning that uses neural networks with many layers. It powers image recognition, speech recognition and large language models."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a chatbot",
+    "how do chatbots work",
+    "what is a chat bot"
+   ],
+   "answer": "A chatbot is a program that talks with people in text or voice. Some follow rules, and others, like me, use trained models to understand and respond."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is open source",
+    "what is open source software"
+   ],
+   "answer": "Open source software has source code anyone can view, use, change and share, like Linux and Python."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a kilobyte",
+    "what is a gigabyte",
+    "megabyte vs gigabyte"
+   ],
+   "answer": "Storage units grow by about a thousand each step: a kilobyte, then a megabyte, a gigabyte and a terabyte."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a computer virus",
+    "what is malware",
+    "how to avoid viruses"
+   ],
+   "answer": "Malware is harmful software. A computer virus is malware that spreads by copying itself. Antivirus tools, updates and caution with downloads help prevent it."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "who founded microsoft",
+    "who is bill gates",
+    "when was microsoft founded"
+   ],
+   "answer": "Bill Gates and Paul Allen founded Microsoft in 1975."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "who founded apple",
+    "who is steve jobs",
+    "when was apple founded"
+   ],
+   "answer": "Steve Jobs, Steve Wozniak and Ronald Wayne founded Apple in 1976."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "who founded google",
+    "when was google founded",
+    "who created google"
+   ],
+   "answer": "Larry Page and Sergey Brin founded Google in 1998."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is git",
+    "what is github",
+    "what is version control"
+   ],
+   "answer": "Git is a version control system that tracks changes to code. GitHub is a website for hosting Git projects and collaborating."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a file",
+    "what is a folder on a computer"
+   ],
+   "answer": "A file is a named piece of stored data, like a document or photo. A folder groups files together."
+  },
+  {
+   "topic": "computing",
+   "patterns": [
+    "what is a large language model",
+    "what is an llm",
+    "how does chatgpt work"
+   ],
+   "answer": "A large language model is a neural network trained on huge amounts of text to predict the next word, which lets it answer questions and write text."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what are vitamins",
+    "why do we need vitamins",
+    "where do vitamins come from"
+   ],
+   "answer": "Vitamins are nutrients the body needs in small amounts to work properly. Most come from a varied diet of fruits, vegetables, grains and proteins."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what does vitamin c do",
+    "foods with vitamin c"
+   ],
+   "answer": "Vitamin C supports the immune system and helps heal wounds. Oranges, strawberries, peppers and broccoli are good sources."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what does vitamin d do",
+    "how do you get vitamin d"
+   ],
+   "answer": "Vitamin D helps the body absorb calcium for strong bones. Skin makes it in sunlight, and it is also in fish, eggs and fortified milk."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what is protein",
+    "why do we need protein",
+    "foods high in protein"
+   ],
+   "answer": "Protein builds and repairs muscles and tissues. Meat, fish, eggs, beans, lentils, nuts and dairy are good sources."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what are carbohydrates",
+    "what are carbs",
+    "why do we need carbs"
+   ],
+   "answer": "Carbohydrates are the body's main source of energy. Whole grains, fruits, vegetables and beans are healthy sources."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what is a calorie",
+    "how many calories do i need",
+    "explain calories"
+   ],
+   "answer": "A calorie is a unit of energy from food. Many adults need roughly 2,000 to 2,500 calories a day, depending on size and activity."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what does the brain do",
+    "how does the brain work",
+    "facts about the brain"
+   ],
+   "answer": "The brain controls thinking, memory, movement and the senses. It has about 86 billion neurons that send signals to each other."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "how many teeth do adults have",
+    "how many teeth do humans have",
+    "number of teeth"
+   ],
+   "answer": "Adults usually have 32 teeth, including wisdom teeth. Children have 20 baby teeth."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what are blood types",
+    "what is blood made of",
+    "what does blood do"
+   ],
+   "answer": "Blood carries oxygen, nutrients and immune cells. It has red cells, white cells, platelets and plasma. The main blood types are A, B, AB and O."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "normal body temperature",
+    "what is a normal temperature",
+    "what is a fever"
+   ],
+   "answer": "Normal body temperature is about 37 degrees Celsius, or 98.6 Fahrenheit. A temperature of 38 Celsius or higher is usually considered a fever."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "normal heart rate",
+    "what is a normal pulse",
+    "resting heart rate"
+   ],
+   "answer": "A normal resting heart rate for adults is about 60 to 100 beats per minute."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "normal blood pressure",
+    "what is blood pressure",
+    "what is high blood pressure"
+   ],
+   "answer": "Blood pressure is the force of blood against artery walls. A healthy reading is around 120 over 80 or lower."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what is the immune system",
+    "how does the immune system work"
+   ],
+   "answer": "The immune system defends the body against germs using white blood cells, antibodies and organs like the spleen and lymph nodes."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what is a vaccine",
+    "how do vaccines work",
+    "why get vaccinated"
+   ],
+   "answer": "A vaccine trains the immune system to recognize a germ without causing the disease, so the body can fight it off quickly later."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "how to wash your hands",
+    "how long should you wash your hands"
+   ],
+   "answer": "Wash your hands with soap and water for at least 20 seconds, scrubbing all surfaces, then rinse and dry."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "how to reduce stress",
+    "what is stress",
+    "how to relax"
+   ],
+   "answer": "Stress is the body's reaction to pressure. Exercise, good sleep, deep breathing, time outdoors and talking with people you trust can help reduce it."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "how does digestion work",
+    "what does the stomach do",
+    "explain the digestive system"
+   ],
+   "answer": "Digestion breaks food into nutrients. It starts in the mouth, continues in the stomach with acids, and nutrients are absorbed mostly in the small intestine."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what are the five senses",
+    "list the five senses"
+   ],
+   "answer": "The five traditional senses are sight, hearing, smell, taste and touch."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what does the liver do",
+    "function of the liver"
+   ],
+   "answer": "The liver filters toxins from the blood, makes bile to digest fat, and stores energy and vitamins."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what do the kidneys do",
+    "function of the kidneys"
+   ],
+   "answer": "The kidneys filter waste and extra water from the blood to make urine, and help control blood pressure."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "how many muscles in the human body",
+    "number of muscles",
+    "strongest muscle"
+   ],
+   "answer": "The human body has about 600 muscles. The masseter, the jaw muscle, is often called the strongest for its size."
+  },
+  {
+   "topic": "health",
+   "patterns": [
+    "what is diabetes",
+    "types of diabetes",
+    "what is insulin"
+   ],
+   "answer": "Diabetes is a condition where blood sugar is too high because the body does not make enough insulin or cannot use it well. Insulin is a hormone that moves sugar into cells."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a pronoun",
+    "define pronoun",
+    "examples of pronouns"
+   ],
+   "answer": "A pronoun replaces a noun, such as he, she, they, it, we or you."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a preposition",
+    "define preposition",
+    "examples of prepositions"
+   ],
+   "answer": "A preposition shows how words relate in place or time, such as in, on, under, before or with."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a conjunction",
+    "define conjunction",
+    "examples of conjunctions"
+   ],
+   "answer": "A conjunction joins words or sentences, such as and, but, or, because and so."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a synonym",
+    "what is an antonym",
+    "synonyms and antonyms"
+   ],
+   "answer": "A synonym has the same or similar meaning as another word, like big and large. An antonym has the opposite meaning, like hot and cold."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a homophone",
+    "examples of homophones"
+   ],
+   "answer": "Homophones sound the same but have different meanings or spellings, like there, their and they're."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a simile",
+    "what is a metaphor",
+    "simile vs metaphor"
+   ],
+   "answer": "A simile compares using like or as, such as brave as a lion. A metaphor says one thing is another, such as time is money."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a paragraph",
+    "how to write a paragraph"
+   ],
+   "answer": "A paragraph is a group of sentences about one main idea, usually starting with a topic sentence."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is punctuation",
+    "punctuation marks",
+    "when to use a comma"
+   ],
+   "answer": "Punctuation marks make writing clear. Periods end sentences, commas separate parts, question marks end questions, and exclamation marks show strong feeling."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a plural",
+    "how to make words plural"
+   ],
+   "answer": "A plural means more than one. Most English words add s or es, like cats or boxes, but some change, like child to children."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is past tense",
+    "what are verb tenses",
+    "past present future tense"
+   ],
+   "answer": "Verb tenses show when something happens: past, like walked, present, like walk, and future, like will walk."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a haiku",
+    "how to write a haiku"
+   ],
+   "answer": "A haiku is a short Japanese style poem with three lines of 5, 7 and 5 syllables."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a consonant",
+    "list the consonants"
+   ],
+   "answer": "Consonants are the letters that are not vowels, like B, C, D and F. English has 21 consonant letters."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "how do you say hello in spanish",
+    "hello in other languages",
+    "how do you say hello in french"
+   ],
+   "answer": "Hello is hola in Spanish, bonjour in French, hallo in German, ciao in Italian, konnichiwa in Japanese and ni hao in Mandarin."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "how do you say thank you in spanish",
+    "thank you in other languages"
+   ],
+   "answer": "Thank you is gracias in Spanish, merci in French, danke in German, grazie in Italian and arigato in Japanese."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a palindrome",
+    "examples of palindromes"
+   ],
+   "answer": "A palindrome reads the same forwards and backwards, like level, racecar or the number 121."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is an acronym",
+    "examples of acronyms"
+   ],
+   "answer": "An acronym is a word made from the first letters of other words, like NASA for National Aeronautics and Space Administration."
+  },
+  {
+   "topic": "language",
+   "patterns": [
+    "what is a syllable",
+    "how to count syllables"
+   ],
+   "answer": "A syllable is a single unit of sound in a word. Water has two syllables: wa and ter."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "what is money",
+    "what is inflation",
+    "why do prices go up"
+   ],
+   "answer": "Money is something people accept in exchange for goods and services. Inflation is when prices rise over time, so money buys less."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "what is democracy",
+    "define democracy",
+    "what is a government"
+   ],
+   "answer": "A government runs a country. In a democracy, citizens choose their leaders by voting."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "what is an economy",
+    "explain the economy",
+    "what is gdp"
+   ],
+   "answer": "An economy is how a place produces, sells and uses goods and services. GDP measures the total value of everything a country produces."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "what are the olympics",
+    "how often are the olympics",
+    "when are the olympics"
+   ],
+   "answer": "The Olympic Games are an international sports competition held every four years, with Summer and Winter Games two years apart."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how many players on a soccer team",
+    "how many players in football",
+    "soccer rules"
+   ],
+   "answer": "A soccer team has 11 players on the field, including the goalkeeper."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how many players on a basketball team",
+    "basketball team size"
+   ],
+   "answer": "A basketball team has 5 players on the court at a time."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "most popular sport",
+    "what is the most popular sport in the world"
+   ],
+   "answer": "Soccer, also called football, is the most popular sport in the world."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "what is chess",
+    "how does chess work",
+    "how many pieces in chess"
+   ],
+   "answer": "Chess is a two player strategy game on an 8 by 8 board. Each player starts with 16 pieces, and the goal is checkmate, trapping the other king."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how many keys on a piano",
+    "piano keys"
+   ],
+   "answer": "A standard piano has 88 keys: 52 white and 36 black."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "tallest animal",
+    "what is the tallest animal",
+    "how tall is a giraffe"
+   ],
+   "answer": "The giraffe is the tallest animal, growing up to about 5.5 meters tall."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "largest bird",
+    "biggest bird in the world",
+    "can ostriches fly"
+   ],
+   "answer": "The ostrich is the largest bird. It cannot fly but can run about 70 kilometers per hour."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "largest fish",
+    "biggest fish in the world",
+    "what is a whale shark"
+   ],
+   "answer": "The whale shark is the largest fish, reaching around 12 to 18 meters long. It eats plankton."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "what do bees do",
+    "how do bees make honey",
+    "why are bees important"
+   ],
+   "answer": "Bees collect nectar to make honey and pollinate plants, which helps many fruits and crops grow."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "what do pandas eat",
+    "facts about pandas"
+   ],
+   "answer": "Giant pandas eat mostly bamboo, up to about 12 to 38 kilograms a day. They live in the mountains of central China."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "longest living animal",
+    "what animal lives the longest"
+   ],
+   "answer": "The Greenland shark is the longest living known vertebrate, possibly living about 400 years. Some sponges and corals live even longer."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how long do humans live",
+    "average life expectancy",
+    "life expectancy"
+   ],
+   "answer": "Global average life expectancy is about 73 years, and it varies a lot between countries."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how many centimeters in a meter",
+    "how many meters in a kilometer",
+    "metric units of length"
+   ],
+   "answer": "There are 100 centimeters in a meter and 1,000 meters in a kilometer."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how many grams in a kilogram",
+    "metric units of weight",
+    "how many kilograms in a ton"
+   ],
+   "answer": "There are 1,000 grams in a kilogram and 1,000 kilograms in a metric ton."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how many inches in a foot",
+    "how many feet in a mile",
+    "imperial units"
+   ],
+   "answer": "There are 12 inches in a foot, 3 feet in a yard and 5,280 feet in a mile."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how many kilometers in a mile",
+    "convert miles to kilometers"
+   ],
+   "answer": "One mile is about 1.609 kilometers, and one kilometer is about 0.621 miles."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how to convert celsius to fahrenheit",
+    "celsius to fahrenheit formula",
+    "fahrenheit to celsius"
+   ],
+   "answer": "To convert Celsius to Fahrenheit, multiply by 9/5 and add 32. To convert back, subtract 32 and multiply by 5/9."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "what is music",
+    "what are musical notes",
+    "music notes"
+   ],
+   "answer": "Music is organized sound with rhythm, melody and harmony. Western music uses seven note names: A, B, C, D, E, F and G."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "what is a dog",
+    "facts about dogs",
+    "how long do dogs live"
+   ],
+   "answer": "Dogs are domesticated mammals descended from wolves. They usually live about 10 to 13 years, depending on breed."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "facts about cats",
+    "how long do cats live",
+    "what is a cat"
+   ],
+   "answer": "Cats are small domesticated carnivores. They usually live about 12 to 18 years and sleep around 12 to 16 hours a day."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how to be more productive",
+    "productivity tips",
+    "how to focus better"
+   ],
+   "answer": "To be more productive, set clear goals, work on one task at a time, take short breaks, limit distractions and get enough sleep."
+  },
+  {
+   "topic": "general",
+   "patterns": [
+    "how to study better",
+    "study tips",
+    "best way to learn"
+   ],
+   "answer": "Study in short focused sessions, test yourself instead of rereading, space out your reviews over days and teach the idea to someone else."
+  }
+ ]
 }

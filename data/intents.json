@@ -17,7 +17,7 @@
      "responses": ["I am Basis, a small AI built from two connected models: a neural brain that understands your question and a language model that writes the answer.", "My name is Basis. I am an AI with my own neural network and my own language model, trained on basic knowledge."]},
     {"intent": "capabilities",
      "patterns": ["what can you do", "help", "how do you work", "what do you know", "what are your skills", "how can you help me", "what topics do you know", "show me what you can do", "commands"],
-     "responses": ["I can answer basic questions about science, math, geography, history, computing, health and language. I can also do arithmetic, remember your name, learn new facts with /teach question | answer, and write text with /generate <words>."]},
+     "responses": ["I know about 350 basic facts across science, space, nature, math, geography, history, computing, health, language and everyday knowledge. I can also do arithmetic, remember your name, learn new facts with /teach question | answer, and write text with /generate <words>."]},
     {"intent": "creator",
      "patterns": ["who made you", "who created you", "who built you", "who programmed you", "where do you come from", "who is your creator"],
      "responses": ["I was built in the BuildYourModel project: a neural network brain plus a custom language model, written from scratch in Python and NumPy."]},

@@ -7,13 +7,13 @@
       -> reply
 """
 import ast
-import csv
 import json
 import operator
 import os
 import re
 
 from .brain import UNKNOWN, Brain
+from .builder import ModelBuilder
 from .language_model import LanguageModel
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -82,7 +82,7 @@ class Assistant:
         self.model_dir = model_dir or os.path.join(ROOT, "models")
         self.learned_path = os.path.join(self.data_dir, "learned.json")
         self.memory = {}
-        self.custom = {}
+        self.builder = ModelBuilder(self.model_dir)
         self.brain = Brain()
         self.lm = LanguageModel()
         self._load_data()
@@ -169,83 +169,18 @@ class Assistant:
         return "Got it. I learned that."
 
     # ------------------------------------------------- build other models
-    def _custom_dir(self):
-        d = os.path.join(self.model_dir, "custom")
-        os.makedirs(d, exist_ok=True)
-        return d
-
-    @staticmethod
-    def _read_examples(path):
-        if path.endswith(".json"):
-            with open(path) as f:
-                data = json.load(f)
-            return [(str(r["text"]), str(r["label"])) for r in data]
-        with open(path, newline="") as f:
-            rows = [r for r in csv.reader(f) if len(r) >= 2 and r[0].strip()]
-        if rows and [c.strip().lower() for c in rows[0][:2]] == ["text", "label"]:
-            rows = rows[1:]
-        return [(r[0].strip(), r[1].strip()) for r in rows]
-
     def build_model(self, name, path):
-        """Build and train a brand-new text classifier from a CSV/JSON of text,label."""
-        if not re.fullmatch(r"[a-z0-9_\-]{1,40}", name):
-            return "Model names can use lowercase letters, numbers, - and _."
         for cand in (path, os.path.join(ROOT, path)):
             if os.path.isfile(cand):
                 path = cand
                 break
-        else:
-            return f"I could not find the file {path}."
-        try:
-            rows = self._read_examples(path)
-        except (OSError, ValueError, KeyError, csv.Error) as e:
-            return f"I could not read that file: {e}"
-        labels = sorted({lab for _, lab in rows})
-        if len(rows) < 6 or len(labels) < 2:
-            return "I need at least 6 examples and 2 different labels (columns: text,label)."
-        report = ""
-        if len(rows) >= 20:  # honest score: hold out every 5th example
-            train = [r for i, r in enumerate(rows) if i % 5]
-            test = [r for i, r in enumerate(rows) if not i % 5]
-            probe = Brain()
-            probe.train(train, epochs=15, verbose=False, unknown=False)
-            hits = sum(probe.predict(t, top=1)[0][0] == lab for t, lab in test)
-            report = f" Held-out accuracy: {hits}/{len(test)}."
-        model = Brain()
-        model.train(rows, epochs=15, verbose=False, unknown=False)
-        d = self._custom_dir()
-        model.save(os.path.join(d, f"{name}.npz"))
-        with open(os.path.join(d, f"{name}.json"), "w") as f:
-            json.dump(rows, f)
-        self.custom[name] = model
-        return (f"Built model '{name}': a neural network trained on {len(rows)} examples with "
-                f"labels {', '.join(labels)}.{report} Try it with /ask {name} <text>.")
-
-    def _get_custom(self, name):
-        if name in self.custom:
-            return self.custom[name]
-        d = self._custom_dir()
-        npz, js = os.path.join(d, f"{name}.npz"), os.path.join(d, f"{name}.json")
-        if not (os.path.exists(npz) and os.path.exists(js)):
-            return None
-        with open(js) as f:
-            rows = [tuple(r) for r in json.load(f)]
-        self.custom[name] = Brain().load(npz, rows)
-        return self.custom[name]
+        return self.builder.build(name, path)
 
     def ask_model(self, name, text):
-        model = self._get_custom(name)
-        if model is None:
-            return f"There is no model named '{name}'. Build one with /build {name} file.csv"
-        label, score, p, s = model.predict(text, top=1)[0]
-        if label == UNKNOWN or score < 0.25:
-            return f"[{name}] not sure (best guess confidence {score:.2f})"
-        return f"[{name}] {label} (confidence {score:.2f})"
+        return self.builder.ask(name, text)
 
     def list_models(self):
-        d = self._custom_dir()
-        names = sorted(f[:-4] for f in os.listdir(d) if f.endswith(".npz"))
-        return ("Models I have built: " + ", ".join(names)) if names else "I have not built any models yet. Use /build name file.csv"
+        return self.builder.list()
 
     # -------------------------------------------------------------- reply
     def analyze(self, text):
@@ -269,7 +204,7 @@ class Assistant:
         if text.startswith("/build"):
             parts = text.split(maxsplit=2)
             if len(parts) < 3:
-                return "Use: /build name file.csv   (CSV columns: text,label)"
+                return "Use: /build name file  (.csv text,label | .csv table, last column = target | .txt text)"
             return self.build_model(parts[1].lower(), parts[2].strip())
         if text.startswith("/ask"):
             parts = text.split(maxsplit=2)

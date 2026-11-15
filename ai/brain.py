@@ -35,10 +35,10 @@ def _pack(feat_dicts):
 
 
 class NeuralNet:
-    def __init__(self, n_classes, h1=256, h2=128, seed=0):
+    def __init__(self, n_classes, h1=256, h2=128, seed=0, n_features=N_FEATURES):
         rng = np.random.default_rng(seed)
         self.p = {
-            "W1": (rng.standard_normal((N_FEATURES, h1)) * 0.1).astype(np.float32),
+            "W1": (rng.standard_normal((n_features, h1)) * 0.1).astype(np.float32),
             "b1": np.zeros(h1, np.float32),
             "W2": (rng.standard_normal((h1, h2)) * math.sqrt(2 / h1)).astype(np.float32),
             "b2": np.zeros(h2, np.float32),
@@ -112,12 +112,13 @@ class Adam:
 class Retriever:
     """TF-IDF cosine retriever over the same hashed features."""
 
-    def __init__(self):
+    def __init__(self, n=N_FEATURES):
+        self.n = n
         self.docs, self.labels, self.idf = [], [], {}
 
     def fit(self, texts, labels):
         self.labels = list(labels)
-        raw = [features(t) for t in texts]
+        raw = [features(t, self.n) for t in texts]
         df = {}
         for f in raw:
             for k in f:
@@ -132,11 +133,11 @@ class Retriever:
         return {k: x / norm for k, x in w.items()}
 
     def add(self, text, label):
-        self.docs.append(self._weight(features(text)))
+        self.docs.append(self._weight(features(text, self.n)))
         self.labels.append(label)
 
     def scores(self, text):
-        q = self._weight(features(text))
+        q = self._weight(features(text, self.n))
         best = {}
         for d, lab in zip(self.docs, self.labels):
             s = sum(v * d.get(k, 0.0) for k, v in q.items())
@@ -146,8 +147,21 @@ class Retriever:
 
 
 class Brain:
-    def __init__(self):
-        self.classes, self.net, self.retriever = [], None, Retriever()
+    def __init__(self, n_features=N_FEATURES, h1=256, h2=128):
+        self.n_features, self.h1, self.h2 = n_features, h1, h2
+        self.classes, self.net, self.retriever = [], None, Retriever(n_features)
+
+    @classmethod
+    def sized_for(cls, examples):
+        """A small brain sized to its data: hash table ~2x the distinct features."""
+        distinct = set()
+        for t, _ in examples:
+            distinct.update(features(t))
+        n = 1 << max(10, min(13, (2 * len(distinct) - 1).bit_length()))
+        return cls(n_features=n, h1=64, h2=32)
+
+    def n_params(self):
+        return int(sum(v.size for v in self.net.p.values()))
 
     # ------------------------------------------------------------------ train
     def train(self, examples, epochs=12, batch=64, aug=12, seed=0, verbose=True, unknown=True):
@@ -161,14 +175,14 @@ class Brain:
             data += [(t, lab) for t in augment(text, aug, rng)]
         if unknown:
             data += [(t, UNKNOWN) for t in negative_examples(len(examples) // 2, rng)]
-        idx, wts = _pack([features(t) for t, _ in data])
+        idx, wts = _pack([features(t, self.n_features) for t, _ in data])
         y = np.array([cid[lab] for _, lab in data])
         C = len(self.classes)
         smooth = 0.05
         target_all = np.full((len(y), C), smooth / C, np.float32)
         target_all[np.arange(len(y)), y] += 1 - smooth
 
-        self.net = NeuralNet(C, seed=seed)
+        self.net = NeuralNet(C, self.h1, self.h2, seed=seed, n_features=self.n_features)
         opt = Adam(self.net.p)
         acc = 0.0
         for ep in range(epochs):
@@ -216,7 +230,7 @@ class Brain:
         """Blend network probability with retrieval similarity.
         Returns list of (label, score, net_prob, retrieval_sim)."""
         text = self.correct(text)
-        idx, wts = _pack([features(text)])
+        idx, wts = _pack([features(text, self.n_features)])
         probs = self.net.forward(idx, wts)[0][0]
         sims = self.retriever.scores(text)
         out = []
@@ -236,12 +250,15 @@ class Brain:
 
     # ------------------------------------------------------------ persistence
     def save(self, path):
-        np.savez(path, classes=np.array(self.classes), **self.net.p)
+        np.savez(path, classes=np.array(self.classes), dims=np.array([self.n_features, self.h1, self.h2]), **self.net.p)
 
     def load(self, path, examples):
         d = np.load(path, allow_pickle=False)
         self.classes = list(d["classes"])
-        self.net = NeuralNet(len(self.classes))
+        if "dims" in d.files:
+            self.n_features, self.h1, self.h2 = (int(x) for x in d["dims"])
+            self.retriever = Retriever(self.n_features)
+        self.net = NeuralNet(len(self.classes), self.h1, self.h2, n_features=self.n_features)
         for k in self.net.p:
             self.net.p[k] = d[k]
         self._fit_side(examples)

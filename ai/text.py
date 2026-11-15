@@ -40,17 +40,17 @@ def tokenize(text):
     return _TOKEN_RE.findall(text)
 
 
-def _h(s):
-    return zlib.crc32(s.encode("utf-8")) % N_FEATURES
+def _h(s, n=N_FEATURES):
+    return zlib.crc32(s.encode("utf-8")) % n
 
 
-def features(text):
+def features(text, n=N_FEATURES):
     """Return {feature_index: weight} using word 1-grams, 2-grams and char 3-grams."""
     toks = canonical(tokenize(text))
     feats = {}
 
     def add(key, w):
-        i = _h(key)
+        i = _h(key, n)
         feats[i] = feats.get(i, 0.0) + w
 
     for t in toks:

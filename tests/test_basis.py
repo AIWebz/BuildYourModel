@@ -57,13 +57,33 @@ class BasisTest(unittest.TestCase):
         self.assertIn("tokenizer", self.bot.reply("how do i make my own llm"))
         self.assertIn("Kaggle", self.bot.reply("where do i get training data"))
 
-    def test_build_and_ask_custom_model(self):
-        out = self.bot.reply(f"/build mood {os.path.join(ROOT, 'data', 'examples', 'sentiment.csv')}")
-        self.assertIn("Built model 'mood'", out)
+    def test_build_small_models(self):
+        ex = os.path.join(ROOT, "data", "examples")
+        out = self.bot.reply(f"/build mood {ex}/sentiment.csv")
+        self.assertIn("Built text classifier 'mood'", out)
         self.assertIn("positive", self.bot.reply("/ask mood i love it, it is amazing"))
-        self.assertIn("mood", self.bot.reply("/models"))
+        meta = self.bot.builder._meta("mood")
+        self.assertLess(meta["bytes"], 2 * 1024 ** 2)  # truly small: under 2 MB
+
+        self.assertIn("number predictor", self.bot.reply(f"/build homes {ex}/houses.csv"))
+        price = float(self.bot.reply("/ask homes 100, 3, downtown").split(":")[-1].replace(",", ""))
+        self.assertAlmostEqual(price, 325000, delta=30000)  # data formula gives 325,000
+        self.assertIn("3 comma-separated", self.bot.reply("/ask homes 100"))
+
+        self.assertIn("table classifier", self.bot.reply(f"/build fruits {ex}/fruit.csv"))
+        self.assertIn("apple", self.bot.reply("/ask fruits 180, red, smooth"))
+
+        self.assertIn("tiny language model", self.bot.reply(f"/build tales {ex}/stories.txt"))
+        self.assertTrue(self.bot.reply("/ask tales the robot").startswith("[tales] The robot"))
+
+        listing = self.bot.reply("/models")
+        for n in ("mood", "homes", "fruits", "tales"):
+            self.assertIn(n, listing)
         self.assertIn("no model named", self.bot.reply("/ask nothere hello"))
         self.assertIn("could not find", self.bot.reply("/build x missing.csv"))
+
+        fresh = Assistant(data_dir=self.bot.data_dir, model_dir=self.bot.model_dir).load()
+        self.assertIn("apple", fresh.reply("/ask fruits 200, green, smooth"))  # reload from disk
 
     def test_save_load(self):
         fresh = Assistant(data_dir=self.bot.data_dir, model_dir=self.bot.model_dir).load()

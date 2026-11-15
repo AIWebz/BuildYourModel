@@ -24,9 +24,18 @@ In chat:
 - `what is 12 times 7`: built-in calculator
 - `/teach what is X | X is ...`: teaches it a new fact (saved to `data/learned.json`)
 - `/generate the capital`: free text from the language model
-- `/build sentiment data/examples/sentiment.csv`: **builds and trains a new AI model** from your data (CSV with `text,label` columns, or JSON) and reports held-out accuracy
-- `/ask sentiment I love this`: runs a model it built
-- `/models`: lists the models it has built (saved in `models/custom/`)
+- `/build name file`: **builds and trains a new small AI model** from your file, sized to the data, then reports held-out accuracy, parameter count and file size
+- `/ask name input`: runs a model it built
+- `/models`: lists built models (saved in `models/custom/`)
+
+| File you give it | Model it builds | Example (files in `data/examples/`) |
+|---|---|---|
+| `.csv` with `text,label` | Text classifier (small neural network) | `/build sentiment data/examples/sentiment.csv` → `/ask sentiment I love this` |
+| `.csv` table, last column a number | Number predictor (regression neural network) | `/build houses data/examples/houses.csv` → `/ask houses 100, 3, downtown` |
+| `.csv` table, last column a category | Table classifier (neural network) | `/build fruit data/examples/fruit.csv` → `/ask fruit 90, yellow, bumpy` |
+| `.txt` plain text | Tiny language model (Kneser-Ney trigram) | `/build robot data/examples/stories.txt` → `/ask robot the bird` |
+
+`houses.csv` and `fruit.csv` are synthetic data generated for the demos.
 
 Ask it things like *how do I build an AI model*, *how do I make my own LLM*, *how do I prevent overfitting*, *what is RAG* or *show me code for a neural network in pytorch*.
 

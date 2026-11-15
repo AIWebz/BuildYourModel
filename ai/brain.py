@@ -252,6 +252,15 @@ class Brain:
     def save(self, path):
         np.savez(path, classes=np.array(self.classes), dims=np.array([self.n_features, self.h1, self.h2]), **self.net.p)
 
+    def save_compact(self, path, init_seed=0):
+        """Smaller file for the browser: drop rows never touched in training, store float16."""
+        init = (np.random.default_rng(init_seed).standard_normal((self.n_features, self.h1)) * 0.1).astype(np.float32)
+        W1 = self.net.p["W1"]
+        rows = np.flatnonzero(np.any(W1 != init, axis=1)).astype(np.int32)
+        rest = {k: v.astype(np.float16) for k, v in self.net.p.items() if k != "W1"}
+        np.savez_compressed(path, classes=np.array(self.classes), dims=np.array([self.n_features, self.h1, self.h2]),
+                            W1_rows=rows, W1_vals=W1[rows].astype(np.float16), **rest)
+
     def load(self, path, examples):
         d = np.load(path, allow_pickle=False)
         self.classes = list(d["classes"])
@@ -260,6 +269,11 @@ class Brain:
             self.retriever = Retriever(self.n_features)
         self.net = NeuralNet(len(self.classes), self.h1, self.h2, n_features=self.n_features)
         for k in self.net.p:
-            self.net.p[k] = d[k]
+            if k == "W1" and "W1_rows" in d.files:  # compact format: only trained rows stored
+                W1 = np.zeros((self.n_features, self.h1), np.float32)
+                W1[d["W1_rows"]] = d["W1_vals"].astype(np.float32)
+                self.net.p[k] = W1
+            else:
+                self.net.p[k] = d[k].astype(np.float32)
         self._fit_side(examples)
         return self

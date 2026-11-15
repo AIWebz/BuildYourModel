@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 data/learned.json
 uploads/
+dist/
+.cache/
